@@ -1,107 +1,220 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة صحة - بوابة التحقق الرقمي</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    :root { --main-blue: #007bff; --seha-blue: #2F6EA5; }
-    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; background-color: #FFFFFF; }
-    .section-white { background: #FFFFFF; padding: 40px 5%; text-align: center; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-    .header-logo { height: 90px; }
-    .query-box { max-width: 650px; margin: 0 auto; }
-    .input-group { text-align: right; margin-bottom: 25px; }
-    .input-group label { display: block; margin-bottom: 10px; font-weight: bold; font-size: 18px; }
-    .input-group input { width: 100%; padding: 18px; border: 2px solid #ccc; border-radius: 12px; box-sizing: border-box; font-size: 18px; text-align: center; }
-    .btn-query { width: 100%; padding: 20px; background: var(--main-blue); color: white; border: none; border-radius: 12px; font-size: 22px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .section-blue { background: var(--seha-blue); padding: 80px 5%; text-align: center; color: white; }
-    .blue-logo { height: 110px; background: white; padding: 10px; border-radius: 15px; margin-bottom: 30px; }
-    footer { background: var(--seha-blue); color: white; padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.2); }
-    #loader { display: none; margin-top: 20px; color: var(--main-blue); font-weight: bold; }
-    #resultSection { display: none; margin-top: 30px; text-align: right; }
-    .res-card { background: #f9f9f9; padding: 25px; border-radius: 15px; border: 1px solid #eee; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة صحة - بوابة التحقق الرقمي 2026</title>
+    <!-- استيراد الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <style>
+        :root { --seha-blue: #004693; --seha-light: #f8f9fa; }
+        body { font-family: 'Cairo', sans-serif; background-color: #fff; margin: 0; padding: 0; overflow-x: hidden; top: 0px !important; }
+        
+        /* كود إخفاء شريط جوجل العلوي */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+
+        /* القسم الأول: الاستعلام (أبيض) */
+        .header-section { padding: 20px 0; border-bottom: 1px solid #eee; }
+        .header-logo { height: 60px; object-fit: contain; }
+        
+        .search-card { max-width: 500px; margin: 40px auto; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: #fff; border: 1px solid #f0f0f0; }
+        .section-title { color: var(--seha-blue); font-weight: 700; margin-bottom: 25px; text-align: center; font-size: 1.5rem; }
+        
+        .form-label { font-weight: 600; color: #555; margin-bottom: 8px; }
+        .form-control { border-radius: 8px; padding: 12px; border: 1.5px solid #ddd; margin-bottom: 20px; }
+        
+        /* الأزرار الزرقاء الموحدة (استعلام + عودة) */
+        .btn-seha { 
+            background-color: var(--seha-blue) !important; 
+            color: white !important; 
+            border: none !important; 
+            padding: 12px 25px !important; 
+            border-radius: 8px !important; 
+            font-weight: 600 !important; 
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-seha:hover { background-color: #003366 !important; transform: translateY(-2px); color: white !important; }
+        
+        /* قسم النتائج */
+        .result-box { display: none; background: #fff; border-radius: 15px; padding: 25px; margin-top: 20px; border: 2px solid #e1f5fe; }
+        .result-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 0.95rem; }
+        .result-label { color: #777; font-weight: 600; }
+        .result-value { color: var(--seha-blue); font-weight: 700; }
+
+        /* القسم الثاني: التعريف (أزرق) */
+        .intro-section { background-color: var(--seha-blue); color: white; padding: 60px 0; text-align: center; }
+        .intro-logo { height: 80px; margin-bottom: 20px; }
+        .intro-text { max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; opacity: 0.9; }
+
+        /* القسم الثالث: الفوتر */
+        .footer-main { background-color: #fcfcfc; padding: 50px 0 20px 0; border-top: 1px solid #eee; }
+        .footer-title { color: var(--seha-blue); font-weight: 700; margin-bottom: 20px; font-size: 1.2rem; }
+        .contact-link { color: #444; text-decoration: none; display: block; margin-bottom: 10px; font-size: 0.95rem; }
+        .footer-logos img { height: 50px; margin-left: 20px; object-fit: contain; }
+
+        /* التذييل النهائي */
+        .final-footer { background: #fff; padding: 20px 0; text-align: center; border-top: 1px solid #eee; }
+        .moh-badge { color: #2c7a7b; font-weight: 700; margin-bottom: 10px; display: block; font-size: 1.1rem; }
+    </style>
 </head>
 <body>
 
-  <section class="section-white">
-    <header>
-      <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Logo" class="header-logo">
-      <div style="font-size: 30px; color: var(--seha-blue); cursor: pointer;"><i class="fas fa-bars"></i></div>
-    </header>
-
-    <div class="query-box">
-      <h1 style="color: var(--seha-blue); font-size: 36px; margin-bottom: 15px;">الإجازات المرضية</h1>
-      <p style="font-size: 18px; color: #555; margin-bottom: 40px;">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك</p>
-      
-      <div id="searchFields">
-        <div class="input-group">
-          <label>رمز الخدمة</label>
-          <input type="text" id="leaveId" placeholder="مثال: SL-123">
+    <!-- القسم الأول: الاستعلام -->
+    <section class="header-section">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Logo" class="header-logo">
+            <div class="d-none d-md-block text-muted">بوابة الاستعلام الرقمي</div>
         </div>
-        <div class="input-group">
-          <label>رقم الهوية / الإقامة</label>
-          <input type="text" id="iqama" placeholder="أدخل رقم الهوية">
-        </div>
-        <button class="btn-query" onclick="checkLeave()">استعلام</button>
-        <div id="loader"><i class="fas fa-spinner fa-spin"></i> جاري جلب البيانات...</div>
-      </div>
+    </section>
 
-      <div id="resultSection">
-        <h3 style="color: #28a745; text-align: center;"><i class="fas fa-check-circle"></i> تم التحقق بنجاح</h3>
-        <div class="res-card" id="resContent"></div>
-        <button class="btn-query" style="background: #6c757d; margin-top: 20px;" onclick="location.reload()">استعلام جديد</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-blue">
-    <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha" class="blue-logo">
-    <p style="font-size: 20px; line-height: 1.8;">منصة صحة تقدم خدمات إلكترونية لجميع المنشآت الطبية لضمان جودة الأداء.</p>
-  </section>
-
-  <footer>
-    <div style="text-align: center;">منصة صحة معتمدة من قبل وزارة الصحة 2026</div>
-  </footer>
-
-  <script>
-    // تم وضع رابطك هنا بنجاح
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec"; 
-
-    function checkLeave() {
-      const iq = document.getElementById('iqama').value;
-      const lid = document.getElementById('leaveId').value;
-      if(!iq || !lid) return alert("يرجى إكمال البيانات");
-      
-      document.getElementById('loader').style.display = 'block';
-      
-      fetch(`${GOOGLE_SCRIPT_URL}?action=check&iqama=${iq}&leaveId=${lid}`)
-        .then(response => response.json())
-        .then(res => {
-          document.getElementById('loader').style.display = 'none';
-          if(res.status === "success") {
-            document.getElementById('searchFields').style.display = 'none';
-            document.getElementById('resultSection').style.display = 'block';
+    <div class="container">
+        <!-- منطقة الاستعلام -->
+        <div class="search-card" id="searchArea">
+            <h2 class="section-title"><i class="fas fa-file-medical me-2"></i> الإجازات المرضية</h2>
+            <p class="text-center text-muted mb-4">أدخل البيانات للاستعلام عن حالة الإجازة</p>
             
-            document.getElementById('resContent').innerHTML = `
-              <p><b>الاسم:</b> ${res.data.nameAr}</p>
-              <p><b>تاريخ الإصدار:</b> ${res.data.issueDate}</p>
-              <p><b>تبدأ من:</b> ${res.data.startDate}</p>
-              <p><b>وحتى:</b> ${res.data.endDate}</p>
-              <p><b>المدة:</b> ${res.data.duration} أيام</p>
-              <p><b>الطبيب:</b> ${res.data.doctor}</p>
+            <label class="form-label">رمز الخدمة / Service ID</label>
+            <input type="text" id="leaveId" class="form-control" placeholder="مثال: 10023456">
+            
+            <label class="form-label">رقم الهوية أو الإقامة / ID Number</label>
+            <input type="text" id="iqama" class="form-control" placeholder="أدخل رقم الإقامة">
+            
+            <button onclick="checkLeave()" id="btnSearch" class="btn btn-seha w-100">
+                <i class="fas fa-search me-2"></i> استعلام / Search
+            </button>
+
+            <div id="loading" class="text-center mt-3 d-none">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">جاري جلب البيانات...</p>
+            </div>
+        </div>
+
+        <!-- قسم عرض النتائج -->
+        <div class="search-card result-box" id="resultArea">
+            <div class="text-center mb-4">
+                <i class="fas fa-check-circle text-success fa-3x"></i>
+                <h4 class="mt-2 text-success">تم التحقق بنجاح</h4>
+            </div>
+            <div id="details"></div>
+            
+            <div class="mt-4 d-flex justify-content-center gap-2">
+                <button onclick="newSearch()" class="btn btn-seha">
+                    <i class="fas fa-search-plus me-2"></i> استعلام جديد / New Query
+                </button>
+                <button onclick="newSearch()" class="btn btn-seha">
+                    <i class="fas fa-undo me-2"></i> العودة للاستعلام / Return
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- القسم الثاني: التعريف (أزرق) -->
+    <section class="intro-section">
+        <div class="container">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha" class="intro-logo" style="filter: brightness(0) invert(1);">
+            <h3 class="mb-4">عن منصة صحة</h3>
+            <p class="intro-text">
+                منصة صحة تقدم خدمات إلكترونية لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.
+            </p>
+        </div>
+    </section>
+
+    <!-- القسم الثالث: الفوتر -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">تواصل معنا</h5>
+                    <a href="tel:920002005" class="contact-link"><i class="fas fa-phone me-2"></i> 920002005</a>
+                    <a href="mailto:support@seha.sa" class="contact-link"><i class="fas fa-envelope me-2"></i> support@seha.sa</a>
+                    <p class="small text-muted mt-3">الأحد حتى الخميس (8 ص - 11 م)</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">القائمة الرئيسية</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="contact-link">الخدمات الإلكترونية</a></li>
+                        <li><a href="#" class="contact-link">الأسئلة الشائعة</a></li>
+                        <li><a href="#" class="contact-link">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4 text-center text-md-start">
+                    <h5 class="footer-title">شركاء النجاح</h5>
+                    <div class="footer-logos">
+                        <img src="https://i.postimg.cc/BbYsjDvW/wzarh-shh-jdyd.jpg" alt="MOH">
+                        <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="final-footer">
+        <div class="container">
+            <span class="moh-badge">منصة صحة معتمدة من قبل وزارة الصحة 2026</span>
+            <p class="text-muted mb-0 small">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة</p>
+        </div>
+    </div>
+
+    <script>
+        // رابط الـ Web App الخاص بك مدمج هنا
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
+
+        async function checkLeave() {
+            const iqama = document.getElementById('iqama').value;
+            const leaveId = document.getElementById('leaveId').value;
+            
+            if (!iqama || !leaveId) {
+                alert("يرجى إدخال جميع البيانات");
+                return;
+            }
+
+            document.getElementById('btnSearch').disabled = true;
+            document.getElementById('loading').classList.remove('d-none');
+
+            try {
+                const response = await fetch(`${WEB_APP_URL}?action=check&iqama=${iqama}&leaveId=${leaveId}`);
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    displayResult(result.data);
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert("خطأ في الاتصال بالمحرك الرئيسي");
+            } finally {
+                document.getElementById('btnSearch').disabled = false;
+                document.getElementById('loading').classList.add('d-none');
+            }
+        }
+
+        function displayResult(data) {
+            const html = `
+                <div class="result-item"><span class="result-label">الاسم الكامل:</span> <span class="result-value">${data.nameAr}</span></div>
+                <div class="result-item"><span class="result-label">تاريخ الإصدار:</span> <span class="result-value">${data.issueDate}</span></div>
+                <div class="result-item"><span class="result-label">تاريخ البداية:</span> <span class="result-value">${data.startDate}</span></div>
+                <div class="result-item"><span class="result-label">تاريخ النهاية:</span> <span class="result-value">${data.endDate}</span></div>
+                <div class="result-item"><span class="result-label">مدة الإجازة:</span> <span class="result-value">${data.duration} أيام</span></div>
+                <div class="result-item"><span class="result-label">الطبيب المعالج:</span> <span class="result-value">${data.doctor}</span></div>
+                <div class="result-item"><span class="result-label">المسمى الوظيفي:</span> <span class="result-value">${data.position}</span></div>
             `;
-          } else {
-            alert(res.message);
-          }
-        })
-        .catch(err => {
-          document.getElementById('loader').style.display = 'none';
-          alert("خطأ في الاتصال. تأكد من أن 'Anyone' لديه وصول في جوجل.");
-        });
-    }
-  </script>
+            document.getElementById('details').innerHTML = html;
+            document.getElementById('searchArea').classList.add('d-none');
+            document.getElementById('resultArea').style.display = 'block';
+        }
+
+        function newSearch() {
+            document.getElementById('searchArea').classList.remove('d-none');
+            document.getElementById('resultArea').style.display = 'none';
+            document.getElementById('iqama').value = '';
+            document.getElementById('leaveId').value = '';
+        }
+    </script>
 </body>
 </html>
