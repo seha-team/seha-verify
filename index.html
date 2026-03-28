@@ -12,50 +12,58 @@
         
         /* القسم الأول: أبيض */
         .section-white { background: #fff; padding: 20px; }
-        .header-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo-main { height: 50px; }
-        .menu-icon { font-size: 24px; color: var(--seha-blue); cursor: pointer; }
         
-        .search-container { max-width: 600px; margin: 40px auto; text-align: center; }
-        .main-title { color: var(--seha-blue); font-size: 28px; font-weight: 700; margin-bottom: 10px; }
-        .sub-title { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 30px; padding: 0 20px; }
+        /* تعديل الهيدر: الشعار يمين والأيقونة يسار */
+        .header-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-direction: row-reverse; }
+        .logo-main { height: 65px; }
+        .menu-icon { font-size: 28px; color: var(--seha-blue); cursor: pointer; }
         
-        .input-group { text-align: right; margin-bottom: 15px; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 15px; }
-        .input-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background: #fdfdfd; }
+        .search-container { max-width: 650px; margin: 40px auto; text-align: center; }
+        .main-title { color: var(--seha-blue); font-size: 32px; font-weight: 800; margin-bottom: 15px; }
         
-        .btn-container { margin-top: 25px; display: flex; flex-direction: column; gap: 10px; }
-        .btn-seha { background: var(--seha-blue); color: #fff; border: none; padding: 12px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 16px; width: 100%; }
-        .btn-seha:hover { background: var(--seha-dark); }
+        /* تكبير نص الوصف */
+        .sub-title { color: #444; font-size: 18px; line-height: 1.8; margin-bottom: 35px; padding: 0 10px; font-weight: 600; }
+        
+        .input-group { text-align: right; margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 16px; color: #333; }
+        .input-group input { width: 100%; padding: 14px; border: 1.5px solid #ddd; border-radius: 6px; box-sizing: border-box; background: #fdfdfd; font-size: 16px; }
+        
+        .btn-container { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; }
+        .btn-seha { background: var(--seha-blue); color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 18px; width: 100%; transition: 0.3s; }
+        .btn-seha:hover { background: var(--seha-dark); transform: translateY(-2px); }
 
         /* نتائج البيانات */
         .results-area { display: none; text-align: right; margin-top: 20px; }
-        .result-row { border-bottom: 1px solid #eee; padding: 10px 0; }
-        .result-label { color: #888; font-weight: 600; }
-        .result-value { color: var(--seha-blue); font-weight: 700; float: left; }
+        .result-row { border-bottom: 1px solid #eee; padding: 12px 0; font-size: 17px; }
+        .result-label { color: #666; font-weight: 700; }
+        .result-value { color: var(--seha-blue); font-weight: 800; float: left; }
 
         /* القسم الثاني: أزرق */
-        .section-blue { background: var(--seha-blue); color: #fff; padding: 50px 20px; text-align: center; }
-        .logo-white { height: 70px; filter: brightness(0) invert(1); margin-bottom: 20px; }
-        .intro-text { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 15px; }
-        .menu-title { margin-top: 40px; font-weight: 700; font-size: 18px; position: relative; display: inline-block; }
-        .menu-title::after { content: ''; display: block; width: 100%; height: 2px; background: #fff; margin-top: 5px; }
-        .vertical-menu { list-style: none; padding: 0; margin: 20px 0; }
-        .vertical-menu li { margin: 10px 0; font-size: 15px; cursor: pointer; }
+        .section-blue { background: var(--seha-blue); color: #fff; padding: 60px 20px; text-align: center; }
+        
+        /* ضمان ظهور الشعار باللون الأبيض */
+        .logo-white { height: 85px; filter: brightness(0) invert(1); margin-bottom: 25px; display: inline-block; }
+        
+        .intro-text { max-width: 850px; margin: 0 auto; line-height: 2; font-size: 17px; font-weight: 400; }
+        .menu-title { margin-top: 45px; font-weight: 700; font-size: 20px; position: relative; display: inline-block; }
+        .menu-title::after { content: ''; display: block; width: 100%; height: 3px; background: #fff; margin-top: 8px; }
+        .vertical-menu { list-style: none; padding: 0; margin: 25px 0; }
+        .vertical-menu li { margin: 12px 0; font-size: 17px; cursor: pointer; opacity: 0.9; }
 
         /* القسم الثالث: الفوتر الأزرق الداكن */
-        .section-footer { background: var(--seha-dark); color: #fff; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; }
-        .contact-info { flex: 1; min-width: 250px; text-align: right; }
-        .footer-logos { flex: 1; min-width: 250px; text-align: left; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-        .footer-logos img { height: 45px; }
+        .section-footer { background: var(--seha-dark); color: #fff; padding: 50px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; }
+        .contact-info { flex: 1; min-width: 300px; text-align: right; }
         
-        .footer-line { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0; }
-        .contact-item { margin: 10px 0; font-size: 14px; }
-        .contact-item i { margin-left: 10px; width: 20px; text-align: center; }
+        /* الشعارات في اليسار */
+        .footer-logos { flex: 1; min-width: 300px; text-align: left; display: flex; align-items: center; justify-content: flex-start; gap: 25px; flex-direction: row-reverse; }
+        .footer-logos img { height: 55px; object-fit: contain; }
         
-        .bottom-bar { text-align: center; padding: 20px; font-size: 13px; color: #aaa; }
-        .trust-badge { color: #48bb78; font-weight: 700; font-size: 16px; margin-bottom: 10px; display: block; }
+        .contact-item { margin: 12px 0; font-size: 15px; display: flex; align-items: center; justify-content: flex-start; flex-direction: row-reverse; }
+        .contact-item i { margin-right: 12px; font-size: 18px; color: #48bb78; }
+        
+        .bottom-bar { text-align: center; padding: 30px; font-size: 14px; color: #ccc; background: #002b55; }
+        .trust-badge { color: #48bb78; font-weight: 800; font-size: 18px; margin-bottom: 12px; display: block; }
     </style>
 </head>
 <body>
@@ -63,8 +71,8 @@
     <!-- القسم الأول: الاستعلام (أبيض) -->
     <div class="section-white">
         <div class="header-nav">
-            <i class="fas fa-bars menu-icon"></i>
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha">
+            <i class="fas fa-bars menu-icon"></i>
         </div>
 
         <div class="search-container" id="searchBox">
@@ -86,18 +94,22 @@
             </div>
         </div>
 
-        <!-- نتائج البحث -->
+        <!-- نتائج البحث (تظهر بعد الاستعلام) -->
         <div class="search-container results-area" id="resultBox">
+            <div class="header-nav" style="margin-bottom: 30px;">
+                <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha">
+                <i class="fas fa-bars menu-icon"></i>
+            </div>
             <h1 class="main-title">الإجازات المرضية</h1>
-            <p class="sub-title">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه</p>
+            <p class="sub-title">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             
-            <div style="background: #f0fff4; padding: 10px; border-radius: 5px; text-align: center; color: #2f855a; margin-bottom: 20px; font-weight: bold;">
+            <div style="background: #f0fff4; padding: 15px; border-radius: 6px; text-align: center; color: #2f855a; margin-bottom: 25px; font-weight: bold; border: 1px solid #c6f6d5;">
                 ✓ تم التحقق بنجاح
             </div>
 
             <div id="dataContent"></div>
 
-            <div class="btn-container" style="margin-top: 30px;">
+            <div class="btn-container" style="margin-top: 40px;">
                 <button class="btn-seha" onclick="location.reload()">استعلام جديد</button>
                 <button class="btn-seha" onclick="location.reload()">رجوع للاستعلامات</button>
             </div>
@@ -124,11 +136,11 @@
     <div class="section-footer">
         <div class="footer-grid">
             <div class="contact-info">
-                <div style="font-weight: 700; margin-bottom: 15px; border-bottom: 1px solid #fff; display: inline-block;">تواصل معنا</div>
-                <div class="contact-item"><i class="fas fa-phone"></i> 920002005</div>
-                <div class="contact-item"><i class="fas fa-envelope"></i> support@seha.sa</div>
-                <div class="contact-item"><i class="fab fa-whatsapp"></i> 920002005</div>
-                <div class="contact-item" style="margin-top: 20px;">اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
+                <div style="font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid #fff; display: inline-block; padding-bottom: 5px;">تواصل معنا</div>
+                <div class="contact-item"><span>920002005</span> <i class="fas fa-phone"></i></div>
+                <div class="contact-item"><span>support@seha.sa</span> <i class="fas fa-envelope"></i></div>
+                <div class="contact-item"><span>920002005</span> <i class="fab fa-whatsapp"></i></div>
+                <div style="margin-top: 25px; font-size: 15px; font-weight: 600;">اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
             </div>
             
             <div class="footer-logos">
@@ -140,8 +152,8 @@
 
     <div class="bottom-bar">
         <span class="trust-badge">منصة صحة معتمدة من قبل وزارة الصحة 2026</span>
-        <div>سياسة الخصوصية | شروط الاستخدام | دليل المستخدم</div>
-        <div style="margin-top: 10px;">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة</div>
+        <div style="margin-bottom: 10px;">سياسة الخصوصية | شروط الاستخدام | دليل المستخدم</div>
+        <div>© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة</div>
     </div>
 
     <script>
@@ -173,13 +185,14 @@
                     `;
                     document.getElementById('searchBox').style.display = 'none';
                     document.getElementById('resultBox').style.display = 'block';
+                    window.scrollTo(0,0);
                 } else {
                     alert(result.message);
                     btn.innerText = "استعلام";
                     btn.disabled = false;
                 }
             } catch (e) {
-                alert("خطأ في الاتصال");
+                alert("خطأ في الاتصال بالمحرك");
                 btn.innerText = "استعلام";
                 btn.disabled = false;
             }
