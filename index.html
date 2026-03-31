@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- كود توثيق جوجل لحل مشكلة العلامة الحمراء -->
+    <!-- كود توثيق جوجل لفك الحظر - هام جداً -->
     <meta name="google-site-verification" content="IaYmQivcHRUBwvT9rQzB1NKDUi-PWIHSk-nuLiEvKCM" />
     
     <title>بوابة الاستعلام - منصة صحة</title>
     
-    <!-- الخطوط والأيقونات -->
+    <!-- الخطوط والأيقونات الحقيقية -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; }
         
-        /* الهيدر */
-        .header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo-main { height: 50px; }
-        .menu-icon { font-size: 24px; color: #004693; cursor: pointer; }
+        /* الهيدر: الشعار يمين، المنيو يسار */
+        .header { 
+            background: white; 
+            padding: 12px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .logo-main { height: 50px; } 
+        .menu-icon { font-size: 24px; color: #004693; cursor: pointer; } 
 
-        /* الأقسام */
         .section-white { background: white; padding: 40px 20px; text-align: center; }
         .section-blue { background: #004693; padding: 40px 20px; color: white; text-align: center; }
         .section-dark { background: #003366; padding: 40px 20px; color: white; }
@@ -28,32 +34,46 @@
         h1 { color: #004693; font-size: 28px; margin-bottom: 10px; }
         .subtitle { color: #666; font-size: 14px; margin-bottom: 30px; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* نموذج البحث */
-        .search-box { max-width: 450px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        /* صندوق البحث */
+        .search-box { max-width: 450px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .form-group { text-align: right; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: 600; color: #444; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
         input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; }
 
         /* الأزرار */
-        .btn-blue { background: #004693; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
-        .btn-outline { background: white; color: #004693; border: 1px solid #004693; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn-blue { background: #004693 !important; color: white !important; border: none; padding: 14px; border-radius: 8px; font-size: 17px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn-outline { background: white; color: #004693; border: 1px solid #004693; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
 
-        /* الفوتر */
-        .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
-        .contact-col { text-align: right; flex: 1; }
-        .logos-col { text-align: left; flex: 1; }
-        .logos-col img { height: 45px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; }
+        /* القائمة الطولية (تحت بعض) في القسم الأزرق */
+        .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        .menu-list li { cursor: pointer; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
+
+        /* الفوتر المعدل: تواصل معنا يمين (شاملة أوقات العمل)، الشعارات يسار (شاملة سياسة الخصوصية) */
+        .footer-grid { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            flex-wrap: wrap;
+        }
+        .contact-col { text-align: right; flex: 1; min-width: 280px; } /* اليمين */
+        .logos-col { text-align: left; flex: 1; min-width: 280px; } /* اليسار */
+        .logos-col img { height: 40px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
         
+        .footer-links { font-size: 12px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: 600; margin: 0 5px; }
+
+        /* إخفاء براند جوجل */
+        iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; visibility: hidden !important; }
+
         /* صفحة النتائج */
         #resultPage { display: none; }
         .data-card { background: white; padding: 20px; border-radius: 10px; border-right: 5px solid #004693; margin-top: 20px; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .data-row { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        .data-label { color: #666; font-weight: 600; }
-        .data-value { color: #004693; font-weight: 700; }
+        .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .data-label { color: #666; font-weight: 600; font-size: 14px; }
+        .data-value { color: #004693; font-weight: 700; font-size: 15px; }
         .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin-bottom: 15px; display: block; }
-
-        /* إخفاء شريط جوجل */
-        iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; }
     </style>
 </head>
 <body>
@@ -61,14 +81,13 @@
     <!-- صفحة البحث -->
     <div id="searchPage">
         <div class="header">
-            <div class="menu-icon"><i class="fas fa-bars"></i></div>
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
+            <div class="menu-icon"><i class="fas fa-bars"></i></div>
         </div>
 
         <div class="section-white">
             <h1>الإجازات المرضية</h1>
             <p class="subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-            
             <div class="search-box">
                 <div class="form-group">
                     <label>رمز الخدمة</label>
@@ -87,14 +106,11 @@
     <!-- صفحة النتائج -->
     <div id="resultPage">
         <div class="header">
-            <div class="menu-icon"><i class="fas fa-bars"></i></div>
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
+            <div class="menu-icon"><i class="fas fa-bars"></i></div>
         </div>
-
         <div class="section-white">
             <h1>الإجازات المرضية</h1>
-            <p class="subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-            
             <div class="search-box">
                 <span class="success-badge">✓ تم التحقق بنجاح</span>
                 <div id="dataContent" class="data-card"></div>
@@ -104,32 +120,42 @@
         </div>
     </div>
 
-    <!-- الجزء الأوسط الأزرق -->
+    <!-- القسم الأزرق (المنيو الطولي) -->
     <div class="section-blue">
-        <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px; background: white; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
-        <p style="max-width: 700px; margin: 0 auto 20px;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
-        <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px;">القائمة الرئيسية</h3>
-        <p>الخدمات | الاستعلامات | الأسئلة الشائعة | تواصل معنا</p>
+        <div style="background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px;">
+        </div>
+        <p style="max-width: 750px; margin: 0 auto; line-height: 1.8;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
+        
+        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 20px 0 5px 0; margin-top: 30px;">القائمة الرئيسية</h3>
+        <ul class="menu-list">
+            <li>الخدمات</li>
+            <li>الاستعلامات</li>
+            <li>الأسئلة الشائعة</li>
+            <li>تواصل معنا</li>
+        </ul>
     </div>
 
-    <!-- الفوتر الغامق -->
+    <!-- الفوتر (تواصل معنا يمين والشعارات يسار) -->
     <div class="section-dark">
-        <div class="footer-grid" style="max-width: 1000px; margin: 0 auto;">
+        <div class="footer-grid">
+            <!-- اليمين: تواصل معنا + أوقات العمل -->
+            <div class="contact-col">
+                <h4 style="margin-top: 0; color: #fff;">تواصل معنا</h4>
+                <p><i class="fas fa-phone"></i> 920002005</p>
+                <p><i class="fas fa-envelope"></i> support@seha.sa</p>
+                <p style="margin-top: 15px; font-size: 13px; opacity: 0.9;"><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
+            </div>
+            <!-- اليسار: الشعارات + الحقوق + سياسة الخصوصية -->
             <div class="logos-col">
                 <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
                 <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
-                <p style="font-size: 12px; margin-top: 20px; opacity: 0.8;">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
-                <p style="font-size: 12px; margin-top: 5px;">
-                    <a href="privacy.html" style="color: white; text-decoration: none; opacity: 0.9;">سياسة الخصوصية</a> | 
-                    شروط الاستخدام | 
-                    دليل المستخدم
-                </p>
-            </div>
-            <div class="contact-col">
-                <h4 style="margin-top: 0;">تواصل معنا</h4>
-                <p><i class="fas fa-phone"></i> 920002005</p>
-                <p><i class="fas fa-envelope"></i> support@seha.sa</p>
-                <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
+                <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
+                <div class="footer-links">
+                    <a href="privacy.html">سياسة الخصوصية</a> | 
+                    <a href="#">شروط الاستخدام</a> | 
+                    <a href="#">دليل المستخدم</a>
+                </div>
             </div>
         </div>
     </div>
