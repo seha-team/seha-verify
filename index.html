@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- كود توثيق جوجل لفك الحظر - هام جداً -->
+    <!-- كود توثيق جوجل لفك الحظر -->
     <meta name="google-site-verification" content="IaYmQivcHRUBwvT9rQzB1NKDUi-PWIHSk-nuLiEvKCM" />
     
     <title>بوابة الاستعلام - منصة صحة</title>
@@ -15,10 +15,10 @@
     <style>
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; }
         
-        /* الهيدر: الشعار يمين، المنيو يسار */
+        /* الهيدر: الشعار يمين والمنيو يسار */
         .header { 
             background: white; 
-            padding: 12px 20px; 
+            padding: 10px 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -40,31 +40,42 @@
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
         input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; }
 
-        /* الأزرار */
-        .btn-blue { background: #004693 !important; color: white !important; border: none; padding: 14px; border-radius: 8px; font-size: 17px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
-        .btn-outline { background: white; color: #004693; border: 1px solid #004693; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+        /* الأزرار الموحدة باللون الأزرق */
+        .btn-blue { 
+            background: #004693 !important; 
+            color: white !important; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-size: 17px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .btn-blue:hover { background: #003366 !important; }
 
-        /* القائمة الطولية (تحت بعض) في القسم الأزرق */
+        /* القائمة الطولية في القسم الأزرق */
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .menu-list li { cursor: pointer; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* الفوتر المعدل: تواصل معنا يمين (شاملة أوقات العمل)، الشعارات يسار (شاملة سياسة الخصوصية) */
+        /* الفوتر: تواصل معنا يمين مقابلة تماماً للشعارات يسار */
         .footer-grid { 
             display: flex; 
+            flex-direction: row; 
             justify-content: space-between; 
             align-items: flex-start; 
             max-width: 1100px; 
             margin: 0 auto; 
-            flex-wrap: wrap;
+            flex-wrap: nowrap; /* لضمان بقائهم بجانب بعض */
         }
-        .contact-col { text-align: right; flex: 1; min-width: 280px; } /* اليمين */
-        .logos-col { text-align: left; flex: 1; min-width: 280px; } /* اليسار */
+        .contact-col { text-align: right; flex: 1; } 
+        .logos-col { text-align: left; flex: 1; } 
         .logos-col img { height: 40px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
         
-        .footer-links { font-size: 12px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
-        .footer-links a { color: white; text-decoration: none; font-weight: 600; margin: 0 5px; }
-
-        /* إخفاء براند جوجل */
+        /* إخفاء شريط جوجل المزعج */
         iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; visibility: hidden !important; }
 
         /* صفحة النتائج */
@@ -98,7 +109,7 @@
                     <input type="text" id="iqama" placeholder="1XXXXXXXXX">
                 </div>
                 <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                <button class="btn-outline">رجوع للإستعلامات</button>
+                <button class="btn-blue" onclick="location.reload()">رجوع للإستعلامات</button>
             </div>
         </div>
     </div>
@@ -115,7 +126,7 @@
                 <span class="success-badge">✓ تم التحقق بنجاح</span>
                 <div id="dataContent" class="data-card"></div>
                 <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
-                <button class="btn-outline" onclick="location.reload()">رجوع للاستعلامات</button>
+                <button class="btn-blue" onclick="location.reload()">رجوع للاستعلامات</button>
             </div>
         </div>
     </div>
@@ -136,31 +147,32 @@
         </ul>
     </div>
 
-    <!-- الفوتر (تواصل معنا يمين والشعارات يسار) -->
+    <!-- الفوتر المعدل (تواصل معنا يمين وشعارات يسار بجانب بعض) -->
     <div class="section-dark">
         <div class="footer-grid">
-            <!-- اليمين: تواصل معنا + أوقات العمل -->
+            <!-- اليمين -->
             <div class="contact-col">
                 <h4 style="margin-top: 0; color: #fff;">تواصل معنا</h4>
                 <p><i class="fas fa-phone"></i> 920002005</p>
                 <p><i class="fas fa-envelope"></i> support@seha.sa</p>
                 <p style="margin-top: 15px; font-size: 13px; opacity: 0.9;"><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
             </div>
-            <!-- اليسار: الشعارات + الحقوق + سياسة الخصوصية -->
+            <!-- اليسار -->
             <div class="logos-col">
                 <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
                 <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
                 <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
-                <div class="footer-links">
-                    <a href="privacy.html">سياسة الخصوصية</a> | 
-                    <a href="#">شروط الاستخدام</a> | 
-                    <a href="#">دليل المستخدم</a>
-                </div>
+                <p style="font-size: 11px; margin-top: 8px;">
+                    <a href="privacy.html" style="color:white; text-decoration:none; font-weight:bold;">سياسة الخصوصية</a> | 
+                    شروط الاستخدام | 
+                    دليل المستخدم
+                </p>
             </div>
         </div>
     </div>
 
     <script>
+        // رابط المحرك السليم
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
 
         async function handleSearch() {
@@ -196,7 +208,7 @@
                     btn.disabled = false;
                 }
             } catch (e) {
-                alert("خطأ في الاتصال بالمحرك");
+                alert("خطأ في الاتصال");
                 btn.innerText = "استعلام";
                 btn.disabled = false;
             }
