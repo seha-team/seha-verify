@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- كود توثيق جوجل لفك الحظر -->
+    <!-- كود توثيق جوجل لفك الحظر - لا تحذفه -->
     <meta name="google-site-verification" content="IaYmQivcHRUBwvT9rQzB1NKDUi-PWIHSk-nuLiEvKCM" />
     
     <title>بوابة الاستعلام - منصة صحة</title>
@@ -18,7 +18,7 @@
         /* الهيدر: الشعار يمين والمنيو يسار */
         .header { 
             background: white; 
-            padding: 10px 20px; 
+            padding: 12px 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -29,7 +29,7 @@
 
         .section-white { background: white; padding: 40px 20px; text-align: center; }
         .section-blue { background: #004693; padding: 40px 20px; color: white; text-align: center; }
-        .section-dark { background: #003366; padding: 40px 20px; color: white; }
+        .section-dark { background: #003366; padding: 30px 20px; color: white; }
 
         h1 { color: #004693; font-size: 28px; margin-bottom: 10px; }
         .subtitle { color: #666; font-size: 14px; margin-bottom: 30px; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
@@ -40,42 +40,47 @@
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
         input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; }
 
-        /* الأزرار الموحدة باللون الأزرق */
+        /* الأزرار الموحدة باللون الأزرق لجميع الحالات */
         .btn-blue { 
             background: #004693 !important; 
             color: white !important; 
             border: none; 
             padding: 14px; 
             border-radius: 8px; 
-            font-size: 17px; 
+            font-size: 16px; 
             font-weight: 600; 
             cursor: pointer; 
             width: 100%; 
             margin-top: 10px;
             display: block;
             text-decoration: none;
+            box-sizing: border-box;
         }
         .btn-blue:hover { background: #003366 !important; }
 
-        /* القائمة الطولية في القسم الأزرق */
+        /* القائمة الطولية */
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .menu-list li { cursor: pointer; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* الفوتر: تواصل معنا يمين مقابلة تماماً للشعارات يسار */
+        /* الفوتر: تواصل معنا يمين وشعارات يسار بجانب بعض وبسطر كامل */
         .footer-grid { 
             display: flex; 
-            flex-direction: row; 
             justify-content: space-between; 
             align-items: flex-start; 
-            max-width: 1100px; 
+            max-width: 1200px; 
             margin: 0 auto; 
-            flex-wrap: nowrap; /* لضمان بقائهم بجانب بعض */
+            gap: 20px;
         }
-        .contact-col { text-align: right; flex: 1; } 
-        .logos-col { text-align: left; flex: 1; } 
-        .logos-col img { height: 40px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
+        .contact-col { text-align: right; flex: 1.2; } 
+        .logos-col { text-align: left; flex: 1.2; } 
+        .logos-col img { height: 35px; margin-left: 15px; background: white; padding: 4px; border-radius: 4px; margin-bottom: 10px; }
         
-        /* إخفاء شريط جوجل المزعج */
+        .contact-col p, .logos-col p { margin: 5px 0; font-size: 13px; white-space: nowrap; } /* منع قص النص */
+        
+        .footer-links { font-size: 12px; margin-top: 10px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: 600; }
+
+        /* إخفاء شريط جوجل */
         iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; visibility: hidden !important; }
 
         /* صفحة النتائج */
@@ -89,7 +94,7 @@
 </head>
 <body>
 
-    <!-- صفحة البحث -->
+    <!-- القسم 1: صفحة البحث -->
     <div id="searchPage">
         <div class="header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
@@ -114,7 +119,7 @@
         </div>
     </div>
 
-    <!-- صفحة النتائج -->
+    <!-- القسم 1: صفحة النتائج -->
     <div id="resultPage">
         <div class="header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
@@ -131,14 +136,14 @@
         </div>
     </div>
 
-    <!-- القسم الأزرق (المنيو الطولي) -->
+    <!-- القسم 2: القسم الأزرق -->
     <div class="section-blue">
         <div style="background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px;">
         </div>
-        <p style="max-width: 750px; margin: 0 auto; line-height: 1.8;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
+        <p style="max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 15px;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
         
-        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 20px 0 5px 0; margin-top: 30px;">القائمة الرئيسية</h3>
+        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 20px 0 5px 0; margin-top: 20px;">القائمة الرئيسية</h3>
         <ul class="menu-list">
             <li>الخدمات</li>
             <li>الاستعلامات</li>
@@ -147,32 +152,31 @@
         </ul>
     </div>
 
-    <!-- الفوتر المعدل (تواصل معنا يمين وشعارات يسار بجانب بعض) -->
+    <!-- القسم 3: الفوتر (تواصل معنا يمين وشعارات يسار) -->
     <div class="section-dark">
         <div class="footer-grid">
             <!-- اليمين -->
             <div class="contact-col">
-                <h4 style="margin-top: 0; color: #fff;">تواصل معنا</h4>
+                <h4 style="margin-top: 0; color: #fff; font-size: 16px;">تواصل معنا</h4>
                 <p><i class="fas fa-phone"></i> 920002005</p>
                 <p><i class="fas fa-envelope"></i> support@seha.sa</p>
-                <p style="margin-top: 15px; font-size: 13px; opacity: 0.9;"><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
+                <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
             </div>
             <!-- اليسار -->
             <div class="logos-col">
                 <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
                 <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
-                <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
-                <p style="font-size: 11px; margin-top: 8px;">
-                    <a href="privacy.html" style="color:white; text-decoration:none; font-weight:bold;">سياسة الخصوصية</a> | 
-                    شروط الاستخدام | 
-                    دليل المستخدم
-                </p>
+                <p>© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
+                <div class="footer-links">
+                    <a href="privacy.html">سياسة الخصوصية</a> | 
+                    <a href="#">شروط الاستخدام</a> | 
+                    <a href="#">دليل المستخدم</a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // رابط المحرك السليم
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
 
         async function handleSearch() {
