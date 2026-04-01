@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- كود توثيق جوجل لفك الحظر -->
     <meta name="google-site-verification" content="IaYmQivcHRUBwvT9rQzB1NKDUi-PWIHSk-nuLiEvKCM" />
+    
     <title>بوابة الاستعلام - منصة صحة</title>
     
+    <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; }
+        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
         
-        /* الهيدر: الشعار يمين والمنيو يسار */
-        .header { background: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo-main { height: 50px; } 
-        .menu-icon { font-size: 24px; color: #004693; cursor: pointer; } 
+        /* الهيدر: شعار كبير وأيقونة واضحة */
+        .header { 
+            background: white; 
+            padding: 15px 25px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        }
+        .logo-main { height: 60px; } 
+        .menu-icon { font-size: 30px; color: #004693; cursor: pointer; } 
 
-        .section-white { background: white; padding: 40px 20px; text-align: center; }
-        .section-blue { background: #004693; padding: 40px 20px; color: white; text-align: center; }
-        .section-dark { background: #003366; padding: 30px 20px; color: white; }
+        .section-white { background: white; padding: 45px 20px; text-align: center; }
+        .section-blue { background: #004693; padding: 45px 20px; color: white; text-align: center; }
+        .section-dark { background: #003366; padding: 40px 20px; color: white; }
 
-        h1 { color: #004693; font-size: 28px; margin-bottom: 10px; }
-        .subtitle { color: #666; font-size: 14px; margin-bottom: 30px; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
+        h1 { color: #004693; font-size: 30px; margin-bottom: 12px; }
+        .subtitle { color: #555; font-size: 16px; margin-bottom: 30px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
 
-        .search-box { max-width: 450px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .form-group { text-align: right; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
-        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; }
+        /* صندوق البحث */
+        .search-box { max-width: 460px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .form-group { text-align: right; margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: #333; font-size: 15px; }
+        input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 17px; }
 
         /* الأزرار الزرقاء الموحدة */
         .btn-blue { 
@@ -35,9 +46,9 @@
             color: white !important; 
             border: none; 
             padding: 14px; 
-            border-radius: 8px; 
-            font-size: 16px; 
-            font-weight: 600; 
+            border-radius: 10px; 
+            font-size: 17px; 
+            font-weight: 700; 
             cursor: pointer; 
             width: 100%; 
             margin-top: 10px;
@@ -46,27 +57,48 @@
         }
 
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .menu-list li { cursor: pointer; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
+        .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* الفوتر: توازن دقيق لعدم خروج الشعارات يميناً أو يساراً */
-        .footer-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; }
-        .contact-col { text-align: right; flex: 1; } 
-        .logos-col { text-align: left; flex: 1; } 
-        .logos-col img { height: 35px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
+        /* الفوتر الاحترافي */
+        .footer-top { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            max-width: 1100px; 
+            margin: 0 auto 30px auto; 
+            flex-wrap: wrap;
+        }
+        .contact-col { text-align: right; flex: 1; min-width: 250px; } 
+        .logos-col { text-align: left; flex: 1; min-width: 250px; } 
+        .logos-col img { height: 40px; margin-left: 15px; background: white; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
         
-        .contact-col p, .logos-col p { margin: 5px 0; font-size: 13px; white-space: nowrap; } /* بقاء النص في سطر واحد */
-        .footer-links { font-size: 12px; margin-top: 10px; white-space: nowrap; }
-        .footer-links a { color: white; text-decoration: none; font-weight: 600; }
+        /* تجميد النصوص الطويلة في المنتصف */
+        .footer-bottom { 
+            text-align: center; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            padding-top: 20px; 
+            width: 100%;
+        }
+        .copyright-text { font-size: 13px; opacity: 0.9; margin-bottom: 10px; line-height: 1.6; }
+        .footer-links { font-size: 12px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 8px; }
 
-        /* إخفاء شريط جوجل المزعج */
+        /* إخفاء شريط جوجل */
         iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; visibility: hidden !important; }
 
         #resultPage { display: none; }
-        .data-card { background: white; padding: 20px; border-radius: 10px; border-right: 5px solid #004693; margin-top: 20px; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; margin-top: 20px; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .data-label { color: #666; font-weight: 600; font-size: 14px; }
-        .data-value { color: #004693; font-weight: 700; font-size: 15px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin-bottom: 15px; display: block; }
+        .data-label { color: #666; font-weight: 700; font-size: 14px; }
+        .data-value { color: #004693; font-weight: 800; font-size: 15px; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin-bottom: 15px; display: block; }
+        
+        /* للجوال لضمان عدم وجود فراغ أبيض */
+        @media (max-width: 600px) {
+            .footer-top { flex-direction: column; align-items: center; text-align: center; }
+            .contact-col, .logos-col { text-align: center; margin-bottom: 20px; }
+            .logos-col img { margin: 5px; }
+        }
     </style>
 </head>
 <body>
@@ -108,15 +140,16 @@
         <div style="background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px;">
         </div>
-        <p style="max-width: 800px; margin: 0 auto; line-height: 1.8;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
-        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 20px 0 5px 0; margin-top: 20px;">القائمة الرئيسية</h3>
+        <p style="max-width: 750px; margin: 0 auto; line-height: 1.8; font-size: 15px;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
+        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 15px 0 5px 0; margin-top: 20px;">القائمة الرئيسية</h3>
         <ul class="menu-list">
             <li>الخدمات</li><li>الاستعلامات</li><li>الأسئلة الشائعة</li><li>تواصل معنا</li>
         </ul>
     </div>
 
     <div class="section-dark">
-        <div class="footer-container">
+        <!-- الجزء العلوي: تواصل يمين وشعارات يسار -->
+        <div class="footer-top">
             <div class="contact-col">
                 <h4 style="margin-top: 0; color: #fff;">تواصل معنا</h4>
                 <p><i class="fas fa-phone"></i> 920002005</p>
@@ -126,10 +159,19 @@
             <div class="logos-col">
                 <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
                 <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
-                <p>© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
-                <div class="footer-links">
-                    <a href="privacy.html">سياسة الخصوصية</a> | <a href="#">شروط الاستخدام</a> | <a href="#">دليل المستخدم</a>
-                </div>
+            </div>
+        </div>
+
+        <!-- الجزء السفلي: الحقوق والروابط في المنتصف تماماً -->
+        <div class="footer-bottom">
+            <p class="copyright-text">
+                منصة صحة هي منصة معتمدة من قبل وزارة الصحة لتقديم الخدمات الصحية الإلكترونية.<br>
+                © جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026
+            </p>
+            <div class="footer-links">
+                <a href="privacy.html">سياسة الخصوصية</a> | 
+                <a href="#">شروط الاستخدام</a> | 
+                <a href="#">دليل المستخدم</a>
             </div>
         </div>
     </div>
