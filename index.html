@@ -8,16 +8,16 @@
     
     <title>بوابة الاستعلام - منصة صحة</title>
     
+    <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية المركزية لتقريب العناصر */
+        /* تقريب العناصر للداخل لعدم التباعد في الابتوب */
         .container { max-width: 1000px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; }
 
-        /* الهيدر: العناصر ملمومة للداخل */
         .header { background: white; padding: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .logo-main { height: 55px; } 
         .menu-icon { font-size: 28px; color: #004693; cursor: pointer; } 
@@ -39,17 +39,18 @@
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* ===================== الفوتر الملموم ===================== */
+        /* ===================== الفوتر ===================== */
         .footer-top {
             display: flex;
+            flex-direction: row; /* بجانب بعض دائماً */
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 25px;
+            align-items: center;
             width: 100%;
+            margin-bottom: 25px;
         }
-        .contact-col { text-align: right; flex: 1; }
-        .contact-col h4 { margin: 0 0 15px 0; color: #fff; font-size: 17px; }
-        .contact-col p { margin: 8px 0; font-size: 14px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
+        .contact-col { text-align: right; flex: 1.5; }
+        .contact-col h4 { margin: 0 0 10px 0; color: #fff; font-size: 17px; }
+        .contact-col p { margin: 6px 0; font-size: 14px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 18px; }
 
         .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
@@ -61,15 +62,14 @@
             padding-top: 20px;
             width: 100%;
         }
-        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; }
+        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; line-height: 1.6; }
         .footer-links { font-size: 12px; margin-top: 10px; }
         .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
 
-        /* تنسيق مربعات الاستعلام في صفحة النتائج */
-        .result-query-box { margin-bottom: 20px; text-align: right; }
-        .res-input-wrap { margin-bottom: 10px; }
-        .res-input-wrap label { font-size: 13px; color: #666; font-weight: 700; margin-bottom: 5px; display: block; }
-        .res-box-styled { background: #f9f9f9; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 16px; min-height: 20px; }
+        /* مربعات الاستعلام في صفحة النتائج */
+        .res-input-wrap { margin-bottom: 12px; text-align: right; }
+        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: 700; }
+        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 16px; min-height: 20px; }
 
         #resultPage { display: none; }
         .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -78,14 +78,16 @@
         .data-value { color: #004693; font-weight: 800; font-size: 15px; }
         .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin: 15px 0; display: block; text-align: center; }
 
-        /* الجوال */
+        /* تعديلات الجوال القوية لضمان عدم النزول */
         @media (max-width: 600px) {
-            .container { flex-direction: row; justify-content: space-between; }
-            .footer-top { flex-direction: column; text-align: center; gap: 15px; align-items: center; }
-            .contact-col { text-align: center; order: 1; }
-            .contact-col p { justify-content: center; }
-            .logos-col { justify-content: center; order: 2; margin-top: 5px; }
-            .footer-bottom { order: 3; }
+            .footer-top { 
+                flex-direction: row !important; /* إجبار البقاء بجانب بعض */
+                align-items: center;
+            }
+            .contact-col { flex: 2; font-size: 11px; }
+            .contact-col p { font-size: 11px; gap: 4px; }
+            .logos-col { flex: 1; }
+            .logos-col img { height: 32px; } /* تصغير الشعارات لتناسب العرض */
         }
     </style>
 </head>
@@ -95,9 +97,7 @@
     <div id="searchPage">
         <div class="header">
             <div class="container">
-                <!-- الشعار يمين ملموم -->
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
-                <!-- المنيو يسار ملموم -->
                 <div class="menu-icon"><i class="fas fa-bars"></i></div>
             </div>
         </div>
@@ -124,15 +124,13 @@
         <div class="section-white">
             <h1>الإجازات المرضية</h1>
             <div class="search-box">
-                <div class="result-query-box">
-                    <div class="res-input-wrap">
-                        <label>رمز الخدمة</label>
-                        <div id="res-leaveId" class="res-box-styled"></div>
-                    </div>
-                    <div class="res-input-wrap">
-                        <label>رقم الهوية / الإقامة</label>
-                        <div id="res-iqama" class="res-box-styled"></div>
-                    </div>
+                <div class="res-input-wrap">
+                    <label>رمز الخدمة</label>
+                    <div id="res-leaveId" class="res-box-styled"></div>
+                </div>
+                <div class="res-input-wrap">
+                    <label>رقم الهوية / الإقامة</label>
+                    <div id="res-iqama" class="res-box-styled"></div>
                 </div>
                 <span class="success-badge">✓ تم التحقق بنجاح</span>
                 <div id="dataContent" class="data-card"></div>
