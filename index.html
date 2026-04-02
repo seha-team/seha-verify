@@ -22,8 +22,8 @@
         .section-blue { background: #004693; padding: 45px 20px; color: white; text-align: center; }
         .section-dark { background: #003366; padding: 40px 20px; color: white; }
 
-        h1 { color: #004693; font-size: 30px; margin-bottom: 12px; }
-        .subtitle { color: #555; font-size: 16px; margin-bottom: 30px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
+        h1 { color: #004693; font-size: 28px; margin-bottom: 12px; }
+        .subtitle { color: #555; font-size: 15px; margin-bottom: 30px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
 
         .search-box { max-width: 460px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
         .form-group { text-align: right; margin-bottom: 18px; }
@@ -35,66 +35,52 @@
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* ===================== الفوتر ===================== */
-
-        /* الجزء العلوي: تواصل يمين والشعارات يسار مقابله تماماً */
+        /* ===================== الفوتر المطور ===================== */
         .footer-top {
             display: flex;
-            flex-direction: row;          /* صف واحد أفقي */
             justify-content: space-between;
-            align-items: center;          /* محاذاة عمودية في المنتصف */
-            max-width: 1000px;
-            margin: 0 auto 25px auto;
-        }
-        .contact-col { 
-            text-align: right; 
-            flex: 1;
-        }
-        .contact-col h4 { margin-top: 0; color: #fff; font-size: 17px; margin-bottom: 10px; }
-        .contact-col p { margin: 7px 0; font-size: 14px; }
-
-        .logos-col { 
-            text-align: left; 
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;    /* الشعارات تجمع في اليسار */
             align-items: center;
-            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto 30px auto;
         }
-        .logos-col img { 
-            height: 50px;                 /* حجم مناسب */
-            background: white; 
-            padding: 6px; 
-            border-radius: 6px; 
-        }
+        .contact-col { text-align: right; flex: 1; }
+        .contact-col h4 { margin: 0 0 10px 0; color: #fff; font-size: 17px; }
+        .contact-col p { margin: 6px 0; font-size: 14px; }
+        .wa-icon { color: #25d366; margin-left: 5px; font-size: 18px; } /* أيقونة الواتساب */
 
-        /* الجزء السفلي: النصوص في المنتصف */
+        .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; gap: 15px; }
+        .logos-col img { height: 45px; background: white; padding: 5px; border-radius: 5px; }
+
         .footer-bottom {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.15);
             padding-top: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            width: 100%;
         }
-        .footer-bottom p { margin: 6px 0; font-size: 13px; opacity: 0.9; line-height: 1.7; }
-        .footer-links { font-size: 12px; margin-top: 8px; }
+        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; }
+        .footer-links { font-size: 12px; margin-top: 10px; }
         .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
 
-        /* إخفاء شريط جوجل */
-        iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-gadget { display: none !important; }
+        /* تنسيق جدول معلومات الاستعلام في صفحة النتائج */
+        .search-info-table { width: 100%; background: #f0f4f8; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: right; border: 1px solid #d1d9e6; }
+        .search-info-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed #ccc; }
+        .search-info-row:last-child { border-bottom: none; }
+        .search-info-label { font-weight: 700; color: #555; font-size: 14px; }
+        .search-info-value { color: #004693; font-weight: 700; }
 
         #resultPage { display: none; }
-        .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; margin-top: 20px; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .data-label { color: #666; font-weight: 700; font-size: 14px; }
         .data-value { color: #004693; font-weight: 800; font-size: 15px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin-bottom: 15px; display: block; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin-bottom: 15px; display: block; text-align: center; }
 
         /* الجوال */
         @media (max-width: 600px) {
-            .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+            .footer-top { flex-direction: column; text-align: center; gap: 20px; }
             .contact-col { text-align: center; }
             .logos-col { justify-content: center; }
+            .footer-bottom p { font-size: 12px; }
         }
     </style>
 </head>
@@ -127,6 +113,12 @@
         <div class="section-white">
             <h1>الإجازات المرضية</h1>
             <div class="search-box">
+                <!-- جدول معلومات الاستعلام المضاف -->
+                <div class="search-info-table">
+                    <div class="search-info-row"><span class="search-info-label">رمز الخدمة:</span><span id="res-leaveId" class="search-info-value"></span></div>
+                    <div class="search-info-row"><span class="search-info-label">رقم الهوية / الإقامة:</span><span id="res-iqama" class="search-info-value"></span></div>
+                </div>
+
                 <span class="success-badge">✓ تم التحقق بنجاح</span>
                 <div id="dataContent" class="data-card"></div>
                 <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
@@ -140,7 +132,7 @@
         <div style="background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px;">
         </div>
-        <p style="max-width: 750px; margin: 0 auto; line-height: 1.8; font-size: 15px;">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونيا لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات بما يضمن جودة الأداء وخفض التكاليف وتوفير الجهد والوقت لجميع المستفيدين.</p>
+        <p style="max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 15px;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
         <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 15px 0 5px 0; margin-top: 20px;">القائمة الرئيسية</h3>
         <ul class="menu-list">
             <li>الخدمات</li>
@@ -152,12 +144,10 @@
 
     <!-- الفوتر -->
     <div class="section-dark">
-
-        <!-- تواصل يمين والشعارات يسار في نفس الصف -->
         <div class="footer-top">
             <div class="contact-col">
                 <h4>تواصل معنا</h4>
-                <p><i class="fas fa-phone"></i> 920002005</p>
+                <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
                 <p><i class="fas fa-envelope"></i> support@seha.sa</p>
                 <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
             </div>
@@ -167,17 +157,13 @@
             </div>
         </div>
 
-        <!-- النصوص والحقوق في المنتصف أسفل الصفين -->
         <div class="footer-bottom">
-            <p>منصة صحة هي منصة معتمدة من قبل وزارة الصحة لتقديم الخدمات الصحية الإلكترونية.</p>
-            <p>© جميع الحقوق محفوظة لمنصة صحة - وزارة الصحة 2026</p>
+            <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
             <div class="footer-links">
-                <a href="privacy.html">سياسة الخصوصية</a> | 
-                <a href="#">شروط الاستخدام</a> | 
+                <a href="privacy.html">سياسة الخصوصية وشروط الإستخدام</a> | 
                 <a href="#">دليل المستخدم</a>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -190,11 +176,17 @@
             const btn = document.getElementById('btnSearch');
             btn.innerText = "جاري التحقق...";
             btn.disabled = true;
+
             try {
                 const res = await fetch(`${WEB_APP_URL}?action=check&iqama=${iq}&leaveId=${lid}`);
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
+                    
+                    // ملء جدول معلومات الاستعلام
+                    document.getElementById('res-leaveId').innerText = lid;
+                    document.getElementById('res-iqama').innerText = iq;
+
                     document.getElementById('dataContent').innerHTML = `
                         <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
                         <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
