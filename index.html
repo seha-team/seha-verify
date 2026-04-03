@@ -16,22 +16,22 @@
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
         
         /* تقريب العناصر للداخل لضمان التماسك البصري */
-        .container { max-width: 950px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; }
+        .container { max-width: 1000px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; }
 
-        .header { background: white; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .logo-main { height: 50px; } 
+        .header { background: white; padding: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .logo-main { height: 55px; } 
         .menu-icon { font-size: 28px; color: #004693; cursor: pointer; } 
 
         .section-white { background: white; padding: 45px 20px; text-align: center; }
         .section-blue { background: #004693; padding: 45px 20px; color: white; text-align: center; }
         .section-dark { background: #003366; padding: 35px 0; color: white; }
 
-        h1 { color: #004693; font-size: 26px; margin-bottom: 10px; }
-        .subtitle { color: #555; font-size: 14px; margin-bottom: 25px; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
+        h1 { color: #004693; font-size: 28px; margin-bottom: 12px; }
+        .subtitle { color: #555; font-size: 15px; margin-bottom: 30px; line-height: 1.7; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        .search-box { max-width: 420px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
-        .form-group { text-align: right; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 6px; font-weight: 700; color: #333; font-size: 15px; }
+        .search-box { max-width: 440px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .form-group { text-align: right; margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: #333; font-size: 15px; }
         input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 17px; background: white; }
 
         .btn-blue { background: #004693 !important; color: white !important; border: none; padding: 14px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; }
@@ -40,52 +40,52 @@
         .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
         /* ===================== الفوتر المطور ===================== */
-        .footer-title { text-align: center; width: 100%; margin-bottom: 20px; }
-        .footer-title h4 { font-size: 20px; color: #fff; margin: 0; }
+        .footer-title { text-align: center; width: 100%; margin-bottom: 25px; }
+        .footer-title h4 { font-size: 22px; color: #fff; margin: 0; }
 
         .footer-top {
             display: flex;
             flex-direction: row; 
             justify-content: space-between;
-            align-items: flex-start; /* لرفع الشعارات للأعلى مقابل أول سطر */
+            align-items: flex-start; /* لرفع الشعارات للأعلى مقابلة لأول سطر */
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .contact-col { text-align: right; flex: 1.5; }
-        .contact-col p { margin: 8px 0; font-size: 14px; display: flex; align-items: center; gap: 10px; }
-        .wa-icon { color: #25d366; font-size: 18px; }
+        .contact-col p { margin: 8px 0; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+        .wa-icon { color: #25d366; font-size: 20px; }
 
-        .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; align-items: flex-start; gap: 15px; }
-        .logos-col img { height: 60px; border-radius: 6px; } /* تكبير الشعارات وحذف الخلفية البيضاء الإضافية */
+        .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; align-items: flex-start; gap: 20px; }
+        .logos-col img { height: 60px; border-radius: 6px; } /* تكبير الشعارات وحذف أي خلفية زائدة */
 
         .footer-bottom {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 20px;
+            padding-top: 25px;
             width: 100%;
         }
-        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; }
-        .footer-links { font-size: 12px; margin-top: 10px; }
-        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
+        .footer-bottom p { margin: 6px 0; font-size: 14px; opacity: 0.9; line-height: 1.6; }
+        .footer-links { font-size: 13px; margin-top: 12px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 10px; }
 
         /* مربعات الاستعلام الفارغة في صفحة النتائج */
         .res-input-wrap { margin-bottom: 15px; text-align: right; }
-        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: 700; }
-        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 18px; min-height: 24px; }
+        .res-input-wrap label { font-size: 14px; color: #777; margin-bottom: 6px; display: block; font-weight: 700; }
+        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 12px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 18px; min-height: 24px; }
 
         #resultPage { display: none; }
         .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .data-label { color: #666; font-weight: 700; font-size: 14px; }
-        .data-value { color: #004693; font-weight: 800; font-size: 15px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin: 15px 0; display: block; text-align: center; }
+        .data-value { color: #004693; font-weight: 800; font-size: 16px; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 20px; margin: 15px 0; display: block; text-align: center; }
 
         /* تعديلات الجوال القوية لضمان التنسيق الجانبي */
         @media (max-width: 600px) {
             .footer-top { flex-direction: row !important; align-items: flex-start; }
-            .contact-col { flex: 2; }
-            .contact-col p { font-size: 11px; gap: 5px; }
-            .logos-col { flex: 1.2; }
+            .contact-col { flex: 2; font-size: 12px; }
+            .contact-col p { font-size: 12px; gap: 5px; }
+            .logos-col { flex: 1.2; gap: 10px; }
             .logos-col img { height: 40px; } 
         }
     </style>
@@ -168,10 +168,10 @@
                     <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
                     <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
                 </div>
-                <!-- الشعارات يسار ومرفوعة للأعلى مقابلة لرقم الجوال -->
+                <!-- الشعارات يسار ومرفوعة للأعلى مقابلة لرقم الجوال (تم تحديث شعار الوزارة) -->
                 <div class="logos-col">
                     <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
-                    <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
+                    <img src="https://i.postimg.cc/BbYsjDvW/wzarh-shh-jdyd.jpg" alt="Ministry of Health">
                 </div>
             </div>
             
