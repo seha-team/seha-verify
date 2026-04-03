@@ -15,7 +15,7 @@
     <style>
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
         
-        /* تقريب العناصر للداخل لعدم التباعد في الابتوب */
+        /* تقريب العناصر للداخل لضمان التماسك البصري */
         .container { max-width: 1000px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; }
 
         .header { background: white; padding: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -39,55 +39,54 @@
         .menu-list { list-style: none; padding: 0; margin: 25px 0; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; width: fit-content; }
 
-        /* ===================== الفوتر ===================== */
+        /* ===================== الفوتر المطور ===================== */
+        .footer-title { text-align: center; width: 100%; margin-bottom: 25px; }
+        .footer-title h4 { font-size: 22px; color: #fff; margin: 0; }
+
         .footer-top {
             display: flex;
-            flex-direction: row; /* بجانب بعض دائماً */
+            flex-direction: row; 
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
-        .contact-col { text-align: right; flex: 1.5; }
-        .contact-col h4 { margin: 0 0 10px 0; color: #fff; font-size: 17px; }
-        .contact-col p { margin: 6px 0; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-        .wa-icon { color: #25d366; font-size: 18px; }
+        .contact-col { text-align: right; flex: 1; }
+        .contact-col p { margin: 8px 0; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+        .wa-icon { color: #25d366; font-size: 20px; } /* أيقونة الواتساب */
 
-        .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
-        .logos-col img { height: 45px; background: white; padding: 5px; border-radius: 5px; }
+        .logos-col { text-align: left; flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 25px; padding-left: 15px; }
+        .logos-col img { height: 65px; background: white; padding: 6px; border-radius: 8px; } /* تكبير الشعارات وسحبها للداخل */
 
         .footer-bottom {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 20px;
+            padding-top: 25px;
             width: 100%;
         }
-        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; line-height: 1.6; }
-        .footer-links { font-size: 12px; margin-top: 10px; }
-        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
+        .footer-bottom p { margin: 6px 0; font-size: 14px; opacity: 0.9; line-height: 1.6; }
+        .footer-links { font-size: 13px; margin-top: 12px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 10px; }
 
-        /* مربعات الاستعلام في صفحة النتائج */
-        .res-input-wrap { margin-bottom: 12px; text-align: right; }
-        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: 700; }
-        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 16px; min-height: 20px; }
+        /* مربعات الاستعلام الفارغة في صفحة النتائج */
+        .res-input-wrap { margin-bottom: 15px; text-align: right; }
+        .res-input-wrap label { font-size: 14px; color: #777; margin-bottom: 6px; display: block; font-weight: 700; }
+        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 12px; border-radius: 8px; text-align: center; color: #004693; font-weight: 700; font-size: 18px; min-height: 24px; }
 
         #resultPage { display: none; }
         .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #004693; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .data-label { color: #666; font-weight: 700; font-size: 14px; }
-        .data-value { color: #004693; font-weight: 800; font-size: 15px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin: 15px 0; display: block; text-align: center; }
+        .data-value { color: #004693; font-weight: 800; font-size: 16px; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 20px; margin: 15px 0; display: block; text-align: center; }
 
-        /* تعديلات الجوال القوية لضمان عدم النزول */
+        /* تعديلات الجوال القوية */
         @media (max-width: 600px) {
-            .footer-top { 
-                flex-direction: row !important; /* إجبار البقاء بجانب بعض */
-                align-items: center;
-            }
-            .contact-col { flex: 2; font-size: 11px; }
-            .contact-col p { font-size: 11px; gap: 4px; }
-            .logos-col { flex: 1; }
-            .logos-col img { height: 32px; } /* تصغير الشعارات لتناسب العرض */
+            .footer-top { flex-direction: row !important; align-items: center; }
+            .contact-col { flex: 1.8; font-size: 12px; }
+            .contact-col p { font-size: 12px; gap: 5px; }
+            .logos-col { flex: 1.2; gap: 10px; }
+            .logos-col img { height: 40px; } 
         }
     </style>
 </head>
@@ -124,6 +123,7 @@
         <div class="section-white">
             <h1>الإجازات المرضية</h1>
             <div class="search-box">
+                <!-- مربعات معلومات الاستعلام (خانات فاضية تُملاً عند البحث) -->
                 <div class="res-input-wrap">
                     <label>رمز الخدمة</label>
                     <div id="res-leaveId" class="res-box-styled"></div>
@@ -155,19 +155,27 @@
     <!-- الفوتر -->
     <div class="section-dark">
         <div class="container" style="flex-direction: column;">
+            <!-- تواصل معنا بالوسط في البداية -->
+            <div class="footer-title">
+                <h4>تواصل معنا</h4>
+            </div>
+            
             <div class="footer-top">
+                <!-- التواصل يمين -->
                 <div class="contact-col">
-                    <h4>تواصل معنا</h4>
                     <p><i class="fas fa-phone"></i> 920002005</p>
                     <p><i class="fas fa-envelope"></i> support@seha.sa</p>
                     <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
                     <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
                 </div>
+                <!-- الشعارات يسار وملمومة للداخل -->
                 <div class="logos-col">
                     <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
                     <img src="https://i.postimg.cc/3R66S0fL/moh-logo.png" alt="MOH">
                 </div>
             </div>
+            
+            <!-- الحقوق والروابط بالوسط -->
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
                 <div class="footer-links">
@@ -193,8 +201,11 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
+                    
+                    // ملء الخانات الفاضية عند نجاح البحث
                     document.getElementById('res-leaveId').innerText = lid;
                     document.getElementById('res-iqama').innerText = iq;
+
                     document.getElementById('dataContent').innerHTML = `
                         <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
                         <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
