@@ -15,96 +15,103 @@
     <style>
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية لتقريب العناصر للداخل */
-        .container { max-width: 1000px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; }
+        /* تقليص حجم الصفحة كاملة ليكون ملموماً (850px) */
+        .container { max-width: 850px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; }
 
-        .header { background: white; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .logo-main { height: 50px; } 
-        .menu-icon { font-size: 28px; color: #2c71b8; cursor: pointer; } 
+        .header { background: white; padding: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .logo-main { height: 45px; } 
+        .menu-icon { font-size: 26px; color: #2c71b8; cursor: pointer; } 
 
-        .section-white { background: white; padding: 45px 20px; text-align: center; }
-        .section-blue { background: #2c71b8; padding: 45px 20px; color: white; text-align: center; }
-        .section-dark { background: #003366; padding: 40px 0; color: white; }
+        .section-white { background: white; padding: 35px 20px; text-align: center; }
+        .section-blue { background: #2c71b8; padding: 35px 20px; color: white; text-align: center; }
+        .section-dark { background: #003366; padding: 30px 0; color: white; }
 
-        h1 { color: #2c71b8; font-size: 26px; margin-bottom: 10px; }
-        .subtitle { color: #555; font-size: 14px; margin-bottom: 25px; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
+        h1 { color: #2c71b8; font-size: 24px; margin-bottom: 10px; }
+        .subtitle { color: #555; font-size: 14px; margin-bottom: 25px; line-height: 1.6; max-width: 550px; margin-left: auto; margin-right: auto; }
 
-        .search-box { max-width: 420px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .search-box { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
         .form-group { text-align: right; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-weight: 700; color: #333; font-size: 15px; }
-        input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 17px; background: white; }
+        label { display: block; margin-bottom: 6px; font-weight: 700; color: #333; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; background: white; }
 
-        .btn-blue { background: #2c71b8 !important; color: white !important; border: none; padding: 14px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; }
+        .btn-blue { background: #2c71b8 !important; color: white !important; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; display: block; text-decoration: none; }
 
-        .menu-list { list-style: none; padding: 0; margin: 20px 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .menu-list li { cursor: pointer; font-size: 19px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: fit-content; }
+        .menu-list { list-style: none; padding: 0; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .menu-list li { cursor: pointer; font-size: 17px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: fit-content; }
 
-        /* ===================== الفوتر الملموم للمنتصف ===================== */
+        /* ===================== الفوتر الملموم والمنضبط ===================== */
         .footer-header { 
             text-align: center; 
             width: 100%; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             border-bottom: 1px solid rgba(255,255,255,0.1); 
-            padding-bottom: 15px; 
+            padding-bottom: 10px; 
         }
-        .footer-header h4 { font-size: 20px; color: #fff; margin: 0; }
+        .footer-header h4 { font-size: 18px; color: #fff; margin: 0; }
 
-        .footer-flex {
+        .footer-grid {
             display: flex;
-            justify-content: center; /* تجميع العناصر في الوسط */
-            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
-            margin-bottom: 30px;
-            gap: 40px; /* مسافة قريبة بين النصوص والشعارات */
+            margin-bottom: 20px;
         }
 
-        .contact-side { text-align: right; }
-        .contact-side p { margin: 8px 0; font-size: 14px; display: flex; align-items: center; gap: 10px; }
-        .wa-icon { color: #25d366; font-size: 18px; }
+        /* اليمين: التواصل */
+        .contact-side { text-align: right; flex: 1; }
+        .contact-side p { margin: 6px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .wa-icon { color: #25d366; font-size: 16px; }
 
-        /* الشعارات: سحبها لليمين لتكون تحت "تواصل معنا" وصافية */
-        .logos-side { 
+        /* الوسط: الشعارات (صافية تماماً) */
+        .logos-center { 
+            flex: 1; 
             display: flex; 
+            justify-content: center; 
             align-items: center; 
             gap: 15px; 
-            padding-top: 5px;
         }
-        .logos-side img { 
-            height: 40px; 
-            width: auto; 
-            max-width: 100px;
+        .logos-center img { 
+            height: 38px; 
             object-fit: contain; 
-            background: transparent; 
-            padding: 0; 
+            mix-blend-mode: multiply; /* لدمج أي بياض مع الخلفية وجعلها صافية */
+            filter: brightness(1.1);
         }
-        .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
 
         .footer-bottom {
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.15);
+            border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 20px;
             width: 100%;
         }
-        .footer-bottom p { margin: 5px 0; font-size: 13px; opacity: 0.9; }
-        .footer-links { font-size: 12px; margin-top: 10px; }
+        .footer-bottom p { margin: 4px 0; font-size: 12px; opacity: 0.8; }
+        .footer-links { font-size: 11px; margin-top: 8px; }
         .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
 
-        /* مربعات الاستعلام الفارغة */
-        .res-input-wrap { margin-bottom: 15px; text-align: right; }
-        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: 700; }
-        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; min-height: 24px; color: transparent; }
+        /* مربعات الاستعلام (تظل فارغة) */
+        .res-input-wrap { margin-bottom: 12px; text-align: right; }
+        .res-input-wrap label { font-size: 12px; color: #777; margin-bottom: 4px; display: block; font-weight: 700; }
+        .res-box-styled { 
+            background: #fdfdfd; 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            border-radius: 8px; 
+            text-align: center; 
+            min-height: 20px;
+            color: transparent; /* النص مخفي بصرياً دائماً */
+        }
 
         #resultPage { display: none; }
-        .data-card { background: white; padding: 25px; border-radius: 15px; border-right: 6px solid #2c71b8; text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .data-row { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .data-label { color: #666; font-weight: 700; font-size: 14px; }
-        .data-value { color: #2c71b8; font-weight: 800; font-size: 16px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 19px; margin: 15px 0; display: block; text-align: center; }
+        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid #2c71b8; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .data-row { padding: 10px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .data-label { color: #777; font-weight: 700; font-size: 13px; }
+        .data-value { color: #2c71b8; font-weight: 800; font-size: 14px; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 10px 0; display: block; text-align: center; }
 
-        @media (max-width: 768px) {
-            .footer-flex { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+        @media (max-width: 600px) {
+            .footer-grid { flex-direction: column; gap: 20px; }
+            .contact-side { text-align: center; }
             .contact-side p { justify-content: center; }
-            .logos-side { justify-content: center; }
+            .logos-center { justify-content: center; }
         }
     </style>
 </head>
@@ -153,31 +160,36 @@
 
     <!-- القسم الأزرق -->
     <div class="section-blue">
-        <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 60px; margin-bottom: 20px;">
-        <p style="max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 15px;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
-        <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 15px 0 5px 0; margin-top: 20px;">القائمة الرئيسية</h3>
-        <ul class="menu-list">
-            <li>الخدمات</li><li>الاستعلامات</li><li>الأسئلة الشائعة</li><li>تواصل معنا</li>
-        </ul>
+        <div class="container" style="flex-direction: column;">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 55px; margin-bottom: 15px; background: white; padding: 5px; border-radius: 5px;">
+            <p style="line-height: 1.8; font-size: 14px;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
+            <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 15px 0 5px 0; margin-top: 15px;">القائمة الرئيسية</h3>
+            <ul class="menu-list">
+                <li>الخدمات</li><li>الاستعلامات</li><li>الأسئلة الشائعة</li><li>تواصل معنا</li>
+            </ul>
+        </div>
     </div>
 
     <!-- الفوتر -->
     <div class="section-dark">
         <div class="container" style="flex-direction: column;">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
-            <div class="footer-flex">
+            
+            <div class="footer-grid">
+                <!-- اليمين: تواصل معنا -->
                 <div class="contact-side">
                     <p><i class="fas fa-phone"></i> 920002005</p>
                     <p><i class="fas fa-envelope"></i> support@seha.sa</p>
                     <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
                     <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
                 </div>
-                <div class="logos-side">
+                <!-- الوسط: الشعارات صافية -->
+                <div class="logos-center">
                     <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
-                    <div class="vertical-divider"></div>
                     <img src="https://i.postimg.cc/BbYsjDvW/wzarh-shh-jdyd.jpg" alt="Ministry of Health">
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
                 <div class="footer-links">
@@ -203,9 +215,11 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
-                    // إفراغ الخانات برمجياً لتظل فاضية
+                    
+                    // الخانات تظل فاضية دائماً كما طلبت
                     document.getElementById('res-leaveId').innerText = ""; 
                     document.getElementById('res-iqama').innerText = "";
+
                     document.getElementById('dataContent').innerHTML = `
                         <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
                         <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
