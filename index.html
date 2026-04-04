@@ -18,35 +18,41 @@
             --dark-blue: #003366;
         }
 
-        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; direction: rtl; overflow-x: hidden; }
+        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
-        /* نظام عرض التطبيق الملموم (480px) */
+        /* الحاوية المركزية الملمومة (650px) لضمان ترابط العناصر */
         .app-container { 
-            max-width: 480px; 
+            max-width: 650px; 
             margin: 0 auto; 
             background-color: #fff; 
             min-height: 100vh; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
         }
 
-        /* الهيدر: توزيع عمودي متمركز */
-        .header-section { 
-            background: white; 
-            padding: 40px 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            text-align: center;
+        /* الهيدر: شعار يمين، أيقونة يسار، نص وسط */
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
         }
-        .logo-main { height: 50px; margin-bottom: 20px; object-fit: contain; }
-        .main-title { color: var(--primary-blue); font-size: 28px; font-weight: bold; margin: 0 0 15px 0; }
-        .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0; padding: 0 10px; }
+        .logo-header { height: 45px; object-fit: contain; }
+        .user-icon { font-size: 24px; color: var(--primary-blue); cursor: pointer; }
+
+        .header-content { 
+            text-align: center; 
+            padding: 30px 20px; 
+            background: white;
+        }
+        .main-title { color: var(--primary-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
+        .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0 auto; max-width: 90%; }
 
         /* صندوق البحث */
-        .content-body { padding: 20px; background-color: #fff; }
-        .search-box { background: white; border-radius: 12px; }
+        .content-body { padding: 20px; background-color: #fff; flex-grow: 1; }
         .form-group { text-align: right; margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
         input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
@@ -56,11 +62,12 @@
 
         /* القسم الأزرق */
         .section-blue { background: var(--primary-blue); padding: 40px 20px; color: white; text-align: center; }
+        .logo-platform { height: 55px; margin-bottom: 20px; mix-blend-mode: multiply; filter: brightness(1.1); }
         .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; cursor: pointer; }
+        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; cursor: pointer; width: fit-content; }
 
-        /* ===================== الفوتر (تواصل معنا) ===================== */
+        /* ===================== الفوتر (المنضبط) ===================== */
         .section-dark { background: var(--dark-blue); padding: 40px 20px; color: white; }
         
         .footer-header { 
@@ -74,16 +81,16 @@
         .footer-flex {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 30px;
         }
 
-        .contact-col { text-align: right; }
+        .contact-col { text-align: right; flex: 1.5; }
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
-        .logos-col { display: flex; align-items: center; gap: 12px; }
-        .logos-col img { height: 45px; width: auto; object-fit: contain; }
+        .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
+        .logos-col img { height: 40px; width: auto; object-fit: contain; }
         .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
 
         .footer-bottom {
@@ -96,10 +103,10 @@
         .footer-links { margin-top: 10px; }
         .footer-links a { color: white; text-decoration: none; font-weight: bold; margin: 0 5px; }
 
-        /* صفحة النتائج ومربعاتها */
+        /* صفحة النتائج */
         #resultPage { display: none; }
         .res-input-wrap { margin-bottom: 15px; text-align: right; }
-        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; }
+        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: bold; }
         .res-box-styled { background: #f9f9f9; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-align: center; min-height: 24px; color: transparent; }
 
         .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid var(--primary-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -113,10 +120,17 @@
 
     <div class="app-container">
         
-        <!-- القسم 1: صفحة البحث -->
+        <!-- الهيدر الموحد للصفحتين -->
+        <div class="header-top-row">
+            <!-- الشعار يمين -->
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
+            <!-- الأيقونة يسار (3 أشخاص) -->
+            <div class="user-icon"><i class="fas fa-users"></i></div>
+        </div>
+
+        <!-- صفحة البحث -->
         <div id="searchPage">
-            <div class="header-section">
-                <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
+            <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
                 <p class="main-subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </div>
@@ -131,10 +145,9 @@
             </div>
         </div>
 
-        <!-- القسم 1 مكرر: صفحة النتائج -->
+        <!-- صفحة النتائج -->
         <div id="resultPage">
-            <div class="header-section">
-                <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
+            <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
             </div>
             <div class="content-body">
@@ -150,9 +163,9 @@
             </div>
         </div>
 
-        <!-- القسم 2: القسم الأزرق -->
+        <!-- القسم الأزرق -->
         <div class="section-blue">
-            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 55px; margin-bottom: 20px; background: white; padding: 5px; border-radius: 5px;">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-platform" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">القائمة الرئيسية</h3>
             <ul class="menu-list">
@@ -160,7 +173,7 @@
             </ul>
         </div>
 
-        <!-- القسم 3: الفوتر (تواصل يمين وشعارات بيضاء يسار) -->
+        <!-- الفوتر -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             
@@ -186,7 +199,7 @@
             </div>
         </div>
 
-    </div> <!-- نهاية الحاوية 480px -->
+    </div>
 
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
@@ -205,7 +218,7 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // إفراغ الخانات برمجياً لتظل فاضية دائماً
+                    // تفريغ الخانات برمجياً لتظل فاضية
                     document.getElementById('res-leaveId').innerText = ""; 
                     document.getElementById('res-iqama').innerText = "";
 
