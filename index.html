@@ -21,7 +21,7 @@
 
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية المركزية الملمومة (650px) لضمان ترابط العناصر */
+        /* الحاوية المركزية الملمومة (650px) */
         .app-container { 
             max-width: 650px; 
             margin: 0 auto; 
@@ -42,7 +42,7 @@
             border-bottom: 1px solid #eee;
         }
         .logo-header { height: 45px; object-fit: contain; }
-        .menu-icon-bars { font-size: 24px; color: var(--mid-light-blue); cursor: pointer; } /* أيقونة 3 أسطر */
+        .menu-icon-bars { font-size: 24px; color: var(--mid-light-blue); cursor: pointer; }
 
         .header-content { text-align: center; padding: 30px 20px; background: white; }
         .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
@@ -54,34 +54,37 @@
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
         input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
 
-        .btn-blue { background: var(--btn-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; text-align: center; }
+        /* توحيد الأزرار بخلفية صلبة */
+        .btn-blue { background: var(--btn-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-blue:hover { opacity: 0.9; }
 
-        /* القسم الأوسط (أزرق أهدأ مع شعار في صندوق أبيض) */
+        /* القسم الأوسط (أزرق أهدأ مع شعار صغير وصافي) */
         .section-blue { background: var(--mid-light-blue); padding: 40px 20px; color: white; text-align: center; }
-        .logo-white-box { background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px; }
-        .logo-white-box img { height: 50px; display: block; }
+        .logo-white-box { background: white; display: inline-block; padding: 8px; border-radius: 8px; margin-bottom: 20px; }
+        .logo-white-box img { height: 35px; display: block; } /* تقليل حجم الشعار */
         .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
         .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; color: white; }
 
-        /* الفوتر (أزرق غامق مع خط تحت العنوان) */
+        /* الفوتر (أزرق غامق مع شعارات صافية تماماً) */
         .section-dark { background: var(--footer-dark-blue); padding: 40px 20px; color: white; }
         .footer-header { text-align: center; margin-bottom: 25px; }
         .footer-header h4 { 
             font-size: 20px; 
             margin: 0; 
             display: inline-block; 
-            border-bottom: 2px solid white; /* خط تحت تواصل معنا */
+            border-bottom: 2.5px solid white; 
             padding-bottom: 8px; 
         }
 
-        .footer-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; width: 100%; }
+        .footer-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; width: 100%; }
         .contact-col { text-align: right; flex: 1.5; }
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
+        /* الشعارات في الفوتر: بدون خلفية وصافية */
         .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
-        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent; }
+        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent; padding: 0; }
         .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); margin: 0 5px; }
 
         .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; }
@@ -113,7 +116,7 @@
 
     <div class="app-container">
         
-        <!-- الهيدر (أيقونة الـ 3 أسطر المطلوبة) -->
+        <!-- الهيدر -->
         <div class="header-top-row">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <div class="menu-icon-bars"><i class="fas fa-bars"></i></div>
@@ -130,7 +133,7 @@
                     <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
                     <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
                     <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                    <button class="btn-blue" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);">رجوع للإستعلامات</button>
+                    <button class="btn-blue" onclick="location.reload()">رجوع للإستعلامات</button>
                 </div>
             </div>
         </div>
@@ -142,18 +145,17 @@
             </div>
             <div class="content-body">
                 <div class="search-box">
-                    <!-- خانات الاستعلام (تظل فارغة دائماً) -->
                     <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
                     <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
                     <span class="success-badge">✓ تم التحقق بنجاح</span>
                     <div id="dataContent" class="data-card"></div>
                     <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
-                    <button class="btn-blue" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);" onclick="location.reload()">رجوع للاستعلامات</button>
+                    <button class="btn-blue" onclick="location.reload()">رجوع للاستعلامات</button>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأوسط (أزرق أهدأ مع شعار في صندوق أبيض) -->
+        <!-- القسم الأوسط (أزرق أهدأ) -->
         <div class="section-blue">
             <div class="logo-white-box">
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
@@ -165,7 +167,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر (أزرق غامق مع خط تحت العنوان) -->
+        <!-- الفوتر (أزرق غامق) -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             <div class="footer-flex">
@@ -178,7 +180,7 @@
                 <div class="logos-col">
                     <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
                     <div class="vertical-divider"></div>
-                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="MOH">
+                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="Ministry of Health">
                 </div>
             </div>
             <div class="footer-bottom">
@@ -207,7 +209,6 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
-                    // تظل الخانات فاضية بصرياً
                     document.getElementById('res-leaveId').innerText = ""; 
                     document.getElementById('res-iqama').innerText = "";
                     document.getElementById('dataContent').innerHTML = `
