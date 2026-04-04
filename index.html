@@ -14,13 +14,14 @@
 
     <style>
         :root {
-            --primary-blue: #2c71b8;
-            --dark-blue: #003366;
+            --mid-blue: #3a6aef; /* اللون الغامق للقسم الأوسط */
+            --footer-blue: #2c71b8; /* اللون الأهدأ للفوتر */
+            --btn-blue: #004693;
         }
 
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية المركزية الملمومة (650px) لضمان ترابط العناصر */
+        /* الحاوية المركزية الملمومة (650px) كما طلبت */
         .app-container { 
             max-width: 650px; 
             margin: 0 auto; 
@@ -31,7 +32,7 @@
             flex-direction: column;
         }
 
-        /* الهيدر: شعار يمين، أيقونة يسار، نص وسط */
+        /* الهيدر: شعار يمين، أيقونة 3 أشخاص يسار */
         .header-top-row {
             display: flex;
             justify-content: space-between;
@@ -41,14 +42,10 @@
             border-bottom: 1px solid #eee;
         }
         .logo-header { height: 45px; object-fit: contain; }
-        .user-icon { font-size: 24px; color: var(--primary-blue); cursor: pointer; }
+        .user-icon { font-size: 24px; color: var(--mid-blue); cursor: pointer; }
 
-        .header-content { 
-            text-align: center; 
-            padding: 30px 20px; 
-            background: white;
-        }
-        .main-title { color: var(--primary-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
+        .header-content { text-align: center; padding: 30px 20px; background: white; }
+        .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
         .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0 auto; max-width: 90%; }
 
         /* صندوق البحث */
@@ -57,49 +54,37 @@
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
         input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
 
-        .btn-blue { background: var(--primary-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; }
-        .btn-outline { background: white; color: var(--primary-blue); border: 1px solid var(--primary-blue); padding: 14px; border-radius: 10px; font-size: 15px; width: 100%; margin-top: 10px; cursor: pointer; }
+        .btn-blue { background: var(--btn-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; text-align: center; }
 
-        /* القسم الأزرق */
-        .section-blue { background: var(--primary-blue); padding: 40px 20px; color: white; text-align: center; }
-        .logo-platform { height: 55px; margin-bottom: 20px; mix-blend-mode: multiply; filter: brightness(1.1); }
-        .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
+        /* القسم الأزرق (الأوسط - غامق) */
+        .section-blue { background: var(--mid-blue); padding: 40px 20px; color: white; text-align: center; }
+        .logo-white { height: 55px; margin-bottom: 20px; filter: brightness(0) invert(1); } /* جعل الشعار أبيض ناصع */
+        .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; cursor: pointer; width: fit-content; }
+        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; width: fit-content; color: white; }
 
-        /* ===================== الفوتر (المنضبط) ===================== */
-        .section-dark { background: var(--dark-blue); padding: 40px 20px; color: white; }
-        
-        .footer-header { 
-            text-align: center; 
-            margin-bottom: 25px; 
-            border-bottom: 1px solid rgba(255,255,255,0.15); 
-            padding-bottom: 10px; 
-        }
-        .footer-header h4 { font-size: 20px; margin: 0; }
-
-        .footer-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
+        /* الفوتر (الأزرق الأهدأ) */
+        .section-dark { background: var(--footer-blue); padding: 40px 20px; color: white; }
+        .footer-header { text-align: center; margin-bottom: 25px; }
+        .footer-header h4 { 
+            font-size: 20px; 
+            margin: 0; 
+            display: inline-block; 
+            border-bottom: 2px solid white; /* الخط تحت تواصل معنا */
+            padding-bottom: 8px; 
         }
 
+        .footer-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
         .contact-col { text-align: right; flex: 1.5; }
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
         .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
-        .logos-col img { height: 40px; width: auto; object-fit: contain; }
+        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent; }
         .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
 
-        .footer-bottom {
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            font-size: 12px;
-        }
-        .footer-bottom p { margin: 5px 0; opacity: 0.8; }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; }
+        .footer-bottom p { margin: 5px 0; opacity: 0.9; }
         .footer-links { margin-top: 10px; }
         .footer-links a { color: white; text-decoration: none; font-weight: bold; margin: 0 5px; }
 
@@ -109,10 +94,10 @@
         .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: bold; }
         .res-box-styled { background: #f9f9f9; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-align: center; min-height: 24px; color: transparent; }
 
-        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid var(--primary-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .data-row { padding: 10px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid var(--btn-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .data-row { padding: 10px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; text-align: right; }
         .data-label { color: #777; font-weight: 700; font-size: 13px; }
-        .data-value { color: var(--primary-blue); font-weight: 800; font-size: 14px; }
+        .data-value { color: var(--btn-blue); font-weight: 800; font-size: 14px; }
         .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 15px 0; display: block; text-align: center; }
     </style>
 </head>
@@ -120,11 +105,9 @@
 
     <div class="app-container">
         
-        <!-- الهيدر الموحد للصفحتين -->
+        <!-- الهيدر -->
         <div class="header-top-row">
-            <!-- الشعار يمين -->
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
-            <!-- الأيقونة يسار (3 أشخاص) -->
             <div class="user-icon"><i class="fas fa-users"></i></div>
         </div>
 
@@ -134,13 +117,12 @@
                 <h1 class="main-title">الإجازات المرضية</h1>
                 <p class="main-subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </div>
-
             <div class="content-body">
                 <div class="search-box">
                     <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
                     <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
                     <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                    <button class="btn-outline">رجوع للإستعلامات</button>
+                    <button class="btn-blue" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);">رجوع للإستعلامات</button>
                 </div>
             </div>
         </div>
@@ -152,20 +134,19 @@
             </div>
             <div class="content-body">
                 <div class="search-box">
-                    <!-- خانات الاستعلام (تظل فارغة دائماً) -->
                     <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
                     <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
                     <span class="success-badge">✓ تم التحقق بنجاح</span>
                     <div id="dataContent" class="data-card"></div>
                     <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
-                    <button class="btn-outline" onclick="location.reload()">رجوع للاستعلامات</button>
+                    <button class="btn-blue" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);" onclick="location.reload()">رجوع للاستعلامات</button>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأزرق -->
+        <!-- القسم الأزرق الأوسط (الغامق) -->
         <div class="section-blue">
-            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-platform" alt="Seha Center">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-white" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">القائمة الرئيسية</h3>
             <ul class="menu-list">
@@ -173,10 +154,9 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
+        <!-- الفوتر (الأهدأ) -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
-            
             <div class="footer-flex">
                 <div class="contact-col">
                     <p><i class="fas fa-phone"></i> 920002005</p>
@@ -190,7 +170,6 @@
                     <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="MOH">
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
                 <div class="footer-links">
@@ -217,11 +196,8 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
-                    
-                    // تفريغ الخانات برمجياً لتظل فاضية
                     document.getElementById('res-leaveId').innerText = ""; 
                     document.getElementById('res-iqama').innerText = "";
-
                     document.getElementById('dataContent').innerHTML = `
                         <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
                         <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
