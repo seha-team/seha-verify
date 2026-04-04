@@ -13,173 +13,168 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; direction: rtl; overflow-x: hidden; }
+        :root {
+            --primary-blue: #2c71b8;
+            --dark-blue: #003366;
+        }
+
+        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; direction: rtl; overflow-x: hidden; }
         
-        /* تصميم ملموم ومنظم (850px) */
-        .container { max-width: 850px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; box-sizing: border-box; }
+        /* نظام عرض التطبيق الملموم (480px) */
+        .app-container { 
+            max-width: 480px; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            min-height: 100vh; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
 
-        .header { background: white; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .logo-main { height: 45px; } 
-        .menu-icon { font-size: 26px; color: #2c71b8; cursor: pointer; } 
+        /* الهيدر: توزيع عمودي متمركز */
+        .header-section { 
+            background: white; 
+            padding: 40px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center;
+        }
+        .logo-main { height: 50px; margin-bottom: 20px; object-fit: contain; }
+        .main-title { color: var(--primary-blue); font-size: 28px; font-weight: bold; margin: 0 0 15px 0; }
+        .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0; padding: 0 10px; }
 
-        .section-white { background: white; padding: 35px 20px; text-align: center; }
-        .section-blue { background: #2c71b8; padding: 35px 20px; color: white; text-align: center; }
-        .section-dark { background: #003366; padding: 35px 0; color: white; }
+        /* صندوق البحث */
+        .content-body { padding: 20px; background-color: #fff; }
+        .search-box { background: white; border-radius: 12px; }
+        .form-group { text-align: right; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
+        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
 
-        h1 { color: #2c71b8; font-size: 24px; margin-bottom: 10px; }
-        .subtitle { color: #555; font-size: 14px; margin-bottom: 25px; line-height: 1.6; max-width: 550px; margin-left: auto; margin-right: auto; }
+        .btn-blue { background: var(--primary-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; }
+        .btn-outline { background: white; color: var(--primary-blue); border: 1px solid var(--primary-blue); padding: 14px; border-radius: 10px; font-size: 15px; width: 100%; margin-top: 10px; cursor: pointer; }
 
-        .search-box { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
-        .form-group { text-align: right; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 6px; font-weight: 700; color: #333; font-size: 14px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; background: white; }
+        /* القسم الأزرق */
+        .section-blue { background: var(--primary-blue); padding: 40px 20px; color: white; text-align: center; }
+        .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
+        .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; cursor: pointer; }
 
-        .btn-blue { background: #2c71b8 !important; color: white !important; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; display: block; text-decoration: none; }
-
-        .menu-list { list-style: none; padding: 0; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        .menu-list li { cursor: pointer; font-size: 17px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; width: fit-content; }
-
-        /* ===================== الفوتر المعتمد ===================== */
+        /* ===================== الفوتر (تواصل معنا) ===================== */
+        .section-dark { background: var(--dark-blue); padding: 40px 20px; color: white; }
+        
         .footer-header { 
             text-align: center; 
-            width: 100%; 
-            margin-bottom: 20px; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            margin-bottom: 25px; 
+            border-bottom: 1px solid rgba(255,255,255,0.15); 
             padding-bottom: 10px; 
         }
-        .footer-header h4 { font-size: 18px; color: #fff; margin: 0; }
+        .footer-header h4 { font-size: 20px; margin: 0; }
 
-        .footer-grid {
+        .footer-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        /* اليمين: التواصل */
-        .contact-side { text-align: right; flex: 1; }
-        .contact-side p { margin: 6px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .contact-col { text-align: right; }
+        .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
-        /* الوسط: الشعارات طبيعية وبدون فلاتر */
-        .logos-center { 
-            flex: 1; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 15px; 
-        }
-        .logos-center img { 
-            height: 40px; 
-            width: auto; 
-            max-width: 100px;
-            object-fit: contain; 
-            border-radius: 4px;
-        }
+        .logos-col { display: flex; align-items: center; gap: 12px; }
+        .logos-col img { height: 45px; width: auto; object-fit: contain; }
+        .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
 
         .footer-bottom {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 20px;
-            width: 100%;
+            font-size: 12px;
         }
-        .footer-bottom p { margin: 4px 0; font-size: 12px; opacity: 0.8; }
-        .footer-links { font-size: 11px; margin-top: 8px; }
-        .footer-links a { color: white; text-decoration: none; font-weight: 700; margin: 0 6px; }
+        .footer-bottom p { margin: 5px 0; opacity: 0.8; }
+        .footer-links { margin-top: 10px; }
+        .footer-links a { color: white; text-decoration: none; font-weight: bold; margin: 0 5px; }
 
-        /* مربعات الاستعلام (تظل فارغة دائماً) */
-        .res-input-wrap { margin-bottom: 12px; text-align: right; }
-        .res-input-wrap label { font-size: 12px; color: #777; margin-bottom: 4px; display: block; font-weight: 700; }
-        .res-box-styled { background: #fdfdfd; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; min-height: 20px; color: transparent; }
-
+        /* صفحة النتائج ومربعاتها */
         #resultPage { display: none; }
-        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid #2c71b8; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .res-input-wrap { margin-bottom: 15px; text-align: right; }
+        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; }
+        .res-box-styled { background: #f9f9f9; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-align: center; min-height: 24px; color: transparent; }
+
+        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid var(--primary-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .data-row { padding: 10px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
         .data-label { color: #777; font-weight: 700; font-size: 13px; }
-        .data-value { color: #2c71b8; font-weight: 800; font-size: 14px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 10px 0; display: block; text-align: center; }
-
-        @media (max-width: 600px) {
-            .footer-grid { flex-direction: column; gap: 20px; }
-            .contact-side { text-align: center; }
-            .contact-side p { justify-content: center; }
-            .logos-center { justify-content: center; }
-        }
+        .data-value { color: var(--primary-blue); font-weight: 800; font-size: 14px; }
+        .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 15px 0; display: block; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- صفحة البحث -->
-    <div id="searchPage">
-        <div class="header">
-            <div class="container">
+    <div class="app-container">
+        
+        <!-- القسم 1: صفحة البحث -->
+        <div id="searchPage">
+            <div class="header-section">
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
-                <div class="menu-icon"><i class="fas fa-bars"></i></div>
+                <h1 class="main-title">الإجازات المرضية</h1>
+                <p class="main-subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </div>
-        </div>
-        <div class="section-white">
-            <h1>الإجازات المرضية</h1>
-            <p class="subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-            <div class="search-box">
-                <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
-                <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
-                <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                <button class="btn-blue" onclick="location.reload()">رجوع للإستعلامات</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- صفحة النتائج -->
-    <div id="resultPage">
-        <div class="header">
-            <div class="container">
+            <div class="content-body">
+                <div class="search-box">
+                    <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
+                    <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
+                    <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
+                    <button class="btn-outline">رجوع للإستعلامات</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- القسم 1 مكرر: صفحة النتائج -->
+        <div id="resultPage">
+            <div class="header-section">
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-main" alt="Seha Logo">
-                <div class="menu-icon"><i class="fas fa-bars"></i></div>
+                <h1 class="main-title">الإجازات المرضية</h1>
+            </div>
+            <div class="content-body">
+                <div class="search-box">
+                    <!-- خانات الاستعلام (تظل فارغة دائماً) -->
+                    <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
+                    <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
+                    <span class="success-badge">✓ تم التحقق بنجاح</span>
+                    <div id="dataContent" class="data-card"></div>
+                    <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
+                    <button class="btn-outline" onclick="location.reload()">رجوع للاستعلامات</button>
+                </div>
             </div>
         </div>
-        <div class="section-white">
-            <h1>الإجازات المرضية</h1>
-            <div class="search-box">
-                <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
-                <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
-                <span class="success-badge">✓ تم التحقق بنجاح</span>
-                <div id="dataContent" class="data-card"></div>
-                <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
-                <button class="btn-blue" onclick="location.reload()">رجوع للاستعلامات</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- القسم الأزرق -->
-    <div class="section-blue">
-        <div class="container" style="flex-direction: column;">
-            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 55px; margin-bottom: 15px; background: white; padding: 5px; border-radius: 5px;">
-            <p style="line-height: 1.8; font-size: 14px;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
-            <h3 style="border-bottom: 2px solid white; display: inline-block; padding: 15px 0 5px 0; margin-top: 15px;">القائمة الرئيسية</h3>
+        <!-- القسم 2: القسم الأزرق -->
+        <div class="section-blue">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center" style="height: 55px; margin-bottom: 20px; background: white; padding: 5px; border-radius: 5px;">
+            <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
+            <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">القائمة الرئيسية</h3>
             <ul class="menu-list">
                 <li>الخدمات</li><li>الاستعلامات</li><li>الأسئلة الشائعة</li><li>تواصل معنا</li>
             </ul>
         </div>
-    </div>
 
-    <!-- الفوتر -->
-    <div class="section-dark">
-        <div class="container" style="flex-direction: column;">
+        <!-- القسم 3: الفوتر (تواصل يمين وشعارات بيضاء يسار) -->
+        <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             
-            <div class="footer-grid">
-                <!-- اليمين: التواصل -->
-                <div class="contact-side">
+            <div class="footer-flex">
+                <div class="contact-col">
                     <p><i class="fas fa-phone"></i> 920002005</p>
                     <p><i class="fas fa-envelope"></i> support@seha.sa</p>
                     <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
                     <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
                 </div>
-                <!-- الوسط: الشعارات طبيعية كما طلبت -->
-                <div class="logos-center">
-                    <img src="https://i.postimg.cc/Dwd61KGN/download-lean-2.png" alt="Lean">
-                    <img src="https://i.postimg.cc/BbYsjDvW/wzarh-shh-jdyd.jpg" alt="Ministry of Health">
+                <div class="logos-col">
+                    <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
+                    <div class="vertical-divider"></div>
+                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="MOH">
                 </div>
             </div>
             
@@ -190,7 +185,8 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    </div> <!-- نهاية الحاوية 480px -->
 
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
