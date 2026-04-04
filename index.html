@@ -14,14 +14,14 @@
 
     <style>
         :root {
-            --mid-blue: #3a6aef; /* اللون الغامق للقسم الأوسط */
-            --footer-blue: #2c71b8; /* اللون الأهدأ للفوتر */
+            --footer-dark-blue: #3a6aef; /* اللون الغامق للفوتر */
+            --mid-light-blue: #2c71b8; /* اللون الأهدأ للقسم الأوسط */
             --btn-blue: #004693;
         }
 
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية المركزية الملمومة (650px) كما طلبت */
+        /* الحاوية المركزية الملمومة (650px) لضمان ترابط العناصر */
         .app-container { 
             max-width: 650px; 
             margin: 0 auto; 
@@ -32,7 +32,7 @@
             flex-direction: column;
         }
 
-        /* الهيدر: شعار يمين، أيقونة 3 أشخاص يسار */
+        /* الهيدر: شعار يمين، أيقونة 3 أسطر يسار */
         .header-top-row {
             display: flex;
             justify-content: space-between;
@@ -42,7 +42,7 @@
             border-bottom: 1px solid #eee;
         }
         .logo-header { height: 45px; object-fit: contain; }
-        .user-icon { font-size: 24px; color: var(--mid-blue); cursor: pointer; }
+        .menu-icon-bars { font-size: 24px; color: var(--mid-light-blue); cursor: pointer; } /* أيقونة 3 أسطر */
 
         .header-content { text-align: center; padding: 30px 20px; background: white; }
         .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
@@ -56,32 +56,33 @@
 
         .btn-blue { background: var(--btn-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; text-align: center; }
 
-        /* القسم الأزرق (الأوسط - غامق) */
-        .section-blue { background: var(--mid-blue); padding: 40px 20px; color: white; text-align: center; }
-        .logo-white { height: 55px; margin-bottom: 20px; filter: brightness(0) invert(1); } /* جعل الشعار أبيض ناصع */
+        /* القسم الأوسط (أزرق أهدأ مع شعار في صندوق أبيض) */
+        .section-blue { background: var(--mid-light-blue); padding: 40px 20px; color: white; text-align: center; }
+        .logo-white-box { background: white; display: inline-block; padding: 10px; border-radius: 8px; margin-bottom: 20px; }
+        .logo-white-box img { height: 50px; display: block; }
         .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; width: fit-content; color: white; }
+        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; color: white; }
 
-        /* الفوتر (الأزرق الأهدأ) */
-        .section-dark { background: var(--footer-blue); padding: 40px 20px; color: white; }
+        /* الفوتر (أزرق غامق مع خط تحت العنوان) */
+        .section-dark { background: var(--footer-dark-blue); padding: 40px 20px; color: white; }
         .footer-header { text-align: center; margin-bottom: 25px; }
         .footer-header h4 { 
             font-size: 20px; 
             margin: 0; 
             display: inline-block; 
-            border-bottom: 2px solid white; /* الخط تحت تواصل معنا */
+            border-bottom: 2px solid white; /* خط تحت تواصل معنا */
             padding-bottom: 8px; 
         }
 
-        .footer-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+        .footer-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; width: 100%; }
         .contact-col { text-align: right; flex: 1.5; }
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
         .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
         .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent; }
-        .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); }
+        .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); margin: 0 5px; }
 
         .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; }
         .footer-bottom p { margin: 5px 0; opacity: 0.9; }
@@ -99,16 +100,23 @@
         .data-label { color: #777; font-weight: 700; font-size: 13px; }
         .data-value { color: var(--btn-blue); font-weight: 800; font-size: 14px; }
         .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 15px 0; display: block; text-align: center; }
+
+        @media (max-width: 600px) {
+            .footer-flex { flex-direction: row !important; align-items: center; }
+            .contact-col { flex: 1.8; }
+            .logos-col { flex: 1.2; }
+            .logos-col img { height: 32px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         
-        <!-- الهيدر -->
+        <!-- الهيدر (أيقونة الـ 3 أسطر المطلوبة) -->
         <div class="header-top-row">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
-            <div class="user-icon"><i class="fas fa-users"></i></div>
+            <div class="menu-icon-bars"><i class="fas fa-bars"></i></div>
         </div>
 
         <!-- صفحة البحث -->
@@ -134,6 +142,7 @@
             </div>
             <div class="content-body">
                 <div class="search-box">
+                    <!-- خانات الاستعلام (تظل فارغة دائماً) -->
                     <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
                     <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
                     <span class="success-badge">✓ تم التحقق بنجاح</span>
@@ -144,9 +153,11 @@
             </div>
         </div>
 
-        <!-- القسم الأزرق الأوسط (الغامق) -->
+        <!-- القسم الأوسط (أزرق أهدأ مع شعار في صندوق أبيض) -->
         <div class="section-blue">
-            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-white" alt="Seha Center">
+            <div class="logo-white-box">
+                <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
+            </div>
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">القائمة الرئيسية</h3>
             <ul class="menu-list">
@@ -154,7 +165,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر (الأهدأ) -->
+        <!-- الفوتر (أزرق غامق مع خط تحت العنوان) -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             <div class="footer-flex">
@@ -196,6 +207,7 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
+                    // تظل الخانات فاضية بصرياً
                     document.getElementById('res-leaveId').innerText = ""; 
                     document.getElementById('res-iqama').innerText = "";
                     document.getElementById('dataContent').innerHTML = `
