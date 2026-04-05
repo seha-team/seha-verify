@@ -11,232 +11,186 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* العرض الكلي المعتمد 650px */
-        .container {
-            width: 650px;
-            background-color: white;
-            min-height: 100vh;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
+        body { font-family: 'Cairo', sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; display: flex; justify-content: center; }
+        .app-container { width: 650px; background: white; min-height: 100vh; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        
         /* الهيدر */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .header-title {
-            font-weight: 700;
-            color: #333;
-            font-size: 18px;
-        }
+        .main-header { padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eee; }
         .logo-header { height: 45px; }
-
-        /* القسم الثاني - اللون المطلوب 0044D0 */
-        .hero-section {
-            background-color: #0044D0; 
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
+        .header-title { font-weight: 700; color: #333; font-size: 18px; text-align: center; flex-grow: 1; }
+        
+        /* القسم الأزرق الهادئ (العلوي) */
+        .hero-section { background-color: #2c71b8; color: white; padding: 30px 20px; text-align: center; }
         .hero-section h1 { margin: 0; font-size: 22px; }
-        .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; }
+        .hero-section p { margin: 10px 0 0; font-size: 14px; opacity: 0.9; line-height: 1.6; }
 
-        /* استمارة البحث */
-        .content-body { padding: 30px 40px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            text-align: center;
-            font-family: 'Cairo';
-        }
+        /* البطاقة والمدخلات */
+        .search-card { padding: 30px 40px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; text-align: center; font-family: 'Cairo'; font-size: 16px; }
 
-        /* الأزرار المعتمدة #004693 */
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 10px;
-            font-family: 'Cairo';
-        }
+        /* الأزرار الملكية المعتمدة */
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-bottom: 10px; font-family: 'Cairo'; font-size: 16px; transition: 0.3s; }
         .btn-primary { background-color: #004693; color: white; }
-        .btn-secondary { background-color: white; color: #004693; border: 1px solid #004693; }
+        .btn-outline { background-color: white; color: #004693; border: 2px solid #004693; }
 
-        /* حقول النتائج الـ 7 */
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
+        /* النتائج */
+        .data-content { margin-top: 20px; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+        .data-row { display: flex; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid #eee; background: #fff; }
         .data-label { color: #666; font-weight: 600; }
-        .data-value { font-weight: 700; }
+        .data-value { color: #000; font-weight: 700; }
 
-        /* الفوتر رويال بلو 4169A1 */
-        .footer {
-            background-color: #4169A1;
-            color: white;
-            padding: 30px 20px;
-        }
-        .footer-title {
-            text-align: center;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-decoration: underline;
-        }
-        .footer-main { display: flex; justify-content: space-between; }
-        .contact-info { font-size: 13px; line-height: 1.8; }
-        .footer-logos { display: flex; align-items: center; gap: 10px; }
-        .footer-logos img { height: 35px; background: transparent; }
-        .divider { width: 1px; height: 30px; background: white; }
+        /* القسم الثاني (المطلوب لونه 0044D0) */
+        .info-section { background-color: #0044D0; color: white; padding: 40px 20px; text-align: center; }
+        .info-section img { height: 60px; margin-bottom: 15px; }
+        .info-section p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
+        .info-section h3 { font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .info-list { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .info-list li { font-size: 14px; font-weight: 600; cursor: pointer; }
 
-        .footer-bottom {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 12px;
-        }
+        /* الفوتر (المطلوب رويال بلو 4169E1) */
+        .main-footer { background-color: #4169E1; color: white; padding: 30px 20px; }
+        .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; font-size: 18px; }
+        .footer-body { display: flex; justify-content: space-between; align-items: flex-start; }
+        .contact-data { font-size: 13px; line-height: 2; }
+        .footer-logos { display: flex; align-items: center; gap: 15px; }
+        .footer-logos img { height: 40px; background: transparent !important; } /* إزالة أي خلفية */
+        .vertical-divider { width: 1px; height: 35px; background: rgba(255,255,255,0.4); }
+
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 20px; padding-top: 15px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- الهيدر -->
-    <header class="header">
-        <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
-        <div class="header-title">الإجازات المرضية</div>
-        <i class="fa-solid fa-bars"></i>
-    </header>
+    <div class="app-container">
+        <!-- الهيدر المعتمد -->
+        <header class="main-header">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
+            <div class="header-title">الإجازات المرضية</div>
+            <i class="fa-solid fa-bars" style="font-size: 20px; color: #666;"></i>
+        </header>
 
-    <!-- صفحة البحث -->
-    <div id="searchPage">
-        <div class="hero-section">
-            <h1>الإجازات المرضية</h1>
-            <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+        <!-- صفحة البحث -->
+        <div id="searchPage">
+            <section class="hero-section">
+                <h1>الإجازات المرضية</h1>
+                <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+            </section>
+            <div class="search-card">
+                <div class="input-group">
+                    <label>رمز الخدمة</label>
+                    <input type="text" id="leaveId" placeholder="أدخل رمز الخدمة">
+                </div>
+                <div class="input-group">
+                    <label>رقم الهوية / الإقامة</label>
+                    <input type="text" id="iqama" placeholder="أدخل رقم الهوية">
+                </div>
+                <button class="btn btn-primary" id="btnSearch" onclick="handleSearch()">استعلام</button>
+                <button class="btn btn-outline">رجوع للإستعلامات</button>
+            </div>
         </div>
 
-        <div class="content-body">
-            <div class="form-group">
-                <label>رمز الخدمة</label>
-                <input type="text" id="leaveId" placeholder="أدخل رمز الخدمة">
+        <!-- صفحة النتائج -->
+        <div id="resultPage" style="display: none;">
+            <section class="hero-section">
+                <h1>الإجازات المرضية</h1>
+            </section>
+            <div class="search-card">
+                <div style="text-align: center; color: #2e7d32; font-weight: 700; margin-bottom: 15px;">✓ تم التحقق بنجاح</div>
+                <div class="data-content" id="dataContent">
+                    <!-- سيتم تعبئة الـ 7 حقول هنا -->
+                </div>
+                <div style="margin-top: 25px;">
+                    <button class="btn btn-primary" onclick="location.reload()">استعلام جديد</button>
+                    <button class="btn btn-outline">رجوع للاستعلامات</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label>رقم الهوية / الإقامة</label>
-                <input type="text" id="iqama" placeholder="أدخل رقم الهوية">
-            </div>
-            <button class="btn btn-primary" id="btnSearch" onclick="handleSearch()">استعلام</button>
-            <button class="btn btn-secondary">رجوع للإستعلامات</button>
         </div>
+
+        <!-- القسم الثاني (تم تعديل اللون لـ 0044D0) -->
+        <div class="info-section">
+            <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
+            <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
+            <h3>القائمة الرئيسية</h3>
+            <ul class="info-list">
+                <li>الخدمات</li>
+                <li>الاستعلامات</li>
+                <li>الأسئلة الشائعة</li>
+                <li>تواصل معنا</li>
+            </ul>
+        </div>
+
+        <!-- الفوتر (تم تعديل اللون لـ 4169E1) -->
+        <footer class="main-footer">
+            <div class="footer-title">تواصل معنا</div>
+            <div class="footer-body">
+                <div class="contact-data">
+                    <div><i class="fa-solid fa-phone"></i> 920002005</div>
+                    <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
+                    <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
+                </div>
+                <div class="footer-logos">
+                    <!-- شعار لين بدون خلفية -->
+                    <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
+                    <div class="vertical-divider"></div>
+                    <!-- شعار الوزارة الجديد -->
+                    <img src="https://i.postimg.cc/PxZBjf9C/coorect-moh.png" alt="MOH">
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>منصة صحة معتمدة من قبل وزارة الصحة © 2026</div>
+                <div style="margin-top: 5px; opacity: 0.8;">سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</div>
+            </div>
+        </footer>
     </div>
 
-    <!-- صفحة النتائج -->
-    <div id="resultPage" style="display: none;">
-        <div class="hero-section">
-            <h1>الإجازات المرضية</h1>
-        </div>
-        <div class="content-body">
-            <div style="text-align: center; color: #2e7d32; font-weight: 700; margin-bottom: 20px;">
-                ✓ تم التحقق بنجاح
-            </div>
-            <div id="dataContent">
-                <!-- الـ 7 حقول تظهر هنا -->
-            </div>
-            <div style="margin-top: 20px;">
-                <button class="btn btn-primary" onclick="location.reload()">استعلام جديد</button>
-                <button class="btn btn-secondary">رجوع للاستعلامات</button>
-            </div>
-        </div>
-    </div>
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
 
-    <!-- الفوتر رويال بلو -->
-    <footer class="footer">
-        <div class="footer-title">تواصل معنا</div>
-        <div class="footer-main">
-            <div class="contact-info">
-                <div><i class="fa-solid fa-phone"></i> 920002005</div>
-                <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
-                <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
-            </div>
-            <div class="footer-logos">
-                <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
-                <div class="divider"></div>
-                <!-- شعار وزارة الصحة الجديد -->
-                <img src="https://i.postimg.cc/PxZBjf9C/coorect-moh.png" alt="MOH">
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
-            <p>سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</p>
-        </div>
-    </footer>
-</div>
+        async function handleSearch() {
+            const lid = document.getElementById('leaveId').value;
+            const iq = document.getElementById('iqama').value;
+            if(!lid || !iq) { alert("يرجى إدخال البيانات"); return; }
+            
+            const btn = document.getElementById('btnSearch');
+            btn.innerText = "جاري التحقق...";
+            btn.disabled = true;
 
-<script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
+            try {
+                const res = await fetch(`${WEB_APP_URL}?action=check&iqama=${iq}&leaveId=${lid}`);
+                const result = await res.json();
+                if(result.status === "success") {
+                    const d = result.data;
+                    
+                    // إفراغ مربعات البحث بصرياً
+                    document.getElementById('leaveId').value = "";
+                    document.getElementById('iqama').value = "";
 
-    async function handleSearch() {
-        const lid = document.getElementById('leaveId').value;
-        const iq = document.getElementById('iqama').value;
-        if(!lid || !iq) { alert("يرجى إدخال البيانات"); return; }
-        
-        const btn = document.getElementById('btnSearch');
-        btn.innerText = "جاري التحقق...";
-        btn.disabled = true;
-
-        try {
-            const res = await fetch(`${WEB_APP_URL}?action=check&iqama=${iq}&leaveId=${lid}`);
-            const result = await res.json();
-            if(result.status === "success") {
-                const d = result.data;
-                
-                // تفريغ الحقول بصرياً حسب القاعدة الصارمة
-                document.getElementById('leaveId').value = "";
-                document.getElementById('iqama').value = "";
-
-                // عرض الـ 7 حقول كاملة
-                document.getElementById('dataContent').innerHTML = `
-                    <div class="data-item"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
-                    <div class="data-item"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
-                    <div class="data-item"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
-                    <div class="data-item"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
-                    <div class="data-item"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
-                    <div class="data-item"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
-                    <div class="data-item"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
-                `;
-                document.getElementById('searchPage').style.display = 'none';
-                document.getElementById('resultPage').style.display = 'block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                alert(result.message);
+                    // عرض الـ 7 حقول كاملة
+                    document.getElementById('dataContent').innerHTML = `
+                        <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
+                        <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
+                        <div class="data-row"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
+                        <div class="data-row"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
+                        <div class="data-row"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
+                        <div class="data-row"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
+                        <div class="data-row"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
+                    `;
+                    document.getElementById('searchPage').style.display = 'none';
+                    document.getElementById('resultPage').style.display = 'block';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    alert(result.message);
+                    btn.innerText = "استعلام";
+                    btn.disabled = false;
+                }
+            } catch (e) {
+                alert("خطأ في الاتصال");
                 btn.innerText = "استعلام";
                 btn.disabled = false;
             }
-        } catch (e) {
-            alert("خطأ في الاتصال");
-            btn.innerText = "استعلام";
-            btn.disabled = false;
         }
-    }
-</script>
+    </script>
 </body>
 </html>
