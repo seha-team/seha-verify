@@ -6,20 +6,22 @@
     <meta name="google-site-verification" content="IaYmQivcHRUBwvT9rQzB1NKDUi-PWIHSk-nuLiEvKCM" />
     <title>بوابة الاستعلام - منصة صحة</title>
     
+    <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --dark-blue: #3a6aef;  /* اللون الغامق للفوتر */
-            --light-blue: #2c71b8; /* اللون الأهدأ للوسط */
-            --btn-blue: #004693;
+            --footer-dark: #3a6aef;  /* اللون الغامق للفوتر */
+            --middle-light: #2c71b8; /* اللون الأهدأ للوسط */
+            --btn-blue: #004693;     /* لون الأزرار الملكي */
         }
 
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
+        /* الحاوية المركزية الملمومة 650 بكسل */
         .app-container { 
-            max-width: 600px; /* تقليص الحجم قليلاً لضبط الجوال أكثر */
+            max-width: 650px; 
             margin: 0 auto; 
             background-color: #fff; 
             min-height: 100vh; 
@@ -28,6 +30,7 @@
             flex-direction: column;
         }
 
+        /* الهيدر */
         .header-top-row {
             display: flex;
             justify-content: space-between;
@@ -37,18 +40,18 @@
             border-bottom: 1px solid #eee;
         }
         .logo-header { height: 45px; object-fit: contain; }
-        .menu-icon-bars { font-size: 24px; color: var(--light-blue); cursor: pointer; }
+        .menu-icon-bars { font-size: 24px; color: var(--middle-light); cursor: pointer; }
 
         .header-content { text-align: center; padding: 30px 20px; background: white; }
         .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
         .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0 auto; max-width: 90%; }
 
+        /* البحث والأزرار */
         .content-body { padding: 20px; background-color: #fff; flex-grow: 1; }
         .form-group { text-align: right; margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
         input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
 
-        /* الأزرار بخلفية زرقاء صلبة لكل التابات */
         .btn-blue { 
             background: var(--btn-blue) !important; 
             color: white !important; 
@@ -65,27 +68,39 @@
             text-align: center; 
         }
 
-        /* القسم الأوسط (أزرق أهدأ - شعار صغير بصندوق أبيض) */
-        .section-blue { background: var(--light-blue); padding: 40px 20px; color: white; text-align: center; }
-        .logo-white-box { background: white; display: inline-block; padding: 8px; border-radius: 8px; margin-bottom: 20px; }
+        /* القسم الأوسط (الأزرق الأهدأ) */
+        .section-blue { background: var(--middle-light); padding: 40px 20px; color: white; text-align: center; }
+        .logo-white-box { 
+            background: white; 
+            display: inline-block; 
+            padding: 8px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+        }
         .logo-white-box img { height: 35px; display: block; } 
         .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
         .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; color: white; }
 
-        /* الفوتر (أزرق غامق - شعارات بدون خلفية وصافية) */
-        .section-dark { background: var(--dark-blue); padding: 40px 20px; color: white; }
+        /* الفوتر (الأزرق الغامق) */
+        .section-dark { background: var(--footer-dark); padding: 40px 20px; color: white; }
         .footer-header { text-align: center; margin-bottom: 25px; width: 100%; }
-        .footer-header h4 { font-size: 20px; margin: 0; display: inline-block; border-bottom: 2.5px solid white; padding-bottom: 8px; }
+        .footer-header h4 { 
+            font-size: 20px; 
+            margin: 0; 
+            display: inline-block; 
+            border-bottom: 2.5px solid white; 
+            padding-bottom: 8px; 
+        }
 
         .footer-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; width: 100%; }
         .contact-col { text-align: right; flex: 1.5; }
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
-        /* الشعارات في الفوتر: صافية تماماً كما طلبت */
+        /* الشعارات صافية تماماً */
         .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
-        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent !important; padding: 0 !important; }
+        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent !important; }
         .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); margin: 0 5px; }
 
         .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; }
@@ -117,11 +132,13 @@
 
     <div class="app-container">
         
+        <!-- الهيدر -->
         <div class="header-top-row">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <div class="menu-icon-bars"><i class="fas fa-bars"></i></div>
         </div>
 
+        <!-- صفحة البحث -->
         <div id="searchPage">
             <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
@@ -137,6 +154,7 @@
             </div>
         </div>
 
+        <!-- صفحة النتائج -->
         <div id="resultPage">
             <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
@@ -153,6 +171,7 @@
             </div>
         </div>
 
+        <!-- القسم الأوسط -->
         <div class="section-blue">
             <div class="logo-white-box">
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
@@ -164,6 +183,7 @@
             </ul>
         </div>
 
+        <!-- الفوتر -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             <div class="footer-flex">
@@ -176,7 +196,7 @@
                 <div class="logos-col">
                     <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
                     <div class="vertical-divider"></div>
-                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="Ministry of Health">
+                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="MOH">
                 </div>
             </div>
             <div class="footer-bottom">
