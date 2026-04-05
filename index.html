@@ -12,201 +12,236 @@
 
     <style>
         :root {
-            --footer-dark: #3a6aef;  /* اللون الغامق للفوتر */
-            --middle-light: #2c71b8; /* اللون الأهدأ للوسط */
-            --btn-blue: #004693;     /* لون الأزرار الملكي */
+            --primary-blue: #0044D0; /* اللون الجديد للقسم الثاني 44D0 */
+            --footer-royal-blue: #4169E1; /* لون الفوتر رويال بلو 4169E1 */
+            --btn-blue: #004693; /* لون الأزرار المعتمد */
+            --bg-light: #f8f9fa;
         }
 
-        body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
-        
-        /* الحاوية المركزية الملمومة 650 بكسل */
-        .app-container { 
-            max-width: 650px; 
-            margin: 0 auto; 
-            background-color: #fff; 
-            min-height: 100vh; 
-            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* الحاوية الرئيسية الثابتة 650px */
+        .app-container {
+            width: 650px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
         }
 
-        /* الهيدر */
-        .header-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* الهيدر: شعار يمين، أيقونة يسار، عنوان وسط */
+        .main-header {
             padding: 15px 20px;
-            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-bottom: 1px solid #eee;
         }
-        .logo-header { height: 45px; object-fit: contain; }
-        .menu-icon-bars { font-size: 24px; color: var(--middle-light); cursor: pointer; }
+        .header-title {
+            font-weight: 700;
+            color: #333;
+            font-size: 18px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .logo-header { height: 45px; }
+        .menu-icon { font-size: 22px; color: #666; cursor: pointer; }
 
-        .header-content { text-align: center; padding: 30px 20px; background: white; }
-        .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
-        .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0 auto; max-width: 90%; }
+        /* القسم الثاني - اللون المحدث #0044D0 */
+        .hero-section {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .hero-section h1 { margin: 0 0 10px; font-size: 22px; }
+        .hero-section p { margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.6; }
 
-        /* البحث والأزرار */
-        .content-body { padding: 20px; background-color: #fff; flex-grow: 1; }
-        .form-group { text-align: right; margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
-        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
-
-        .btn-blue { 
-            background: var(--btn-blue) !important; 
-            color: white !important; 
-            border: none; 
-            padding: 16px; 
-            border-radius: 10px; 
-            font-size: 17px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            width: 100%; 
-            margin-top: 10px; 
-            display: block; 
-            text-decoration: none; 
-            text-align: center; 
+        /* نموذج البحث */
+        .search-card {
+            padding: 30px 40px;
+            flex-grow: 1;
+        }
+        .input-group { margin-bottom: 20px; }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Cairo';
+            text-align: center;
+            font-size: 16px;
         }
 
-        /* القسم الأوسط (الأزرق الأهدأ) */
-        .section-blue { background: var(--middle-light); padding: 40px 20px; color: white; text-align: center; }
-        .logo-white-box { 
-            background: white; 
-            display: inline-block; 
-            padding: 8px; 
-            border-radius: 8px; 
-            margin-bottom: 20px; 
+        /* الأزرار المعتمدة #004693 */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-family: 'Cairo';
+            transition: 0.3s;
+            font-size: 16px;
         }
-        .logo-white-box img { height: 35px; display: block; } 
-        .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
-        .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; color: white; }
+        .btn-primary { background-color: var(--btn-blue); color: white; }
+        .btn-outline { background-color: white; color: var(--btn-blue); border: 2px solid var(--btn-blue); }
 
-        /* الفوتر (الأزرق الغامق) */
-        .section-dark { background: var(--footer-dark); padding: 40px 20px; color: white; }
-        .footer-header { text-align: center; margin-bottom: 25px; width: 100%; }
-        .footer-header h4 { 
-            font-size: 20px; 
-            margin: 0; 
-            display: inline-block; 
-            border-bottom: 2.5px solid white; 
-            padding-bottom: 8px; 
+        /* صفحة النتائج والحقول الـ 7 */
+        .result-data {
+            background: #fff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .data-label { color: #666; font-weight: 600; }
+        .data-value { color: #000; font-weight: 700; }
+        .success-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
-        .footer-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; width: 100%; }
-        .contact-col { text-align: right; flex: 1.5; }
-        .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
-        .wa-icon { color: #25d366; font-size: 16px; }
-
-        /* الشعارات صافية تماماً */
-        .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
-        .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent !important; }
-        .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); margin: 0 5px; }
-
-        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; }
-        .footer-bottom p { margin: 5px 0; opacity: 0.9; }
-        .footer-links { margin-top: 10px; }
-        .footer-links a { color: white; text-decoration: none; font-weight: bold; margin: 0 5px; }
-
-        /* صفحة النتائج */
-        #resultPage { display: none; }
-        .res-input-wrap { margin-bottom: 15px; text-align: right; }
-        .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: bold; }
-        .res-box-styled { background: #f9f9f9; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-align: center; min-height: 24px; color: transparent; }
-
-        .data-card { background: white; padding: 20px; border-radius: 12px; border-right: 5px solid var(--btn-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .data-row { padding: 10px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; text-align: right; }
-        .data-label { color: #777; font-weight: 700; font-size: 13px; }
-        .data-value { color: var(--btn-blue); font-weight: 800; font-size: 14px; }
-        .success-badge { color: #28a745; font-weight: 700; font-size: 18px; margin: 15px 0; display: block; text-align: center; }
-
-        @media (max-width: 600px) {
-            .footer-flex { flex-direction: row !important; align-items: center; }
-            .contact-col { flex: 1.8; }
-            .logos-col { flex: 1.2; }
-            .logos-col img { height: 32px; }
+        /* الفوتر رويال بلو #4169E1 */
+        .main-footer {
+            background-color: var(--footer-royal-blue);
+            color: white;
+            padding: 30px 20px;
         }
+        .footer-top-title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-decoration: underline;
+            font-size: 18px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .contact-info { font-size: 13px; line-height: 2; }
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .footer-logos img { height: 40px; background: transparent !important; }
+        .vertical-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.3); }
+
+        .copyright-section {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 20px;
+            padding-top: 15px;
+            font-size: 12px;
+        }
+        .privacy-link { color: white; text-decoration: none; opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        
         <!-- الهيدر -->
-        <div class="header-top-row">
+        <header class="main-header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
-            <div class="menu-icon-bars"><i class="fas fa-bars"></i></div>
-        </div>
+            <div class="header-title">الإجازات المرضية</div>
+            <i class="fa-solid fa-bars menu-icon"></i>
+        </header>
 
         <!-- صفحة البحث -->
         <div id="searchPage">
-            <div class="header-content">
-                <h1 class="main-title">الإجازات المرضية</h1>
-                <p class="main-subtitle">خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-            </div>
-            <div class="content-body">
-                <div class="search-box">
-                    <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
-                    <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
-                    <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                    <button class="btn-blue" onclick="location.reload()">رجوع للإستعلامات</button>
+            <section class="hero-section">
+                <h1>الإجازات المرضية</h1>
+                <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+            </section>
+
+            <div class="search-card">
+                <div class="input-group">
+                    <label>رمز الخدمة</label>
+                    <input type="text" id="leaveId" placeholder="مثال: 123456">
                 </div>
+                <div class="input-group">
+                    <label>رقم الهوية / الإقامة</label>
+                    <input type="text" id="iqama" placeholder="1XXXXXXXXX">
+                </div>
+                <button class="btn btn-primary" id="btnSearch" onclick="handleSearch()">استعلام</button>
+                <button class="btn btn-outline">رجوع للإستعلامات</button>
             </div>
         </div>
 
         <!-- صفحة النتائج -->
-        <div id="resultPage">
-            <div class="header-content">
-                <h1 class="main-title">الإجازات المرضية</h1>
-            </div>
-            <div class="content-body">
-                <div class="search-box">
-                    <div class="res-input-wrap"><label>رمز الخدمة</label><div id="res-leaveId" class="res-box-styled"></div></div>
-                    <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
-                    <span class="success-badge">✓ تم التحقق بنجاح</span>
-                    <div id="dataContent" class="data-card"></div>
-                    <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
-                    <button class="btn-blue" onclick="location.reload()">رجوع للاستعلامات</button>
+        <div id="resultPage" style="display: none;">
+            <section class="hero-section">
+                <h1>تفاصيل الإجازة المرضية</h1>
+            </section>
+            
+            <div class="search-card">
+                <div class="success-badge">✓ تم التحقق بنجاح</div>
+                
+                <div class="result-data" id="dataContent">
+                    <!-- سيتم تعبئة الـ 7 حقول هنا برمجياً -->
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="location.reload()">استعلام جديد</button>
+                    <button class="btn btn-outline">رجوع للاستعلامات</button>
                 </div>
             </div>
-        </div>
-
-        <!-- القسم الأوسط -->
-        <div class="section-blue">
-            <div class="logo-white-box">
-                <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
-            </div>
-            <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
-            <h3 style="border-bottom: 2px solid white; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;">القائمة الرئيسية</h3>
-            <ul class="menu-list">
-                <li>الخدمات</li><li>الاستعلامات</li><li>الأسئلة الشائعة</li><li>تواصل معنا</li>
-            </ul>
         </div>
 
         <!-- الفوتر -->
-        <div class="section-dark">
-            <div class="footer-header"><h4>تواصل معنا</h4></div>
-            <div class="footer-flex">
-                <div class="contact-col">
-                    <p><i class="fas fa-phone"></i> 920002005</p>
-                    <p><i class="fas fa-envelope"></i> support@seha.sa</p>
-                    <p><i class="fab fa-whatsapp wa-icon"></i> 920002005</p>
-                    <p><i class="fas fa-clock"></i> اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</p>
+        <footer class="main-footer">
+            <div class="footer-top-title">تواصل معنا</div>
+            
+            <div class="footer-content">
+                <div class="contact-info">
+                    <div><i class="fa-solid fa-phone"></i> 920002005</div>
+                    <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
+                    <div>اوقات العمل : الاحد حتي الخميس</div>
+                    <div>من 8 ص الي 11 م</div>
                 </div>
-                <div class="logos-col">
+
+                <div class="footer-logos">
+                    <!-- شعار لين بدون خلفية -->
                     <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
                     <div class="vertical-divider"></div>
-                    <img src="https://i.postimg.cc/SNh13gjB/ministry-white-one.png" alt="MOH">
+                    <!-- شعار وزارة الصحة المحدث -->
+                    <img src="https://i.postimg.cc/PxZBjf9C/coorect-moh.png" alt="MOH">
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
-                <div class="footer-links">
-                    <a href="privacy.html">سياسة الخصوصية وشروط الإستخدام</a> | <a href="#">دليل المستخدم</a>
-                </div>
-            </div>
-        </div>
 
+            <div class="copyright-section">
+                <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
+                <a href="privacy.html" class="privacy-link">سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</a>
+            </div>
+        </footer>
     </div>
 
     <script>
@@ -215,7 +250,12 @@
         async function handleSearch() {
             const lid = document.getElementById('leaveId').value;
             const iq = document.getElementById('iqama').value;
-            if(!lid || !iq) { alert("يرجى إدخال البيانات"); return; }
+            
+            if(!lid || !iq) { 
+                alert("يرجى إدخال البيانات"); 
+                return; 
+            }
+
             const btn = document.getElementById('btnSearch');
             btn.innerText = "جاري التحقق...";
             btn.disabled = true;
@@ -223,19 +263,25 @@
             try {
                 const res = await fetch(`${WEB_APP_URL}?action=check&iqama=${iq}&leaveId=${lid}`);
                 const result = await res.json();
+                
                 if(result.status === "success") {
                     const d = result.data;
-                    document.getElementById('res-leaveId').innerText = ""; 
-                    document.getElementById('res-iqama').innerText = "";
+                    
+                    // القاعدة الصارمة: تفريغ الحقول بصرياً بعد النجاح
+                    document.getElementById('leaveId').value = "";
+                    document.getElementById('iqama').value = "";
+
+                    // عرض 7 حقول كاملة للتقرير
                     document.getElementById('dataContent').innerHTML = `
-                        <div class="data-row"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
-                        <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
-                        <div class="data-row"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
-                        <div class="data-row"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
-                        <div class="data-row"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
-                        <div class="data-row"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
-                        <div class="data-row"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
+                        <div class="data-row"><span class="data-label">الاسم الكامل:</span> <span class="data-value">${d.nameAr}</span></div>
+                        <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span> <span class="data-value">${d.issueDate}</span></div>
+                        <div class="data-row"><span class="data-label">تبدأ من:</span> <span class="data-value">${d.startDate}</span></div>
+                        <div class="data-row"><span class="data-label">وحتى:</span> <span class="data-value">${d.endDate}</span></div>
+                        <div class="data-row"><span class="data-label">المدة بالايام:</span> <span class="data-value">${d.duration}</span></div>
+                        <div class="data-row"><span class="data-label">اسم الطبيب:</span> <span class="data-value">${d.doctor}</span></div>
+                        <div class="data-row"><span class="data-label">المسمى الوظيفي:</span> <span class="data-value">${d.position}</span></div>
                     `;
+
                     document.getElementById('searchPage').style.display = 'none';
                     document.getElementById('resultPage').style.display = 'block';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -245,7 +291,7 @@
                     btn.disabled = false;
                 }
             } catch (e) {
-                alert("خطأ في الاتصال");
+                alert("خطأ في الاتصال بالسيرفر");
                 btn.innerText = "استعلام";
                 btn.disabled = false;
             }
