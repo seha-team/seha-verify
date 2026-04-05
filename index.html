@@ -11,16 +11,15 @@
 
     <style>
         :root {
-            --footer-dark: #3a6aef; /* اللون الغامق للفوتر */
-            --mid-light: #2c71b8;   /* اللون الأهدأ للوسط */
+            --dark-blue: #3a6aef;  /* اللون الغامق للفوتر */
+            --light-blue: #2c71b8; /* اللون الأهدأ للوسط */
             --btn-blue: #004693;
         }
 
         body { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; background-color: #f4f7f9; direction: rtl; overflow-x: hidden; }
         
-        /* الحاوية المركزية الملمومة (650px) لضمان ترابط العناصر */
         .app-container { 
-            max-width: 650px; 
+            max-width: 600px; /* تقليص الحجم قليلاً لضبط الجوال أكثر */
             margin: 0 auto; 
             background-color: #fff; 
             min-height: 100vh; 
@@ -29,7 +28,6 @@
             flex-direction: column;
         }
 
-        /* الهيدر: شعار يمين، أيقونة 3 أسطر يسار */
         .header-top-row {
             display: flex;
             justify-content: space-between;
@@ -39,30 +37,44 @@
             border-bottom: 1px solid #eee;
         }
         .logo-header { height: 45px; object-fit: contain; }
-        .menu-icon-bars { font-size: 24px; color: var(--mid-light); cursor: pointer; }
+        .menu-icon-bars { font-size: 24px; color: var(--light-blue); cursor: pointer; }
 
         .header-content { text-align: center; padding: 30px 20px; background: white; }
         .main-title { color: var(--btn-blue); font-size: 28px; font-weight: bold; margin: 0 0 10px 0; }
         .main-subtitle { color: #666; font-size: 14px; line-height: 1.6; margin: 0 auto; max-width: 90%; }
 
-        /* صندوق البحث */
         .content-body { padding: 20px; background-color: #fff; flex-grow: 1; }
         .form-group { text-align: right; margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; font-size: 15px; }
         input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; text-align: center; font-size: 16px; background: #fdfdfd; }
 
-        .btn-blue-solid { background: var(--btn-blue) !important; color: white !important; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; display: block; text-decoration: none; text-align: center; }
+        /* الأزرار بخلفية زرقاء صلبة لكل التابات */
+        .btn-blue { 
+            background: var(--btn-blue) !important; 
+            color: white !important; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 10px; 
+            font-size: 17px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px; 
+            display: block; 
+            text-decoration: none; 
+            text-align: center; 
+        }
 
         /* القسم الأوسط (أزرق أهدأ - شعار صغير بصندوق أبيض) */
-        .section-blue { background: var(--mid-light); padding: 40px 20px; color: white; text-align: center; }
+        .section-blue { background: var(--light-blue); padding: 40px 20px; color: white; text-align: center; }
         .logo-white-box { background: white; display: inline-block; padding: 8px; border-radius: 8px; margin-bottom: 20px; }
         .logo-white-box img { height: 35px; display: block; } 
         .section-blue p { font-size: 14px; line-height: 1.8; margin-bottom: 25px; color: white; }
         .menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
         .menu-list li { font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; cursor: pointer; color: white; }
 
-        /* الفوتر (أزرق غامق) */
-        .section-dark { background: var(--footer-dark); padding: 40px 20px; color: white; }
+        /* الفوتر (أزرق غامق - شعارات بدون خلفية وصافية) */
+        .section-dark { background: var(--dark-blue); padding: 40px 20px; color: white; }
         .footer-header { text-align: center; margin-bottom: 25px; width: 100%; }
         .footer-header h4 { font-size: 20px; margin: 0; display: inline-block; border-bottom: 2.5px solid white; padding-bottom: 8px; }
 
@@ -71,6 +83,7 @@
         .contact-col p { margin: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px; }
         .wa-icon { color: #25d366; font-size: 16px; }
 
+        /* الشعارات في الفوتر: صافية تماماً كما طلبت */
         .logos-col { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex: 1; }
         .logos-col img { height: 40px; width: auto; object-fit: contain; background: transparent !important; padding: 0 !important; }
         .vertical-divider { width: 1px; height: 30px; background-color: rgba(255, 255, 255, 0.3); margin: 0 5px; }
@@ -80,7 +93,7 @@
         .footer-links { margin-top: 10px; }
         .footer-links a { color: white; text-decoration: none; font-weight: bold; margin: 0 5px; }
 
-        /* صفحة النتائج ومربعاتها الفارغة */
+        /* صفحة النتائج */
         #resultPage { display: none; }
         .res-input-wrap { margin-bottom: 15px; text-align: right; }
         .res-input-wrap label { font-size: 13px; color: #777; margin-bottom: 5px; display: block; font-weight: bold; }
@@ -104,13 +117,11 @@
 
     <div class="app-container">
         
-        <!-- الهيدر (أيقونة 3 أسطر) -->
         <div class="header-top-row">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <div class="menu-icon-bars"><i class="fas fa-bars"></i></div>
         </div>
 
-        <!-- صفحة البحث -->
         <div id="searchPage">
             <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
@@ -120,13 +131,12 @@
                 <div class="search-box">
                     <div class="form-group"><label>رمز الخدمة</label><input type="text" id="leaveId" placeholder="أدخل رقم الإجازة"></div>
                     <div class="form-group"><label>رقم الهوية / الإقامة</label><input type="text" id="iqama" placeholder="1XXXXXXXXX"></div>
-                    <button class="btn-blue-solid" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                    <button class="btn-blue-solid" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);" onclick="location.reload()">رجوع للإستعلامات</button>
+                    <button class="btn-blue" id="btnSearch" onclick="handleSearch()">استعلام</button>
+                    <button class="btn-blue" onclick="location.reload()">رجوع للإستعلامات</button>
                 </div>
             </div>
         </div>
 
-        <!-- صفحة النتائج -->
         <div id="resultPage">
             <div class="header-content">
                 <h1 class="main-title">الإجازات المرضية</h1>
@@ -137,13 +147,12 @@
                     <div class="res-input-wrap"><label>رقم الهوية / الإقامة</label><div id="res-iqama" class="res-box-styled"></div></div>
                     <span class="success-badge">✓ تم التحقق بنجاح</span>
                     <div id="dataContent" class="data-card"></div>
-                    <button class="btn-blue-solid" onclick="location.reload()">استعلام جديد</button>
-                    <button class="btn-blue-solid" style="background:#fff !important; color:var(--btn-blue) !important; border:1px solid var(--btn-blue);" onclick="location.reload()">رجوع للاستعلامات</button>
+                    <button class="btn-blue" onclick="location.reload()">استعلام جديد</button>
+                    <button class="btn-blue" onclick="location.reload()">رجوع للاستعلامات</button>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الأوسط (أزرق أهدأ) -->
         <div class="section-blue">
             <div class="logo-white-box">
                 <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" alt="Seha Center">
@@ -155,7 +164,6 @@
             </ul>
         </div>
 
-        <!-- الفوتر (أزرق غامق) -->
         <div class="section-dark">
             <div class="footer-header"><h4>تواصل معنا</h4></div>
             <div class="footer-flex">
