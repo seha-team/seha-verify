@@ -73,7 +73,9 @@
             box-sizing: border-box;
             text-align: center;
             font-family: 'Cairo';
+            background-color: #fff;
         }
+
         .btn {
             width: 100%;
             padding: 12px;
@@ -93,7 +95,7 @@
             color: white;
         }
 
-        /* القسم الثاني - بدون شفافية */
+        /* القسم الثاني */
         .info-section {
             background-color: #2c71b8;
             color: white;
@@ -128,23 +130,24 @@
             content: "- ";
         }
 
-        /* الفوتر - بدون شفافية */
+        /* الفوتر - تم تعديله للتوسيط */
         .footer {
             background-color: #2c71b8;
             color: white;
             padding: 30px 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
         .footer-title {
-            text-align: center;
             font-weight: 700;
             margin-bottom: 20px;
             text-decoration: underline;
         }
         .footer-main {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            gap: 20px;
         }
         .contact-info {
             font-size: 13px;
@@ -152,18 +155,20 @@
         }
         .footer-logos {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         .footer-logos img {
-            height: 50px; /* حجم مناسب للشعار المشترك الجديد */
+            height: 75px; /* تكبير الصورة كما طلبت */
         }
         .footer-bottom {
-            text-align: center;
             margin-top: 30px;
             font-size: 12px;
             border-top: 1px solid rgba(255,255,255,0.2);
             padding-top: 20px;
         }
+
+        /* تنسيق بيانات النتائج */
         .data-item {
             display: flex;
             justify-content: space-between;
@@ -208,16 +213,32 @@
             </div>
         </div>
 
-        <!-- صفحة النتائج -->
+        <!-- صفحة النتائج (المعدلة) -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
                 <h1>الإجازات المرضية</h1>
+                <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </section>
+
             <div class="content-body">
+                <!-- حقول البحث تظهر فارغة هنا -->
+                <div class="form-group">
+                    <label>رمز الخدمة</label>
+                    <input type="text" readonly value="">
+                </div>
+                <div class="form-group">
+                    <label>رقم الهوية / الإقامة</label>
+                    <input type="text" readonly value="">
+                </div>
+
                 <div style="text-align: center; color: #2e7d32; font-weight: 700; margin-bottom: 20px;">
                     ✓ تم التحقق بنجاح
                 </div>
-                <div id="dataContent"></div>
+
+                <div id="dataContent">
+                    <!-- البيانات تظهر هنا -->
+                </div>
+
                 <div style="margin-top: 30px;">
                     <button class="btn btn-primary" onclick="location.reload()">استعلام جديد</button>
                     <button class="btn btn-secondary">رجوع للاستعلامات</button>
@@ -238,7 +259,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
+        <!-- الفوتر الموسط -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -249,8 +270,8 @@
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
                 <div class="footer-logos">
-                    <!-- الرابط الجديد المدمج (لين والوزارة معاً) بدون فواصل -->
-                    <img src="https://i.postimg.cc/GpYW0J4z/LEN-AND-MINISTRY-FINAL-FINAL-ONE.png" alt="Lean and MOH">
+                    <!-- الشعار المدمج الموسط والمكبر -->
+                    <img src="https://i.postimg.cc/GpYW0J4z/LEN-AND-MINISTRY-FINAL-FINAL-ONE.png" alt="Lean and Ministry of Health">
                 </div>
             </div>
             <div class="footer-bottom">
