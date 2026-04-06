@@ -36,7 +36,6 @@
             height: 45px;
         }
         
-        /* القسم الأول بدون خلفية زرقاء */
         .hero-section {
             background-color: transparent;
             color: #333;
@@ -94,19 +93,18 @@
             color: white;
         }
 
-        /* القسم الثاني - معالجة الشعارات والقائمة */
+        /* القسم الثاني */
         .info-section {
-            background-color: #2c71b8; /* لون القسم الثاني */
+            background-color: #2c71b8;
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
         .info-section img {
-            height: 70px;
+            height: 80px; /* تكبير بسيط للشعار ليتضح التفاصيل */
             margin-bottom: 20px;
-            /* خدعة برمجية لجعل خلفية الشعار شفافة ودمجه مع اللون الأزرق */
             mix-blend-mode: screen; 
-            filter: brightness(1.2);
+            filter: brightness(1.1);
         }
         .info-section p {
             font-size: 14px;
@@ -124,13 +122,9 @@
             padding: 0;
             margin: 0;
             display: flex;
-            flex-direction: column; /* جعل القائمة طولية */
+            flex-direction: column;
             align-items: center;
             gap: 12px;
-        }
-        .info-list li {
-            font-size: 15px;
-            font-weight: 600;
         }
         .info-list li::before {
             content: "- ";
@@ -161,17 +155,10 @@
         .footer-logos {
             display: flex;
             align-items: center;
-            gap: 15px;
         }
         .footer-logos img {
-            height: 45px;
-            /* جعل خلفية شعارات الفوتر شفافة */
+            height: 50px; /* حجم مناسب للشعار المشترك */
             mix-blend-mode: screen;
-        }
-        .divider {
-            width: 1px;
-            height: 40px;
-            background-color: white;
         }
         .footer-bottom {
             text-align: center;
@@ -197,7 +184,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- الهيدر: تم حذف النص المكرر -->
+        <!-- الهيدر -->
         <header class="header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <i class="fa-solid fa-bars"></i>
@@ -241,9 +228,9 @@
             </div>
         </div>
 
-        <!-- قسم المعلومات -->
+        <!-- قسم المعلومات: تحديث شعار صحة الملون -->
         <div class="info-section">
-            <img src="https://i.postimg.cc/02NtsdzX/shh-abyd.png" alt="Seha Center">
+            <img src="https://i.postimg.cc/G3Q1hQqP/SEHAV-FINAL-FINAL-ONE.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <h3>القائمة الرئيسية</h3>
             <ul class="info-list">
@@ -254,7 +241,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
+        <!-- الفوتر: تحديث شعار لين والوزارة المشترك -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -265,9 +252,8 @@
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
                 <div class="footer-logos">
-                    <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean">
-                    <div class="divider"></div>
-                    <img src="https://i.postimg.cc/CM4FtY8t/MINISTRY-OF-HEALTH-FINAL.png" alt="MOH">
+                    <!-- هذا الرابط يعرض شعار لين والوزارة معاً كما طلبت -->
+                    <img src="https://i.postimg.cc/wMJPJP3z/len-white-one.png" alt="Lean and Ministry of Health">
                 </div>
             </div>
             <div class="footer-bottom">
@@ -278,7 +264,7 @@
     </div>
 
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec";
 
         async function handleSearch() {
             const lid = document.getElementById('leaveId').value;
@@ -295,12 +281,12 @@
                     const d = result.data;
                     document.getElementById('dataContent').innerHTML = `
                         <div class="data-item"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
-                        <div class="data-item"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
-                        <div class="data-item"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
-                        <div class="data-item"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
-                        <div class="data-item"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
-                        <div class="data-item"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
-                        <div class="data-item"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
+                        <div class="data-row"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
+                        <div class="data-row"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
+                        <div class="data-row"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
+                        <div class="data-row"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
+                        <div class="data-row"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
+                        <div class="data-row"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
                     `;
                     document.getElementById('searchPage').style.display = 'none';
                     document.getElementById('resultPage').style.display = 'block';
