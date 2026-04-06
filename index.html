@@ -130,45 +130,49 @@
             content: "- ";
         }
 
-        /* الفوتر - تم تعديله للتوسيط */
+        /* الفوتر - التعديل المطلوب هنا */
         .footer {
             background-color: #2c71b8;
             color: white;
             padding: 30px 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
         }
         .footer-title {
+            text-align: center; /* العنوان في الوسط */
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-decoration: underline;
+            font-size: 18px;
         }
         .footer-main {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 20px;
+            justify-content: flex-start; /* لضمان توزيع العناصر يميناً ووسطاً */
+            position: relative;
         }
         .contact-info {
+            width: 50%;
+            text-align: right; /* بيانات التواصل يميناً */
             font-size: 13px;
             line-height: 2;
         }
         .footer-logos {
+            width: 50%;
             display: flex;
-            justify-content: center;
-            width: 100%;
+            justify-content: center; /* الشعار في الوسط مقابل البيانات */
         }
         .footer-logos img {
-            height: 75px; /* تكبير الصورة كما طلبت */
+            height: 70px;
         }
         .footer-bottom {
+            text-align: center;
             margin-top: 30px;
             font-size: 12px;
             border-top: 1px solid rgba(255,255,255,0.2);
             padding-top: 20px;
         }
 
-        /* تنسيق بيانات النتائج */
+        /* تنسيق البيانات */
         .data-item {
             display: flex;
             justify-content: space-between;
@@ -213,7 +217,7 @@
             </div>
         </div>
 
-        <!-- صفحة النتائج (المعدلة) -->
+        <!-- صفحة النتائج -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
                 <h1>الإجازات المرضية</h1>
@@ -221,7 +225,7 @@
             </section>
 
             <div class="content-body">
-                <!-- حقول البحث تظهر فارغة هنا -->
+                <!-- حقول البحث تظل فارغة كما طلبت -->
                 <div class="form-group">
                     <label>رمز الخدمة</label>
                     <input type="text" readonly value="">
@@ -236,7 +240,7 @@
                 </div>
 
                 <div id="dataContent">
-                    <!-- البيانات تظهر هنا -->
+                    <!-- البيانات ستظهر هنا عبر الجافاسكريبت -->
                 </div>
 
                 <div style="margin-top: 30px;">
@@ -259,7 +263,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر الموسط -->
+        <!-- الفوتر المحدث (بيانات يمين - شعار وسط) -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -270,7 +274,7 @@
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
                 <div class="footer-logos">
-                    <!-- الشعار المدمج الموسط والمكبر -->
+                    <!-- الشعار المدمج في الوسط -->
                     <img src="https://i.postimg.cc/GpYW0J4z/LEN-AND-MINISTRY-FINAL-FINAL-ONE.png" alt="Lean and Ministry of Health">
                 </div>
             </div>
