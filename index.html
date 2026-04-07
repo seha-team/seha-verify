@@ -129,7 +129,7 @@
             content: "- ";
         }
 
-        /* الفوتر - تصحيح التموضع */
+        /* الفوتر - بيانات يمين، شعار وسط، بدون خطوط زائدة */
         .footer {
             background-color: #2c71b8;
             color: white;
@@ -150,20 +150,21 @@
         }
         .contact-info {
             flex: 1;
-            text-align: right; /* الآن ستظهر في اليمين تماماً */
+            text-align: right;
             font-size: 13px;
             line-height: 2;
         }
         .footer-logos {
             flex: 1;
             display: flex;
-            justify-content: center; /* الشعار في المنتصف */
+            justify-content: center;
         }
         .footer-logos img {
             height: 70px;
+            border: none; /* لضمان عدم وجود أي خط حول الصورة */
         }
         .footer-spacer {
-            flex: 1; /* مساحة تعويضية في اليسار لضبط التوازن */
+            flex: 1;
         }
 
         .footer-bottom {
@@ -248,9 +249,9 @@
             </div>
         </div>
 
-        <!-- قسم المعلومات -->
+        <!-- قسم المعلومات - تم تحديث رابط الشعار هنا أيضاً -->
         <div class="info-section">
-            <img src="https://i.postimg.cc/G3Q1hQqP/SEHAV-FINAL-FINAL-ONE.png" alt="Seha Center">
+            <img src="https://i.postimg.cc/28wBC8jh/today-leen-and-ministry-colour-good-Copy.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <h3>القائمة الرئيسية</h3>
             <ul class="info-list">
@@ -261,11 +262,10 @@
             </ul>
         </div>
 
-        <!-- الفوتر - التعديل النهائي الموزون -->
+        <!-- الفوتر - بيانات يمين وشعار وسط وبدون خطوط زائدة -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
-                <!-- 1. بيانات التواصل في اليمين (أول عنصر في الكود لـ RTL) -->
                 <div class="contact-info">
                     <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-brands fa-whatsapp"></i> واتساب: 920002005</div>
@@ -273,12 +273,10 @@
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
 
-                <!-- 2. الشعار المدمج في الوسط -->
                 <div class="footer-logos">
                     <img src="https://i.postimg.cc/28wBC8jh/today-leen-and-ministry-colour-good-Copy.png" alt="Lean and Ministry of Health">
                 </div>
 
-                <!-- 3. مساحة فارغة في اليسار لضبط السنتر -->
                 <div class="footer-spacer"></div>
             </div>
             <div class="footer-bottom">
