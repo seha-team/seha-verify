@@ -129,12 +129,11 @@
             content: "- ";
         }
 
-        /* الفوتر - تنظيف كامل من الخطوط (الشخط) */
         .footer {
             background-color: #2c71b8;
             color: white;
             padding: 30px 20px;
-            border-top: none; /* إزالة أي خط علوي */
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
         .footer-title {
             text-align: center;
@@ -149,8 +148,8 @@
             justify-content: space-between;
         }
         .contact-info {
-            flex: 1;
             text-align: right;
+            flex: 1;
             font-size: 13px;
             line-height: 2;
         }
@@ -160,17 +159,10 @@
             justify-content: center;
         }
         .footer-logos img {
-            height: 65px;
-            border: none !important; /* ضمان عدم وجود أي شخط */
-            outline: none !important;
+            height: 70px;
         }
         .footer-spacer {
             flex: 1;
-        }
-
-        /* حذف أي كود يخص الفواصل (divider) */
-        .divider, .vertical-divider {
-            display: none !important;
         }
 
         .footer-bottom {
@@ -255,7 +247,7 @@
             </div>
         </div>
 
-        <!-- قسم المعلومات - تم تحديث رابط شعار صحة الأخير -->
+        <!-- قسم المعلومات -->
         <div class="info-section">
             <img src="https://i.postimg.cc/QNy9YnMb/Screenshot-2026-04-07-033156-shh-akhr-lyl.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
@@ -268,11 +260,11 @@
             </ul>
         </div>
 
-        <!-- الفوتر - تم حذف "الشخط" وتثبيت التوزيع -->
+        <!-- الفوتر - تم تحديث الرابط المطلوب فقط -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
-                <!-- بيانات التواصل يمين -->
+                
                 <div class="contact-info">
                     <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-brands fa-whatsapp"></i> واتساب: 920002005</div>
@@ -280,14 +272,12 @@
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
 
-                <!-- شعار لين والوزارة وسط وبدون أي خطوط زائدة -->
                 <div class="footer-logos">
-                    <img src="https://i.postimg.cc/28wBC8jh/today-leen-and-ministry-colour-good-Copy.png" alt="Lean and MOH">
+                    <!-- الرابط الجديد النظيف بدون خط أصفر -->
+                    <img src="https://i.postimg.cc/PqTBDjBb/sshmsha.png" alt="Lean and MOH">
                 </div>
-
-                <!-- مساحة فارغة لليسار لضبط التوازن -->
-                <div class="footer-spacer"></div>
             </div>
+            
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
                 <p>سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</p>
