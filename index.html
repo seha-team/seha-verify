@@ -129,7 +129,7 @@
             content: "- ";
         }
 
-        /* الفوتر - بيانات يمين، شعار وسط، عنوان منتصف */
+        /* الفوتر - تصحيح التموضع */
         .footer {
             background-color: #2c71b8;
             color: white;
@@ -149,21 +149,21 @@
             justify-content: space-between;
         }
         .contact-info {
-            text-align: right;
             flex: 1;
+            text-align: right; /* الآن ستظهر في اليمين تماماً */
             font-size: 13px;
             line-height: 2;
         }
         .footer-logos {
             flex: 1;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* الشعار في المنتصف */
         }
         .footer-logos img {
             height: 70px;
         }
         .footer-spacer {
-            flex: 1;
+            flex: 1; /* مساحة تعويضية في اليسار لضبط التوازن */
         }
 
         .footer-bottom {
@@ -261,23 +261,25 @@
             </ul>
         </div>
 
-        <!-- الفوتر - الرابط المحدث -->
+        <!-- الفوتر - التعديل النهائي الموزون -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
-                <div class="footer-spacer"></div>
-                
-                <div class="footer-logos">
-                    <!-- الرابط الجديد الملون المحدث -->
-                    <img src="https://i.postimg.cc/28wBC8jh/today-leen-and-ministry-colour-good-Copy.png" alt="Lean and Ministry of Health">
-                </div>
-
+                <!-- 1. بيانات التواصل في اليمين (أول عنصر في الكود لـ RTL) -->
                 <div class="contact-info">
                     <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-brands fa-whatsapp"></i> واتساب: 920002005</div>
                     <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
+
+                <!-- 2. الشعار المدمج في الوسط -->
+                <div class="footer-logos">
+                    <img src="https://i.postimg.cc/28wBC8jh/today-leen-and-ministry-colour-good-Copy.png" alt="Lean and Ministry of Health">
+                </div>
+
+                <!-- 3. مساحة فارغة في اليسار لضبط السنتر -->
+                <div class="footer-spacer"></div>
             </div>
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
@@ -307,7 +309,7 @@
                         <div class="data-item"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
                         <div class="data-item"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
                         <div class="data-item"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
-                        <div class="data-item"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration}</span></div>
+                        <div class="data-item"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration} أيام</span></div>
                         <div class="data-item"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
                         <div class="data-item"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
                     `;
