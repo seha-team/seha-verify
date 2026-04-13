@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* تعديل الشخط ليكون على النص مباشرة من الجيم للضاد */
+        /* الشخط: على النص مباشرة من الجيم للضاد */
         .hero-section h1 { 
             margin: 0; 
             font-size: 24px; 
@@ -56,12 +56,12 @@
         .hero-section h1::after {
             content: "";
             position: absolute;
-            bottom: 6px; /* يرفع العلامة لتغطي جسم الحروف */
-            right: 18%;  /* يبدأ من حرف الجيم */
-            width: 66%;   /* ينتهي عند حرف الضاد */
-            height: 14px; /* سمك العلامة الزرقاء */
+            bottom: 7px; /* وضعية "على النص" مباشرة */
+            right: 18%;  /* يبدأ من الجيم */
+            width: 66%;  /* ينتهي عند الضاد */
+            height: 13px; /* يغطي جسم الحروف */
             background-color: var(--highlight-color);
-            z-index: -1;  /* خلف النص ليظهر الكلام فوقه */
+            z-index: -1;
             opacity: 1;
         }
 
@@ -100,9 +100,9 @@
             background-color: var(--section-blue);
         }
 
-        /* خلفية لايت جراي للبيانات وتنسيق الخطوط */
+        /* خلفية بيانات المريض - رمادي أغمق قليلاً للوضوح */
         .data-container-box {
-            background-color: #f2f2f2;
+            background-color: #E8E8E8; 
             padding: 25px;
             border-radius: 10px;
             margin-top: 20px;
@@ -120,6 +120,7 @@
             font-size: 20px; 
             font-weight: 400; 
             color: #333;
+            display: block;
         }
 
         .info-section {
@@ -128,18 +129,21 @@
             padding: 40px 20px;
             text-align: center;
         }
-        .info-section img { height: 80px; margin-bottom: 20px; }
+        .info-section img { height: 80px; margin-bottom: 20px; mix-blend-mode: screen; }
         .info-section p { font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
         .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .info-list li { font-size: 14px; font-weight: 600; }
 
-        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; }
+        /* الفوتر: التواصل لليمين والشعار في المنتصف */
+        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; font-size: 18px; }
         .footer-main { display: flex; align-items: center; justify-content: space-between; }
+        
         .contact-info { flex: 1; text-align: right; font-size: 13px; line-height: 2; }
         .footer-logos { flex: 1; display: flex; justify-content: center; }
-        .footer-logos img { height: 70px; }
+        .footer-logos img { height: 75px; } /* تكبير بسيط للشعار */
         .footer-spacer { flex: 1; }
+
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
     </style>
 </head>
@@ -191,7 +195,6 @@
                     <input type="text" readonly>
                 </div>
 
-                <!-- حاوية البيانات بخلفية لايت جراي -->
                 <div class="data-container-box" id="dataContent"></div>
 
                 <div class="btn-container">
@@ -201,12 +204,12 @@
             </div>
         </div>
 
-        <!-- قسم المعلومات -->
+        <!-- القسم الأوسط -->
         <div class="info-section">
-            <img src="https://i.postimg.cc/QNy9YnMb/Screenshot-2026-04-07-033156-shh-akhr-lyl.png" alt="Seha Center">
+            <img src="https://i.postimg.cc/G3Q1hQqP/SEHAV-FINAL-FINAL-ONE.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <ul class="info-list">
-                <li style="border-bottom: 1px solid white; padding-bottom: 5px; width: 100%;">القائمة الرئيسية</li>
+                <li style="border-bottom: 1px solid white; padding-bottom: 5px; width: 100%; font-weight: bold;">القائمة الرئيسية</li>
                 <li>الخدمات</li>
                 <li>الاستعلامات</li>
                 <li>الأسئلة الشائعة</li>
@@ -214,11 +217,11 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
+        <!-- الفوتر الموزون -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
-                <div class="footer-spacer"></div>
+                <div class="footer-spacer"></div> <!-- موازن لجهة اليسار -->
                 <div class="footer-logos">
                     <img src="https://i.postimg.cc/PqTBDjBb/sshmsha.png" alt="Lean and MOH">
                 </div>
@@ -251,11 +254,13 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
+                    
+                    // استخراج الأرقام فقط لضمان ظهور الرقم (مثل 2) بدلاً من النص
                     const numericDuration = String(d.duration).replace(/[^0-9]/g, '');
 
                     const fields = [
                         { label: "الاسم", value: d.nameAr },
-                        { label: "تاريخ اصدار التقرير", value: d.issueDate },
+                        { label: "تاريخ اصدار تقرير الاجازة", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
                         { label: "المدة بالايام", value: numericDuration || d.duration },
