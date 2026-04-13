@@ -12,8 +12,8 @@
 
     <style>
         :root {
-            --section-blue: #2c71b8; /* لون القسم الثاني المعتمد */
-            --highlight-color: rgba(225, 240, 255, 0.3); /* لون الشخط الأزرق الخفيف */
+            --section-blue: #2c71b8;
+            --highlight-color: #E1F0FF; /* لون الشخط المطلوب */
         }
 
         body {
@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط الأزرق الخفيف فوق الكلمة */
+        /* الشخط الأزرق الخفيف - تم زيادة الوضوح */
         .highlight-wrapper {
             position: relative;
             display: inline-block;
@@ -52,13 +52,13 @@
         .highlight-wrapper::after {
             content: "";
             position: absolute;
-            top: 5px;
-            right: 15%; /* يبدأ من حرف الجيم تقريباً */
-            width: 70%;  /* ينتهي عند حرف الضاد تقريباً */
-            height: 12px;
+            top: 4px;
+            right: 15%;
+            width: 70%;
+            height: 14px;
             background-color: var(--highlight-color);
-            z-index: 1;
-            pointer-events: none;
+            z-index: -1; /* خلف النص قليلاً لضمان وضوح الحروف */
+            opacity: 0.8; /* زيادة الوضوح كما طلبت */
         }
 
         .hero-section {
@@ -67,7 +67,7 @@
             padding: 30px 20px;
             text-align: center;
         }
-        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; z-index: 2; }
+        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; }
         .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #666; }
 
         .content-body { padding: 20px 40px; text-align: center; }
@@ -84,10 +84,10 @@
             font-family: 'Cairo';
         }
 
-        /* تعديل الأزرار لتكون صغيرة وبنفس لون القسم الثاني */
+        /* تعديل الأزرار - تقليل الارتفاع وتغيير اللون */
         .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            padding: 8px 20px;
+            padding: 5px 25px; /* تقليل الارتفاع كما طلبت */
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -96,29 +96,28 @@
             font-size: 14px;
             color: white;
             background-color: var(--section-blue);
-            width: auto; /* حجم على قدر الكلمة */
+            width: auto;
             transition: 0.3s;
         }
-        .btn:hover { opacity: 0.9; }
 
-        /* تنسيق بيانات النتائج (رأسي وتوسيط) */
-        .data-content { margin-top: 20px; }
-        .data-block { margin-bottom: 15px; }
+        /* تنسيق البيانات (رأسي وتوسيط) */
+        .data-content { margin-top: 25px; }
+        .data-block { margin-bottom: 20px; text-align: center; }
         .data-header {
             font-family: 'Arial', sans-serif;
             font-size: 12px;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 4px;
+            color: #000; /* أسود صريح */
+            margin-bottom: 2px;
         }
         .data-value {
-            background-color: #f9f9f9; /* خلفية قريبة للابيض */
-            padding: 8px;
-            border-radius: 4px;
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 18px; /* حجم أكبر قليلاً */
+            font-weight: 400; /* خط عادي Regular */
+            color: #333;
+            background-color: #fcfcfc; /* خلفية قريبة جداً للابيض */
+            padding: 5px 20px;
             display: inline-block;
-            min-width: 200px;
+            border-radius: 4px;
         }
 
         .info-section {
@@ -133,24 +132,21 @@
         .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .info-list li { font-size: 14px; font-weight: 600; }
 
-        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; }
         .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; }
         .footer-main { display: flex; justify-content: space-between; align-items: center; }
         .contact-info { font-size: 13px; line-height: 1.8; }
         .footer-logos img { height: 60px; }
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
-        .footer-bottom a { color: white; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- الهيدر -->
         <header class="header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <i class="fa-solid fa-bars"></i>
         </header>
 
-        <!-- صفحة البحث -->
         <div id="searchPage">
             <section class="hero-section">
                 <div class="highlight-wrapper">
@@ -175,7 +171,6 @@
             </div>
         </div>
 
-        <!-- صفحة النتائج -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
                 <div class="highlight-wrapper">
@@ -185,7 +180,6 @@
             </section>
 
             <div class="content-body">
-                <!-- حقول البحث تظل فارغة -->
                 <div class="form-group">
                     <label>رمز الخدمة</label>
                     <input type="text" readonly>
@@ -195,9 +189,8 @@
                     <input type="text" readonly>
                 </div>
 
-                <!-- البيانات التفصيلية (رأسية) -->
                 <div id="dataContent" class="data-content">
-                    <!-- سيتم تعبئة البيانات هنا برمجياً -->
+                    <!-- تعبئة البيانات هنا -->
                 </div>
 
                 <div class="btn-container">
@@ -207,7 +200,6 @@
             </div>
         </div>
 
-        <!-- قسم المعلومات -->
         <div class="info-section">
             <img src="https://i.postimg.cc/QNy9YnMb/Screenshot-2026-04-07-033156-shh-akhr-lyl.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
@@ -220,7 +212,6 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -235,8 +226,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
-                <p><a href="privacy.html">سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</a></p>
+                <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026 | <a href="privacy.html" style="color:white; text-decoration:none;">سياسة الخصوصية</a></p>
             </div>
         </footer>
     </div>
@@ -258,13 +248,13 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // بناء البيانات بشكل رأسي (العنوان فوق والقيمة تحت)
+                    // ترتيب الحقول حسب طلبك (العنوان فوق والقيمة تحت)
                     const fields = [
-                        { label: "الاسم الكامل", value: d.nameAr },
+                        { label: "الاسم", value: d.nameAr }, // تم حذف "كامل"
                         { label: "تاريخ اصدار التقرير", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
-                        { label: "المدة بالايام", value: d.duration + " أيام" },
+                        { label: "المدة بالايام", value: d.duration }, // الرقم فقط بدون كلمة أيام
                         { label: "اسم الطبيب", value: d.doctor },
                         { label: "المسمى الوظيفي", value: d.position }
                     ];
