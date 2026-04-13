@@ -13,7 +13,7 @@
     <style>
         :root {
             --section-blue: #2c71b8;
-            --highlight-color: #E1F0FF; /* لون الشخط المطلوب */
+            --highlight-color: #E1F0FF; 
         }
 
         body {
@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط الأزرق الخفيف - تم زيادة الوضوح */
+        /* تمييز بصري (Highlight) واضح فوق الكلمة */
         .highlight-wrapper {
             position: relative;
             display: inline-block;
@@ -52,13 +52,13 @@
         .highlight-wrapper::after {
             content: "";
             position: absolute;
-            top: 4px;
-            right: 15%;
-            width: 70%;
-            height: 14px;
+            bottom: 6px;
+            right: 10%;
+            width: 80%;
+            height: 16px;
             background-color: var(--highlight-color);
-            z-index: -1; /* خلف النص قليلاً لضمان وضوح الحروف */
-            opacity: 0.8; /* زيادة الوضوح كما طلبت */
+            z-index: -1;
+            opacity: 1; /* لون صريح ليكون ظاهراً */
         }
 
         .hero-section {
@@ -67,7 +67,7 @@
             padding: 30px 20px;
             text-align: center;
         }
-        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; }
+        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; z-index: 2; }
         .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #666; }
 
         .content-body { padding: 20px 40px; text-align: center; }
@@ -84,10 +84,10 @@
             font-family: 'Cairo';
         }
 
-        /* تعديل الأزرار - تقليل الارتفاع وتغيير اللون */
+        /* أزرار نحيفة وبنفس لون القسم الثاني */
         .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            padding: 5px 25px; /* تقليل الارتفاع كما طلبت */
+            padding: 4px 22px; /* تقليل الارتفاع (نحيف) */
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -100,22 +100,22 @@
             transition: 0.3s;
         }
 
-        /* تنسيق البيانات (رأسي وتوسيط) */
+        /* تنسيق البيانات المطور */
         .data-content { margin-top: 25px; }
-        .data-block { margin-bottom: 20px; text-align: center; }
+        .data-block { margin-bottom: 22px; text-align: center; }
         .data-header {
             font-family: 'Arial', sans-serif;
-            font-size: 12px;
+            font-size: 16px; /* تكبير العنوان كما طلبت */
             font-weight: bold;
             color: #000; /* أسود صريح */
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
         .data-value {
-            font-size: 18px; /* حجم أكبر قليلاً */
+            font-size: 18px; /* حجم كبير واضح */
             font-weight: 400; /* خط عادي Regular */
             color: #333;
-            background-color: #fcfcfc; /* خلفية قريبة جداً للابيض */
-            padding: 5px 20px;
+            background-color: #fcfcfc; /* خلفية قريبة للابيض */
+            padding: 6px 25px;
             display: inline-block;
             border-radius: 4px;
         }
@@ -142,11 +142,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- الهيدر -->
         <header class="header">
             <img src="https://i.postimg.cc/ydL2jKCV/SEHA-LOGO.jpg" class="logo-header" alt="Seha">
             <i class="fa-solid fa-bars"></i>
         </header>
 
+        <!-- صفحة البحث -->
         <div id="searchPage">
             <section class="hero-section">
                 <div class="highlight-wrapper">
@@ -171,6 +173,7 @@
             </div>
         </div>
 
+        <!-- صفحة النتائج -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
                 <div class="highlight-wrapper">
@@ -190,7 +193,7 @@
                 </div>
 
                 <div id="dataContent" class="data-content">
-                    <!-- تعبئة البيانات هنا -->
+                    <!-- تعبئة البيانات برمجياً -->
                 </div>
 
                 <div class="btn-container">
@@ -200,6 +203,7 @@
             </div>
         </div>
 
+        <!-- قسم المعلومات -->
         <div class="info-section">
             <img src="https://i.postimg.cc/QNy9YnMb/Screenshot-2026-04-07-033156-shh-akhr-lyl.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
@@ -212,6 +216,7 @@
             </ul>
         </div>
 
+        <!-- الفوتر -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -248,13 +253,15 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // ترتيب الحقول حسب طلبك (العنوان فوق والقيمة تحت)
+                    // استخراج الأرقام فقط من حقل المدة (مثلاً سيحول "يوم واحد" أو "1 يوم" إلى "1")
+                    const numericDuration = d.duration.replace(/\D/g, '');
+
                     const fields = [
-                        { label: "الاسم", value: d.nameAr }, // تم حذف "كامل"
+                        { label: "الاسم", value: d.nameAr },
                         { label: "تاريخ اصدار التقرير", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
-                        { label: "المدة بالايام", value: d.duration }, // الرقم فقط بدون كلمة أيام
+                        { label: "المدة بالايام", value: numericDuration },
                         { label: "اسم الطبيب", value: d.doctor },
                         { label: "المسمى الوظيفي", value: d.position }
                     ];
