@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط: على النص مباشرة (يغطي جسم الحروف) من الجيم للضاد */
+        /* الشخط: على النص مباشرة من الجيم للضاد */
         .highlight-text { 
             margin: 0; 
             font-size: 24px; 
@@ -57,11 +57,11 @@
         .highlight-text::after {
             content: "";
             position: absolute;
-            top: 55%; /* يتمركز "على النص" تماماً */
+            top: 55%; 
             transform: translateY(-50%);
-            right: 18%;  /* يبدأ من حرف الجيم */
-            width: 66%;  /* ينتهي عند حرف الضاد */
-            height: 13px; /* يغطي جسم الحروف */
+            right: 18%;  
+            width: 66%;  
+            height: 13px; 
             background-color: var(--highlight-color);
             z-index: -1;
             opacity: 1;
@@ -102,7 +102,7 @@
             background-color: var(--section-blue);
         }
 
-        /* خلفية بيانات المريض - أوف وايت قريب للأبيض */
+        /* خلفية بيانات المريض - قريبة للأبيض */
         .data-container-box {
             background-color: #FCFCFC; 
             padding: 25px;
@@ -132,13 +132,20 @@
             padding: 40px 20px;
             text-align: center;
         }
-        /* شعار صحتي الجديد بنفس الحجم السابق */
         .info-section img { height: 80px; margin-bottom: 20px; }
         .info-section p { font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+        
+        /* تنسيق القائمة والخط الأبيض تحت العنوان فقط */
         .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .info-list li { font-size: 14px; font-weight: 600; }
+        .menu-title { 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            display: inline-block;
+            border-bottom: 1px solid white; 
+            padding-bottom: 5px;
+        }
 
-        /* الفوتر: تواصل معنا لليمين والشعار في المنتصف */
         .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; font-size: 18px; }
         .footer-main { display: flex; align-items: center; justify-content: space-between; }
@@ -208,12 +215,12 @@
             </div>
         </div>
 
-        <!-- القسم الأوسط (شعار صحتي الجديد) -->
+        <!-- القسم الأوسط -->
         <div class="info-section">
             <img src="https://i.postimg.cc/P5Y3zMHB/Screenshot-2026-04-14-005203.png" alt="Seha Center">
             <p>منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف</p>
             <ul class="info-list">
-                <li style="border-bottom: 1px solid white; padding-bottom: 5px; width: 100%; font-weight: bold;">القائمة الرئيسية</li>
+                <li><span class="menu-title">القائمة الرئيسية</span></li>
                 <li>الخدمات</li>
                 <li>الاستعلامات</li>
                 <li>الأسئلة الشائعة</li>
@@ -258,16 +265,14 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
-                    
-                    // استخراج الأرقام من العمود الإنجليزي (مثل 2 days) لضمان ظهور الرقم فقط
-                    const numericDuration = String(d.durationEn || d.duration).replace(/[^0-9]/g, '');
 
                     const fields = [
                         { label: "الاسم", value: d.nameAr },
                         { label: "تاريخ اصدار تقرير الاجازة", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
-                        { label: "المدة بالايام", value: numericDuration || d.duration },
+                        // نستخدم القيمة القادمة من السكربت مباشرة لأنها مرتبة بـ "1 يوم"
+                        { label: "المدة بالايام", value: d.duration },
                         { label: "اسم الطبيب", value: d.doctor },
                         { label: "المسمى الوظيفي", value: d.position }
                     ];
