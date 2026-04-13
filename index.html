@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط الأزرق الخفيف - دقة من الجيم إلى الضاد */
+        /* الشخط الديكوري المعتمد - تحديد الموقع بدقة من الجيم للضاد */
         .highlight-wrapper {
             position: relative;
             display: inline-block;
@@ -52,12 +52,14 @@
         .highlight-wrapper::after {
             content: "";
             position: absolute;
-            bottom: 5px;
-            right: 18%; /* يبدأ من حرف الجيم */
-            width: 68%;  /* ينتهي عند حرف الضاد */
-            height: 15px;
+            top: 2px;
+            right: 18%; /* يبدأ من الجيم */
+            width: 58%;  /* ينتهي عند الضاد */
+            height: 12px;
             background-color: var(--highlight-color);
-            z-index: -1;
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
         }
 
         .hero-section {
@@ -66,7 +68,7 @@
             padding: 30px 20px;
             text-align: center;
         }
-        .hero-section h1 { margin: 0; font-size: 32px; color: #2c71b8; position: relative; font-weight: 700; }
+        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; }
         .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #666; }
 
         .content-body { padding: 20px 40px; text-align: center; }
@@ -83,10 +85,10 @@
             font-family: 'Cairo';
         }
 
-        /* أزرار نحيفة جداً وبنفس لون القسم الثاني */
+        /* الأزرار النحيفة المعتمدة */
         .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            padding: 3px 25px; 
+            padding: 4px 22px; /* ارتفاع نحيف */
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -96,27 +98,27 @@
             color: white;
             background-color: var(--section-blue);
             width: auto;
-            line-height: 1.6;
         }
 
-        /* خلفية كاملة لمنطقة البيانات وتنسيق رأسي */
-        .data-content { 
-            margin-top: 25px; 
-            background-color: #f9fbfd; /* خلفية هادئة قريبة للأبيض للبيانات كاملة */
-            padding: 20px;
-            border-radius: 8px;
+        /* حاوية البيانات بخلفية شاملة وتنسيق رأسي */
+        .data-container-box {
+            background-color: #f9fbfd; /* خلفية كاملة للبيانات قريبة للأبيض */
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
         }
-        .data-block { margin-bottom: 25px; text-align: center; }
+        .data-block { margin-bottom: 25px; }
         .data-header {
             font-family: 'Arial', sans-serif;
-            font-size: 18px; /* تكبير الهيدر */
+            font-size: 18px; /* حجم كبير للهيدر */
             font-weight: bold;
             color: #000; /* أسود صريح */
             margin-bottom: 5px;
         }
         .data-value {
-            font-size: 20px; /* حجم أكبر للبيانات الفعلية */
-            font-weight: 400; /* Regular */
+            font-size: 20px; /* حجم أكبر للبيانات */
+            font-weight: 400; /* خط عادي Regular */
             color: #333;
             display: block;
         }
@@ -138,8 +140,6 @@
         .footer-main { display: flex; justify-content: space-between; align-items: center; }
         .contact-info { font-size: 13px; line-height: 1.8; }
         .footer-logos img { height: 60px; }
-        .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top13px; line-height: 1.8; }
-        .footer-logos img { height: 60px; }
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
     </style>
 </head>
@@ -154,9 +154,9 @@
         <!-- صفحة البحث -->
         <div id="searchPage">
             <section class="hero-section">
-                <h1>
-                    <span class="highlight-wrapper">الإجازات المرضية</span>
-                </h1>
+                <div class="highlight-wrapper">
+                    <h1>الإجازات المرضية</h1>
+                </div>
                 <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </section>
 
@@ -179,9 +179,9 @@
         <!-- صفحة النتائج -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
-                <h1>
-                    <span class="highlight-wrapper">الإجازات المرضية</span>
-                </h1>
+                <div class="highlight-wrapper">
+                    <h1>الإجازات المرضية</h1>
+                </div>
                 <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </section>
 
@@ -195,7 +195,8 @@
                     <input type="text" readonly>
                 </div>
 
-                <div id="dataContent" class="data-content">
+                <!-- حاوية البيانات الموحدة -->
+                <div class="data-container-box" id="dataContent">
                     <!-- تعبئة البيانات هنا -->
                 </div>
 
@@ -256,17 +257,15 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // استخراج الرقم الأول فقط لخانة المدة
-                    let displayDuration = d.duration;
-                    const match = String(d.duration).match(/\d+/);
-                    if (match) { displayDuration = match[0]; }
+                    // استخراج الأرقام فقط لخانة المدة لضمان ظهور 1 أو 2 فقط
+                    const numericDuration = String(d.duration).replace(/[^0-9]/g, '');
 
                     const fields = [
                         { label: "الاسم", value: d.nameAr },
                         { label: "تاريخ اصدار التقرير", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
-                        { label: "المدة بالايام", value: displayDuration },
+                        { label: "المدة بالايام", value: numericDuration || d.duration },
                         { label: "اسم الطبيب", value: d.doctor },
                         { label: "المسمى الوظيفي", value: d.position }
                     ];
