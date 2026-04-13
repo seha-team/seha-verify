@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
+        :root {
+            --section-blue: #2c71b8; /* لون القسم الثاني المعتمد */
+            --highlight-color: rgba(225, 240, 255, 0.3); /* لون الشخط الأزرق الخفيف */
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #f4f7f6;
@@ -19,12 +24,16 @@
             display: flex;
             justify-content: center;
         }
+
         .container {
             width: 650px;
             background-color: white;
             min-height: 100vh;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -32,160 +41,105 @@
             padding: 15px 20px;
             border-bottom: 1px solid #eee;
         }
-        .logo-header {
-            height: 45px;
+
+        .logo-header { height: 45px; }
+
+        /* الشخط الأزرق الخفيف فوق الكلمة */
+        .highlight-wrapper {
+            position: relative;
+            display: inline-block;
         }
-        
+        .highlight-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 15%; /* يبدأ من حرف الجيم تقريباً */
+            width: 70%;  /* ينتهي عند حرف الضاد تقريباً */
+            height: 12px;
+            background-color: var(--highlight-color);
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .hero-section {
             background-color: transparent;
             color: #333;
             padding: 30px 20px;
             text-align: center;
         }
-        .hero-section h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #2c71b8;
-        }
-        .hero-section p {
-            margin-top: 10px;
-            font-size: 15px;
-            line-height: 1.6;
-            color: #666;
-        }
+        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; z-index: 2; }
+        .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #666; }
 
-        .content-body {
-            padding: 30px 40px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
+        .content-body { padding: 20px 40px; text-align: center; }
+
+        .form-group { margin-bottom: 15px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
         .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
             text-align: center;
             font-family: 'Cairo';
-            background-color: #fff;
         }
 
+        /* تعديل الأزرار لتكون صغيرة وبنفس لون القسم الثاني */
+        .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            width: 100%;
-            padding: 12px;
+            padding: 8px 20px;
             border: none;
-            border-radius: 5px;
-            font-weight: 700;
+            border-radius: 4px;
+            font-weight: 600;
             cursor: pointer;
-            margin-bottom: 10px;
             font-family: 'Cairo';
-        }
-        .btn-primary {
-            background-color: #004693;
+            font-size: 14px;
             color: white;
+            background-color: var(--section-blue);
+            width: auto; /* حجم على قدر الكلمة */
+            transition: 0.3s;
         }
-        .btn-secondary {
-            background-color: #004693;
-            color: white;
+        .btn:hover { opacity: 0.9; }
+
+        /* تنسيق بيانات النتائج (رأسي وتوسيط) */
+        .data-content { margin-top: 20px; }
+        .data-block { margin-bottom: 15px; }
+        .data-header {
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .data-value {
+            background-color: #f9f9f9; /* خلفية قريبة للابيض */
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            display: inline-block;
+            min-width: 200px;
         }
 
         .info-section {
-            background-color: #2c71b8;
+            background-color: var(--section-blue);
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
-        .info-section img {
-            height: 80px;
-            margin-bottom: 20px;
-        }
-        .info-section p {
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        .info-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            padding-bottom: 10px;
-        }
-        .info-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-        .info-list li::before {
-            content: "- ";
-        }
+        .info-section img { height: 80px; margin-bottom: 20px; }
+        .info-section p { font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+        .info-section h3 { font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+        .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .info-list li { font-size: 14px; font-weight: 600; }
 
-        .footer {
-            background-color: #2c71b8;
-            color: white;
-            padding: 30px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-title {
-            text-align: center;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-decoration: underline;
-            font-size: 18px;
-        }
-        .footer-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .contact-info {
-            text-align: right;
-            flex: 1;
-            font-size: 13px;
-            line-height: 2;
-        }
-        .footer-logos {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        .footer-logos img {
-            height: 70px;
-        }
-        .footer-spacer {
-            flex: 1;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 12px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 20px;
-        }
-
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .data-label {
-            color: #666;
-            font-weight: 600;
-        }
-        .data-value {
-            font-weight: 700;
-        }
+        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; }
+        .footer-main { display: flex; justify-content: space-between; align-items: center; }
+        .contact-info { font-size: 13px; line-height: 1.8; }
+        .footer-logos img { height: 60px; }
+        .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
+        .footer-bottom a { color: white; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -199,7 +153,9 @@
         <!-- صفحة البحث -->
         <div id="searchPage">
             <section class="hero-section">
-                <h1>الإجازات المرضية</h1>
+                <div class="highlight-wrapper">
+                    <h1>الإجازات المرضية</h1>
+                </div>
                 <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </section>
 
@@ -212,37 +168,41 @@
                     <label>رقم الهوية / الإقامة</label>
                     <input type="text" id="iqama" placeholder="أدخل رقم الهوية">
                 </div>
-                <button class="btn btn-primary" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                <button class="btn btn-secondary">رجوع للإستعلامات</button>
+                <div class="btn-container">
+                    <button class="btn" id="btnSearch" onclick="handleSearch()">استعلام</button>
+                    <button class="btn">رجوع للإستعلامات</button>
+                </div>
             </div>
         </div>
 
         <!-- صفحة النتائج -->
         <div id="resultPage" style="display: none;">
             <section class="hero-section">
-                <h1>الإجازات المرضية</h1>
+                <div class="highlight-wrapper">
+                    <h1>الإجازات المرضية</h1>
+                </div>
                 <p>خدمة الإستعلام عن الإجازات المرضية تتيح لك الإستعلام عن حالة طلبك للإجازه ويمكنك طباعتها عن طريق تطبيق صحتي</p>
             </section>
 
             <div class="content-body">
+                <!-- حقول البحث تظل فارغة -->
                 <div class="form-group">
                     <label>رمز الخدمة</label>
-                    <input type="text" readonly value="">
+                    <input type="text" readonly>
                 </div>
                 <div class="form-group">
                     <label>رقم الهوية / الإقامة</label>
-                    <input type="text" readonly value="">
+                    <input type="text" readonly>
                 </div>
 
-                <div style="text-align: center; color: #2e7d32; font-weight: 700; margin-bottom: 20px;">
-                    ✓ تم التحقق بنجاح
+                <!-- البيانات التفصيلية (رأسية) -->
+                <div id="dataContent" class="data-content">
+                    <!-- سيتم تعبئة البيانات هنا برمجياً -->
                 </div>
 
-                <div id="dataContent"></div>
-
-                <div style="margin-top: 30px;">
-                    <button class="btn btn-primary" onclick="location.reload()">استعلام جديد</button>
-                    <button class="btn btn-secondary">رجوع للاستعلامات</button>
+                <div class="btn-container">
+                    <button class="btn" onclick="location.reload()">استعلام جديد</button>
+                    <button class="btn">رجوع للاستعلامات</button>
                 </div>
             </div>
         </div>
@@ -260,27 +220,23 @@
             </ul>
         </div>
 
-        <!-- الفوتر - تم تحديث الرابط المطلوب فقط -->
+        <!-- الفوتر -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
-                
                 <div class="contact-info">
                     <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-brands fa-whatsapp"></i> واتساب: 920002005</div>
                     <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
                 </div>
-
                 <div class="footer-logos">
-                    <!-- الرابط الجديد النظيف بدون خط أصفر -->
                     <img src="https://i.postimg.cc/PqTBDjBb/sshmsha.png" alt="Lean and MOH">
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>منصة صحة معتمدة من قبل وزارة الصحة © 2026</p>
-                <p>سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</p>
+                <p><a href="privacy.html">سياسة الخصوصية وشروط الإستخدام | دليل المستخدم</a></p>
             </div>
         </footer>
     </div>
@@ -301,15 +257,29 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
-                    document.getElementById('dataContent').innerHTML = `
-                        <div class="data-item"><span class="data-label">الاسم الكامل:</span><span class="data-value">${d.nameAr}</span></div>
-                        <div class="data-item"><span class="data-label">تاريخ اصدار التقرير:</span><span class="data-value">${d.issueDate}</span></div>
-                        <div class="data-item"><span class="data-label">تبدأ من:</span><span class="data-value">${d.startDate}</span></div>
-                        <div class="data-item"><span class="data-label">وحتى:</span><span class="data-value">${d.endDate}</span></div>
-                        <div class="data-item"><span class="data-label">المدة بالايام:</span><span class="data-value">${d.duration} أيام</span></div>
-                        <div class="data-item"><span class="data-label">اسم الطبيب:</span><span class="data-value">${d.doctor}</span></div>
-                        <div class="data-item"><span class="data-label">المسمى الوظيفي:</span><span class="data-value">${d.position}</span></div>
-                    `;
+                    
+                    // بناء البيانات بشكل رأسي (العنوان فوق والقيمة تحت)
+                    const fields = [
+                        { label: "الاسم الكامل", value: d.nameAr },
+                        { label: "تاريخ اصدار التقرير", value: d.issueDate },
+                        { label: "تبدأ من", value: d.startDate },
+                        { label: "وحتى", value: d.endDate },
+                        { label: "المدة بالايام", value: d.duration + " أيام" },
+                        { label: "اسم الطبيب", value: d.doctor },
+                        { label: "المسمى الوظيفي", value: d.position }
+                    ];
+
+                    let htmlContent = "";
+                    fields.forEach(f => {
+                        htmlContent += `
+                            <div class="data-block">
+                                <div class="data-header">${f.label}</div>
+                                <div class="data-value">${f.value}</div>
+                            </div>
+                        `;
+                    });
+
+                    document.getElementById('dataContent').innerHTML = htmlContent;
                     document.getElementById('searchPage').style.display = 'none';
                     document.getElementById('resultPage').style.display = 'block';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
