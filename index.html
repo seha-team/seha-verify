@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط الديكوري المعتمد - تحديد الموقع بدقة من الجيم للضاد */
+        /* تعديل الشخط ليكون على النص مباشرة من الجيم للضاد */
         .highlight-wrapper {
             position: relative;
             display: inline-block;
@@ -52,14 +52,14 @@
         .highlight-wrapper::after {
             content: "";
             position: absolute;
-            top: 2px;
-            right: 18%; /* يبدأ من الجيم */
-            width: 58%;  /* ينتهي عند الضاد */
-            height: 12px;
+            top: 55%; /* يتمركز في منتصف النص تماماً */
+            transform: translateY(-50%);
+            right: 18%; /* بداية من الجيم */
+            width: 65%;  /* نهاية عند الضاد */
+            height: 12px; /* ارتفاع مناسب يغطي جسم الحروف */
             background-color: var(--highlight-color);
-            z-index: 1;
-            opacity: 0.8;
-            pointer-events: none;
+            z-index: -1; /* خلف الحروف لضمان القراءة ووضوح النقاط */
+            opacity: 0.9;
         }
 
         .hero-section {
@@ -85,10 +85,10 @@
             font-family: 'Cairo';
         }
 
-        /* الأزرار النحيفة المعتمدة */
+        /* أزرار نحيفة جداً وملائمة للكلمة */
         .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            padding: 4px 22px; /* ارتفاع نحيف */
+            padding: 4px 22px; 
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -100,9 +100,9 @@
             width: auto;
         }
 
-        /* حاوية البيانات بخلفية شاملة وتنسيق رأسي */
+        /* خلفية شاملة لايت جراي للبيانات وتنسيق رأسي */
         .data-container-box {
-            background-color: #f9fbfd; /* خلفية كاملة للبيانات قريبة للأبيض */
+            background-color: #f2f2f2; /* خلفية لايت جراي المطلوبة */
             padding: 25px;
             border-radius: 10px;
             margin-top: 20px;
@@ -111,14 +111,14 @@
         .data-block { margin-bottom: 25px; }
         .data-header {
             font-family: 'Arial', sans-serif;
-            font-size: 18px; /* حجم كبير للهيدر */
+            font-size: 18px; 
             font-weight: bold;
-            color: #000; /* أسود صريح */
+            color: #000; 
             margin-bottom: 5px;
         }
         .data-value {
-            font-size: 20px; /* حجم أكبر للبيانات */
-            font-weight: 400; /* خط عادي Regular */
+            font-size: 20px; 
+            font-weight: 400; 
             color: #333;
             display: block;
         }
@@ -136,10 +136,13 @@
         .info-list li { font-size: 14px; font-weight: 600; }
 
         .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; }
-        .footer-main { display: flex; justify-content: space-between; align-items: center; }
-        .contact-info { font-size: 13px; line-height: 1.8; }
-        .footer-logos img { height: 60px; }
+        .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; font-size: 18px; }
+        .footer-main { display: flex; align-items: center; justify-content: space-between; }
+        .contact-info { flex: 1; text-align: right; font-size: 13px; line-height: 2; }
+        .footer-logos { flex: 1; display: flex; justify-content: center; }
+        .footer-logos img { height: 70px; }
+        .footer-spacer { flex: 1; }
+
         .footer-bottom { text-align: center; margin-top: 30px; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
     </style>
 </head>
@@ -195,10 +198,8 @@
                     <input type="text" readonly>
                 </div>
 
-                <!-- حاوية البيانات الموحدة -->
-                <div class="data-container-box" id="dataContent">
-                    <!-- تعبئة البيانات هنا -->
-                </div>
+                <!-- حاوية البيانات بخلفية لايت جراي شاملة -->
+                <div class="data-container-box" id="dataContent"></div>
 
                 <div class="btn-container">
                     <button class="btn" onclick="location.reload()">استعلام جديد</button>
@@ -220,18 +221,19 @@
             </ul>
         </div>
 
-        <!-- الفوتر -->
+        <!-- الفوتر الموزون -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
+                <div class="footer-spacer"></div>
+                <div class="footer-logos">
+                    <img src="https://i.postimg.cc/PqTBDjBb/sshmsha.png" alt="Lean and MOH">
+                </div>
                 <div class="contact-info">
                     <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-brands fa-whatsapp"></i> واتساب: 920002005</div>
                     <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
                     <div>اوقات العمل : الاحد حتي الخميس من 8 ص الي 11 م</div>
-                </div>
-                <div class="footer-logos">
-                    <img src="https://i.postimg.cc/PqTBDjBb/sshmsha.png" alt="Lean and MOH">
                 </div>
             </div>
             <div class="footer-bottom">
@@ -257,7 +259,7 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // استخراج الأرقام فقط لخانة المدة لضمان ظهور 1 أو 2 فقط
+                    // استخراج الأرقام فقط من حقل المدة لضمان ظهور 1 أو 2 فقط
                     const numericDuration = String(d.duration).replace(/[^0-9]/g, '');
 
                     const fields = [
