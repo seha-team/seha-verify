@@ -44,12 +44,12 @@
 
         .logo-header { height: 45px; }
 
-        /* تمييز بصري (Highlight) واضح جداً */
+        /* تمييز بصري (Highlight) واضح ومحدد الموقع */
         .highlight-wrapper {
-            position: relative;
             display: inline-block;
-            background: linear-gradient(to bottom, transparent 40%, var(--highlight-color) 40%, var(--highlight-color) 85%, transparent 85%);
-            padding: 0 5px;
+            background: linear-gradient(to bottom, transparent 45%, var(--highlight-color) 45%, var(--highlight-color) 85%, transparent 85%);
+            padding: 0 8px;
+            line-height: 1.2;
         }
 
         .hero-section {
@@ -58,7 +58,7 @@
             padding: 30px 20px;
             text-align: center;
         }
-        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; position: relative; }
+        .hero-section h1 { margin: 0; font-size: 24px; color: #2c71b8; }
         .hero-section p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #666; }
 
         .content-body { padding: 20px 40px; text-align: center; }
@@ -78,7 +78,7 @@
         /* أزرار نحيفة جداً (Slim) */
         .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
         .btn {
-            padding: 3px 20px; /* أنحف ارتفاع ممكن */
+            padding: 3px 25px; /* أنحف ارتفاع ممكن */
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -88,25 +88,25 @@
             color: white;
             background-color: var(--section-blue);
             width: auto;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* تنسيق البيانات (رأسي وتوسيط) */
+        /* تنسيق البيانات الرأسي المطور */
         .data-content { margin-top: 25px; }
         .data-block { margin-bottom: 25px; text-align: center; }
         .data-header {
             font-family: 'Arial', sans-serif;
-            font-size: 16px; /* الحجم المطلوب */
-            font-weight: bold; /* Bold */
+            font-size: 16px; 
+            font-weight: bold;
             color: #000; /* أسود صريح */
             margin-bottom: 4px;
         }
         .data-value {
-            font-size: 19px; /* حجم كبير واضح */
-            font-weight: 400; /* Regular */
+            font-size: 19px; 
+            font-weight: 400; 
             color: #333;
             background-color: #f9f9f9;
-            padding: 4px 25px;
+            padding: 5px 30px;
             display: inline-block;
             border-radius: 4px;
         }
@@ -123,7 +123,7 @@
         .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .info-list li { font-size: 14px; font-weight: 600; }
 
-        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; }
+        .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; }
         .footer-main { display: flex; justify-content: space-between; align-items: center; }
         .contact-info { font-size: 13px; line-height: 1.8; }
@@ -244,11 +244,11 @@
                 if(result.status === "success") {
                     const d = result.data;
                     
-                    // تحسين جلب الرقم لخانة المدة (يأخذ الرقم الأول لضمان ظهور 1 أو 2 فقط)
+                    // استخراج الأرقام فقط (مثلاً سيحول "يوم واحد" أو "1 أيام" إلى "1") لضمان عدم اختفاء الخانة
                     let displayDuration = d.duration;
-                    if (typeof d.duration === 'string') {
-                        const match = d.duration.match(/\d+/);
-                        displayDuration = match ? match[0] : d.duration;
+                    const match = String(d.duration).match(/\d+/);
+                    if (match) {
+                        displayDuration = match[0];
                     }
 
                     const fields = [
