@@ -44,7 +44,7 @@
 
         .logo-header { height: 45px; }
 
-        /* الشخط: على النص مباشرة من الجيم للضاد */
+        /* الشخط: على النص مباشرة (يغطي جسم الحروف) من الجيم للضاد */
         .highlight-text { 
             margin: 0; 
             font-size: 24px; 
@@ -57,11 +57,11 @@
         .highlight-text::after {
             content: "";
             position: absolute;
-            top: 55%; 
+            top: 55%; /* يتمركز "على النص" تماماً */
             transform: translateY(-50%);
-            right: 18%;  
-            width: 66%;  
-            height: 13px; 
+            right: 18%;  /* يبدأ من حرف الجيم */
+            width: 66%;  /* ينتهي عند حرف الضاد */
+            height: 13px; /* يغطي جسم الحروف */
             background-color: var(--highlight-color);
             z-index: -1;
             opacity: 1;
@@ -89,9 +89,16 @@
             font-family: 'Cairo';
         }
 
-        .btn-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        /* تعديل الأزرار لتكون رأسية وفي منتصف الصفحة */
+        .btn-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 12px; 
+            margin-top: 15px; 
+        }
         .btn {
-            padding: 4px 25px; 
+            padding: 6px 30px; 
             border: none;
             border-radius: 4px;
             font-weight: 600;
@@ -100,9 +107,10 @@
             font-size: 14px;
             color: white;
             background-color: var(--section-blue);
+            width: 220px; /* توحيد عرض الأزرار ليكون الشكل مرتباً */
         }
 
-        /* خلفية بيانات المريض - قريبة للأبيض */
+        /* خلفية بيانات المريض - قريبة للابيض */
         .data-container-box {
             background-color: #FCFCFC; 
             padding: 25px;
@@ -132,10 +140,11 @@
             padding: 40px 20px;
             text-align: center;
         }
+        /* شعار صحتي الجديد */
         .info-section img { height: 80px; margin-bottom: 20px; }
         .info-section p { font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
         
-        /* تنسيق القائمة والخط الأبيض تحت العنوان فقط */
+        /* القائمة الرئيسية بخط تحتها فقط */
         .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .info-list li { font-size: 14px; font-weight: 600; }
         .menu-title { 
@@ -146,6 +155,7 @@
             padding-bottom: 5px;
         }
 
+        /* الفوتر: بيانات التواصل لليمين */
         .footer { background-color: var(--section-blue); color: white; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-title { text-align: center; font-weight: 700; margin-bottom: 20px; text-decoration: underline; font-size: 18px; }
         .footer-main { display: flex; align-items: center; justify-content: space-between; }
@@ -184,7 +194,7 @@
                 </div>
                 <div class="btn-container">
                     <button class="btn" id="btnSearch" onclick="handleSearch()">استعلام</button>
-                    <button class="btn">رجوع للإستعلامات</button>
+                    <button class="btn">رجوع للاستعلامات</button>
                 </div>
             </div>
         </div>
@@ -228,7 +238,7 @@
             </ul>
         </div>
 
-        <!-- الفوتر: تواصل معنا لليمين والشعار بالوسط -->
+        <!-- الفوتر: تواصل معنا لليمين -->
         <footer class="footer">
             <div class="footer-title">تواصل معنا</div>
             <div class="footer-main">
@@ -265,14 +275,16 @@
                 const result = await res.json();
                 if(result.status === "success") {
                     const d = result.data;
+                    
+                    // التعديل: استخراج الرقم فقط لضمان ظهور 1 أو 2 فقط على الموقع
+                    const numericOnly = String(d.duration).replace(/[^0-9]/g, '');
 
                     const fields = [
                         { label: "الاسم", value: d.nameAr },
                         { label: "تاريخ اصدار تقرير الاجازة", value: d.issueDate },
                         { label: "تبدأ من", value: d.startDate },
                         { label: "وحتى", value: d.endDate },
-                        // نستخدم القيمة القادمة من السكربت مباشرة لأنها مرتبة بـ "1 يوم"
-                        { label: "المدة بالايام", value: d.duration },
+                        { label: "المدة بالايام", value: numericOnly || d.duration },
                         { label: "اسم الطبيب", value: d.doctor },
                         { label: "المسمى الوظيفي", value: d.position }
                     ];
