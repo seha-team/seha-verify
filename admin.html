@@ -7,81 +7,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary:#1a5fa8; --primary-d:#134a87; --accent:#28a745;
-  --danger:#dc3545; --bg:#f0f4f8; --card:#ffffff;
-  --border:#d1dce8; --text:#2d3748; --sub:#6b7a8d; --sec-bg:#eef4fb;
+  --primary:   #1a5fa8;
+  --primary-d: #134a87;
+  --accent:    #28a745;
+  --danger:    #dc3545;
+  --bg:        #f0f4f8;
+  --card:      #ffffff;
+  --border:    #d1dce8;
+  --text:      #2d3748;
+  --sub:       #6b7a8d;
+  --sec-bg:    #eef4fb;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-#loginSection{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
-.login-card{background:var(--card);border-radius:16px;box-shadow:0 8px 32px rgba(26,95,168,.15);padding:40px 36px;width:100%;max-width:400px;text-align:center;}
-.login-logo{width:64px;height:64px;background:var(--primary);border-radius:16px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;}
-.login-logo svg{width:36px;height:36px;fill:none;stroke:white;stroke-width:2;}
-.login-card h2{color:var(--primary);font-size:22px;margin-bottom:6px;}
-.login-card p{color:var(--sub);font-size:14px;margin-bottom:28px;}
-.form-group{margin-bottom:18px;text-align:right;}
-.form-group label{display:block;font-size:14px;font-weight:500;color:var(--text);margin-bottom:6px;}
-.form-group select,.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:15px;color:var(--text);background:white;transition:border-color .2s;}
-.form-group select:focus,.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,95,168,.1);}
-.btn-primary{width:100%;padding:13px;background:var(--primary);color:white;border:none;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s;}
-.btn-primary:hover{background:var(--primary-d);}
-#loginError{color:var(--danger);font-size:13px;margin-top:12px;display:none;}
-#appSection{display:none;min-height:100vh;}
-.app-header{background:var(--primary);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;color:white;box-shadow:0 2px 8px rgba(0,0,0,.15);position:sticky;top:0;z-index:100;}
-.app-header-title{font-size:17px;font-weight:700;}
-.btn-logout{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:white;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;margin-right:12px;transition:background .2s;}
-.btn-logout:hover{background:rgba(255,255,255,.3);}
-.tabs{display:flex;background:white;border-bottom:2px solid var(--border);padding:0 24px;}
-.tab-btn{padding:14px 24px;border:none;background:none;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:500;color:var(--sub);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
-.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
-.tab-content{display:none;padding:24px;max-width:900px;margin:0 auto;}
-.tab-content.active{display:block;}
-.section-card{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;overflow:hidden;}
-.section-header{background:var(--sec-bg);padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
-.section-icon{width:32px;height:32px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.section-title{font-size:15px;font-weight:700;color:var(--primary);}
-.section-body{padding:20px;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-.field-full{grid-column:span 2;}
-.field-group label{display:block;font-size:13px;font-weight:500;color:var(--sub);margin-bottom:6px;}
-.field-group input,.field-group select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--text);background:white;transition:border-color .2s;}
-.field-group input:focus,.field-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,95,168,.08);}
-.field-group input[readonly]{background:#f7fafc;color:var(--sub);cursor:not-allowed;}
-.field-group input.ar-input{direction:rtl;}
-.field-group input.en-input{direction:ltr;font-family:Arial,sans-serif;}
-.ar-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f4ea;color:#2d7a38;}
-.en-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8eef8;color:#1a5fa8;}
-.opt-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
-.submit-area{text-align:center;margin-top:8px;}
-.btn-submit{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--accent);color:white;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:background .2s;box-shadow:0 4px 12px rgba(40,167,69,.3);}
-.btn-submit:hover{background:#218838;}
-.btn-submit:disabled{background:#9ec9aa;cursor:not-allowed;box-shadow:none;}
-#submitStatus{margin-top:16px;font-size:15px;font-weight:500;}
-#submitStatus.success{color:var(--accent);}
-#submitStatus.error{color:var(--danger);}
-.pdf-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:12px 28px;background:var(--primary);color:white;border-radius:8px;text-decoration:none;font-size:15px;font-weight:600;box-shadow:0 3px 10px rgba(26,95,168,.25);transition:background .2s;}
-.pdf-link:hover{background:var(--primary-d);}
-.leaves-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
-.leaves-header h3{font-size:17px;color:var(--primary);}
-.btn-refresh{padding:8px 16px;background:var(--sec-bg);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--primary);transition:all .2s;}
-.btn-refresh:hover{background:var(--primary);color:white;border-color:var(--primary);}
-.leave-item{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
-.leave-item:hover{box-shadow:0 3px 12px rgba(26,95,168,.1);}
-.leave-name{font-size:15px;font-weight:700;color:var(--text);}
-.leave-meta{font-size:13px;color:var(--sub);margin-top:4px;}
-.leave-badge{background:#e8f4ea;color:#2d7a38;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;}
-#leavesLoading{text-align:center;color:var(--sub);padding:40px;}
-#leavesEmpty{text-align:center;color:var(--sub);padding:40px;display:none;}
-@media(max-width:600px){
-  .field-row{grid-template-columns:1fr;}
-  .field-full{grid-column:span 1;}
-  .tab-btn{padding:12px 14px;font-size:14px;}
-  .login-card{padding:30px 20px;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+#loginSection { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+.login-card { background: var(--card); border-radius: 16px; box-shadow: 0 8px 32px rgba(26,95,168,0.15); padding: 40px 36px; width: 100%; max-width: 400px; text-align: center; }
+.login-logo { width: 64px; height: 64px; background: var(--primary); border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.login-logo svg { width: 36px; height: 36px; fill: none; stroke: white; stroke-width: 2; }
+.login-card h2 { color: var(--primary); font-size: 22px; margin-bottom: 6px; }
+.login-card p  { color: var(--sub); font-size: 14px; margin-bottom: 28px; }
+.form-group { margin-bottom: 18px; text-align: right; }
+.form-group label { display: block; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.form-group select, .form-group input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 15px; color: var(--text); background: white; transition: border-color .2s; }
+.form-group select:focus, .form-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,95,168,0.1); }
+.btn-primary { width: 100%; padding: 13px; background: var(--primary); color: white; border: none; border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.btn-primary:hover { background: var(--primary-d); }
+#loginError { color: var(--danger); font-size: 13px; margin-top: 12px; display: none; }
+
+#appSection { display: none; min-height: 100vh; }
+.app-header { background: var(--primary); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+.app-header-title { font-size: 17px; font-weight: 700; }
+.btn-logout { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 13px; margin-right: 12px; transition: background .2s; }
+.btn-logout:hover { background: rgba(255,255,255,0.3); }
+
+.tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 24px; }
+.tab-btn { padding: 14px 24px; border: none; background: none; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 500; color: var(--sub); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .2s; }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+.tab-content { display: none; padding: 24px; max-width: 900px; margin: 0 auto; }
+.tab-content.active { display: block; }
+
+.section-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; overflow: hidden; }
+.section-header { background: var(--sec-bg); padding: 14px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+.section-icon { width: 32px; height: 32px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.section-title { font-size: 15px; font-weight: 700; color: var(--primary); }
+.section-body { padding: 20px; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.field-full { grid-column: span 2; }
+.field-group label { display: block; font-size: 13px; font-weight: 500; color: var(--sub); margin-bottom: 6px; }
+.field-group input, .field-group select { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--text); background: white; transition: border-color .2s; }
+.field-group input:focus, .field-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,95,168,0.08); }
+.field-group input[readonly] { background: #f7fafc; color: var(--sub); cursor: not-allowed; }
+.field-group input.ar-input { direction: rtl; }
+.field-group input.en-input { direction: ltr; font-family: Arial, sans-serif; }
+
+.lang-badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 4px; font-weight: 600; }
+.ar-badge { background: #e8f4ea; color: #2d7a38; }
+.en-badge { background: #e8eef8; color: #1a5fa8; }
+
+.submit-area { text-align: center; margin-top: 8px; }
+.btn-submit { display: inline-flex; align-items: center; gap: 10px; padding: 14px 40px; background: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; transition: background .2s; box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
+.btn-submit:hover { background: #218838; }
+.btn-submit:disabled { background: #9ec9aa; cursor: not-allowed; box-shadow: none; }
+#submitStatus { margin-top: 16px; font-size: 15px; font-weight: 500; }
+#submitStatus.success { color: var(--accent); }
+#submitStatus.error { color: var(--danger); }
+.pdf-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 12px 28px; background: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 600; box-shadow: 0 3px 10px rgba(26,95,168,0.25); transition: background .2s; }
+.pdf-link:hover { background: var(--primary-d); }
+
+.leaves-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.leaves-header h3 { font-size: 17px; color: var(--primary); }
+.btn-refresh { padding: 8px 16px; background: var(--sec-bg); border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 14px; color: var(--primary); transition: all .2s; }
+.btn-refresh:hover { background: var(--primary); color: white; border-color: var(--primary); }
+.leave-item { background: var(--card); border: 1.5px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+.leave-item:hover { box-shadow: 0 3px 12px rgba(26,95,168,0.1); }
+.leave-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.leave-meta { font-size: 13px; color: var(--sub); margin-top: 4px; }
+.leave-badge { background: #e8f4ea; color: #2d7a38; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+#leavesLoading { text-align: center; color: var(--sub); padding: 40px; }
+#leavesEmpty   { text-align: center; color: var(--sub); padding: 40px; display: none; }
+
+@media (max-width: 600px) {
+  .field-row { grid-template-columns: 1fr; }
+  .field-full { grid-column: span 1; }
+  .tab-btn { padding: 12px 14px; font-size: 14px; }
+  .login-card { padding: 30px 20px; }
 }
 </style>
 </head>
 <body>
 
+<!-- ===== LOGIN ===== -->
 <div id="loginSection">
   <div class="login-card">
     <div class="login-logo">
@@ -108,6 +126,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
+<!-- ===== APP ===== -->
 <div id="appSection">
   <div class="app-header">
     <div class="app-header-title">🏥 بوابة الإجازات المرضية</div>
@@ -122,6 +141,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">📂 إجازاتي</button>
   </div>
 
+  <!-- تبويب إضافة إجازة -->
   <div class="tab-content active" id="tab-addLeave">
     <form id="leaveForm" onsubmit="submitLeave(event)">
 
@@ -175,13 +195,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
           </div>
           <div class="field-row">
-            <div class="field-group">
-              <label>جهة العمل بالعربي <span class="ar-badge">عربي</span></label>
-              <input type="text" id="employerAr" class="ar-input" placeholder="موظف حكومي / طالب جامعي">
-            </div>
-            <div class="field-group">
-              <label>جهة العمل بالإنجليزي <span class="opt-badge">اختياري</span></label>
-              <input type="text" id="employerEn" class="en-input" placeholder="Government Employee (optional)">
+            <div class="field-group field-full">
+              <label>جهة العمل <span class="ar-badge">Employer</span></label>
+              <input type="text" id="employer" class="ar-input" placeholder="موظف حكومي / طالب جامعي ...">
             </div>
           </div>
         </div>
@@ -259,7 +275,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
             <div class="field-group">
               <label>المدة <span class="ar-badge">تلقائي</span></label>
-              <input type="text" id="durDisplay" readonly placeholder="تُحسب تلقائياً">
+              <input type="text" id="durDisplay" readonly placeholder="تُحسب تلقائياً بعد إدخال التواريخ">
             </div>
           </div>
           <div class="field-row">
@@ -307,20 +323,25 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
           <div class="field-row">
             <div class="field-group field-full">
               <label>رقم الترخيص <span class="en-badge">License No.</span></label>
-              <input type="text" id="licenseNo" class="en-input" placeholder="رقم الترخيص 202504236756" required>
+              <input type="text" id="licenseNo" class="en-input"
+                     placeholder="رقم الترخيص 202504236756" required>
             </div>
           </div>
         </div>
       </div>
 
       <div class="submit-area">
-        <button type="submit" class="btn-submit" id="submitBtn">💾 حفظ وإصدار PDF</button>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          💾 حفظ وإصدار PDF
+        </button>
         <div id="submitStatus"></div>
         <div id="pdfArea"></div>
       </div>
+
     </form>
   </div>
 
+  <!-- تبويب إجازاتي -->
   <div class="tab-content" id="tab-myLeaves">
     <div class="leaves-header">
       <h3>📂 إجازاتي</h3>
@@ -334,161 +355,207 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec';
-let SESSION = { user:'', pass:'' };
+let SESSION = { user: '', pass: '' };
 
 function doLogin() {
-  var u=document.getElementById('loginUser').value;
-  var p=document.getElementById('loginPass').value;
-  var err=document.getElementById('loginError');
-  if(!u||!p){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ اختر المستخدم وأدخل كلمة المرور';return;}
-  if(p!=='Sl@2026@ksa'){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ كلمة المرور غير صحيحة';return;}
-  SESSION={user:u,pass:p};
-  document.getElementById('headerUser').textContent='👤 '+u;
-  document.getElementById('loginSection').style.display='none';
-  document.getElementById('appSection').style.display='block';
-  err.style.display='none';
-  document.getElementById('issueDate').value=todayISO();
+  var u = document.getElementById('loginUser').value;
+  var p = document.getElementById('loginPass').value;
+  var err = document.getElementById('loginError');
+  if (!u || !p) {
+    err.style.display='block';
+    err.style.color='var(--danger)';
+    err.textContent='❌ اختر المستخدم وأدخل كلمة المرور';
+    return;
+  }
+  if (p !== 'Sl@2026@ksa') {
+    err.style.display='block';
+    err.style.color='var(--danger)';
+    err.textContent='❌ كلمة المرور غير صحيحة';
+    return;
+  }
+  SESSION = { user: u, pass: p };
+  document.getElementById('headerUser').textContent = '👤 ' + u;
+  document.getElementById('loginSection').style.display = 'none';
+  document.getElementById('appSection').style.display   = 'block';
+  err.style.display = 'none';
+  document.getElementById('issueDate').value = todayISO();
 }
 
-function doLogout(){
-  SESSION={user:'',pass:''};
-  document.getElementById('loginSection').style.display='flex';
-  document.getElementById('appSection').style.display='none';
-  document.getElementById('loginPass').value='';
-  document.getElementById('loginUser').value='';
+function doLogout() {
+  SESSION = { user:'', pass:'' };
+  document.getElementById('loginSection').style.display = 'flex';
+  document.getElementById('appSection').style.display   = 'none';
+  document.getElementById('loginPass').value  = '';
+  document.getElementById('loginUser').value  = '';
   document.getElementById('leaveForm').reset();
 }
 
-function switchTab(name,btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
 }
 
-function todayISO(){return new Date().toISOString().split('T')[0];}
-
-function fmtDate(iso){
-  if(!iso)return'';
-  var d=new Date(iso);
-  return String(d.getDate()).padStart(2,'0')+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear();
+function todayISO() {
+  return new Date().toISOString().split('T')[0];
 }
 
-function toHijri(date){
-  var gD=date.getDate(),gM=date.getMonth()+1,gY=date.getFullYear();
+function fmtDate(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  return String(d.getDate()).padStart(2,'0') + '/' +
+         String(d.getMonth()+1).padStart(2,'0') + '/' +
+         d.getFullYear();
+}
+
+function toHijri(date) {
+  var gD=date.getDate(), gM=date.getMonth()+1, gY=date.getFullYear();
   var JD=Math.floor((1461*(gY+4800+Math.floor((gM-14)/12)))/4)+
          Math.floor((367*(gM-2-12*Math.floor((gM-14)/12)))/12)-
          Math.floor((3*(Math.floor((gY+4900+Math.floor((gM-14)/12))/100)))/4)+gD-32075;
-  var l=JD-1948440+10632,n=Math.floor((l-1)/10631);
+  var l=JD-1948440+10632, n=Math.floor((l-1)/10631);
   l=l-10631*n+354;
-  var j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);
-  l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;
-  var hM=Math.floor((24*l)/709),hD=l-Math.floor((709*hM)/24),hY=30*n+j-30;
-  return String(hD).padStart(2,'0')+'-'+String(hM).padStart(2,'0')+'-'+hY;
+  var j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+
+        Math.floor(l/5670)*Math.floor((43*l)/15238);
+  l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-
+    Math.floor(j/16)*Math.floor((15238*j)/43)+29;
+  var hM=Math.floor((24*l)/709),
+      hD=l-Math.floor((709*hM)/24),
+      hY=30*n+j-30;
+  return String(hD).padStart(2,'0')+'/'+String(hM).padStart(2,'0')+'/'+hY;
 }
 
-function calcAll(){
-  var a=document.getElementById('admAD').value;
-  var d=document.getElementById('disAD').value;
-  if(a)document.getElementById('admAH').value=toHijri(new Date(a));
-  if(d)document.getElementById('disAH').value=toHijri(new Date(d));
-  if(a&&d){
-    var diff=Math.round((new Date(d)-new Date(a))/(864e5))+1;
-    if(diff>0){
-      var ar=diff===1?diff+' يوم':diff+' أيام';
-      var en=diff===1?diff+' Day':diff+' Days';
-      document.getElementById('durDisplay').value=ar+' / '+en;
+function calcAll() {
+  var a = document.getElementById('admAD').value;
+  var d = document.getElementById('disAD').value;
+  if (a) document.getElementById('admAH').value = toHijri(new Date(a));
+  if (d) document.getElementById('disAH').value = toHijri(new Date(d));
+  if (a && d) {
+    var diff = Math.round((new Date(d)-new Date(a))/(864e5)) + 1;
+    if (diff > 0) {
+      var ar = diff===1 ? diff+' يوم' : diff+' أيام';
+      var en = diff===1 ? diff+' Day'  : diff+' Days';
+      document.getElementById('durDisplay').value = ar + ' / ' + en;
     }
   }
 }
 
-function syncPos(){
-  var v=document.getElementById('posAr').value;
-  var map={'استشاري':'Consultant','أخصائي':'Specialist','طبيب عام':'General Practitioner','ممارس صحي':'Health Practitioner','طبيب أسنان':'Dentist','طبيب مقيم':'Resident'};
-  document.getElementById('posManual').style.display=v==='أخرى'?'grid':'none';
-  if(v!=='أخرى')document.getElementById('posEn').value=map[v]||'';
+function syncPos() {
+  var v = document.getElementById('posAr').value;
+  var map = {
+    'استشاري':'Consultant','أخصائي':'Specialist',
+    'طبيب عام':'General Practitioner',
+    'ممارس صحي':'Health Practitioner',
+    'طبيب أسنان':'Dentist','طبيب مقيم':'Resident'
+  };
+  document.getElementById('posManual').style.display = v==='أخرى' ? 'grid' : 'none';
+  if (v !== 'أخرى') document.getElementById('posEn').value = map[v] || '';
 }
 
-async function submitLeave(e){
+async function submitLeave(e) {
   e.preventDefault();
-  var btn=document.getElementById('submitBtn');
-  var status=document.getElementById('submitStatus');
-  var pdfArea=document.getElementById('pdfArea');
-  var posArV=document.getElementById('posAr').value==='أخرى'?document.getElementById('posArM').value:document.getElementById('posAr').value;
-  var posEnV=document.getElementById('posEn').value==='Other'?document.getElementById('posEnM').value:document.getElementById('posEn').value;
-  var dur=document.getElementById('durDisplay').value||'';
-  var dp=dur.split(' / ');
+  var btn    = document.getElementById('submitBtn');
+  var status = document.getElementById('submitStatus');
+  var pdfArea= document.getElementById('pdfArea');
 
-  var payload={
-    action:'addLeave',
-    username:SESSION.user,
-    password:SESSION.pass,
-    leaveId:document.getElementById('leaveId').value.trim(),
-    nameAr:document.getElementById('nameAr').value.trim(),
-    nameEn:document.getElementById('nameEn').value.trim(),
-    iqama:document.getElementById('iqama').value.trim(),
-    durAr:dp[0]||'',
-    durEn:dp[1]||'',
-    docAr:document.getElementById('docAr').value.trim(),
-    docEn:document.getElementById('docEn').value.trim(),
-    posAr:posArV,
-    posEn:posEnV,
-    natAr:document.getElementById('natAr').value.trim(),
-    natEn:document.getElementById('natEn').value.trim(),
-    employerAr:document.getElementById('employerAr').value.trim(),
-    employerEn:document.getElementById('employerEn').value.trim(),
-    admissionAD:fmtDate(document.getElementById('admAD').value),
-    admissionAH:document.getElementById('admAH').value,
-    dischargeAD:fmtDate(document.getElementById('disAD').value),
-    dischargeAH:document.getElementById('disAH').value,
-    issueDate:fmtDate(document.getElementById('issueDate').value),
-    hospAr:document.getElementById('hospAr').value.trim(),
-    hospEn:document.getElementById('hospEn').value.trim(),
-    licenseNo:document.getElementById('licenseNo').value.trim()
+  var posArV = document.getElementById('posAr').value==='أخرى'
+    ? document.getElementById('posArM').value
+    : document.getElementById('posAr').value;
+  var posEnV = document.getElementById('posEn').value==='Other'
+    ? document.getElementById('posEnM').value
+    : document.getElementById('posEn').value;
+
+  var dur = document.getElementById('durDisplay').value || '';
+  var dp  = dur.split(' / ');
+
+  var payload = {
+    action:      'addLeave',
+    username:    SESSION.user,
+    password:    SESSION.pass,
+    leaveId:     document.getElementById('leaveId').value.trim(),
+    nameAr:      document.getElementById('nameAr').value.trim(),
+    nameEn:      document.getElementById('nameEn').value.trim(),
+    iqama:       document.getElementById('iqama').value.trim(),
+    durAr:       dp[0]||'',
+    durEn:       dp[1]||'',
+    docAr:       document.getElementById('docAr').value.trim(),
+    docEn:       document.getElementById('docEn').value.trim(),
+    posAr:       posArV,
+    posEn:       posEnV,
+    natAr:       document.getElementById('natAr').value.trim(),
+    natEn:       document.getElementById('natEn').value.trim(),
+    employer:    document.getElementById('employer').value.trim(),
+    admissionAD: fmtDate(document.getElementById('admAD').value),
+    admissionAH: document.getElementById('admAH').value,
+    dischargeAD: fmtDate(document.getElementById('disAD').value),
+    dischargeAH: document.getElementById('disAH').value,
+    issueDate:   fmtDate(document.getElementById('issueDate').value),
+    hospAr:      document.getElementById('hospAr').value.trim(),
+    hospEn:      document.getElementById('hospEn').value.trim(),
+    licenseNo:   document.getElementById('licenseNo').value.trim()
   };
 
-  btn.disabled=true;
-  btn.textContent='⏳ جاري الحفظ وإنشاء PDF...';
-  status.className='';status.textContent='';
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري الحفظ وإنشاء PDF...';
+  status.className=''; status.textContent='';
   pdfArea.innerHTML='';
 
-  try{
-    var res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
-    var result=await res.json();
-    if(result.status==='success'){
-      status.className='success';
-      status.textContent='✅ تم الحفظ بنجاح!';
-      pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
+  try {
+    var res    = await fetch(SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload)
+    });
+    var result = await res.json();
+
+    if (result.status === 'success') {
+      status.className = 'success';
+      status.textContent = '✅ تم الحفظ بنجاح!';
+      pdfArea.innerHTML =
+        '<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
       document.getElementById('leaveForm').reset();
-      document.getElementById('issueDate').value=todayISO();
-    }else{throw new Error(result.message||'خطأ غير معروف');}
-  }catch(err){
-    status.className='error';
-    status.textContent='❌ خطأ: '+err.message;
-  }finally{
-    btn.disabled=false;
-    btn.textContent='💾 حفظ وإصدار PDF';
+      document.getElementById('issueDate').value = todayISO();
+    } else {
+      throw new Error(result.message || 'خطأ غير معروف');
+    }
+  } catch(err) {
+    status.className = 'error';
+    status.textContent = '❌ خطأ: ' + err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '💾 حفظ وإصدار PDF';
   }
 }
 
-async function loadMyLeaves(){
-  var loading=document.getElementById('leavesLoading');
-  var empty=document.getElementById('leavesEmpty');
-  var list=document.getElementById('leavesList');
+async function loadMyLeaves() {
+  var loading = document.getElementById('leavesLoading');
+  var empty   = document.getElementById('leavesEmpty');
+  var list    = document.getElementById('leavesList');
   loading.style.display='block';
   empty.style.display='none';
   list.innerHTML='';
-  try{
-    var url=SCRIPT_URL+'?action=getLeaves&user='+SESSION.user+'&pwd='+encodeURIComponent(SESSION.pass);
-    var r=await fetch(url);
-    var res=await r.json();
+  try {
+    var url = SCRIPT_URL+'?action=getLeaves&user='+SESSION.user+
+              '&pwd='+encodeURIComponent(SESSION.pass);
+    var r   = await fetch(url);
+    var res = await r.json();
     loading.style.display='none';
-    if(res.status==='success'&&res.leaves.length>0){
+    if (res.status==='success' && res.leaves.length>0) {
       res.leaves.slice().reverse().forEach(function(lv){
-        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span></div>';
+        list.innerHTML +=
+          '<div class="leave-item">'+
+            '<div class="leave-info">'+
+              '<div class="leave-name">👤 '+lv.patientName+'</div>'+
+              '<div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div>'+
+            '</div>'+
+            '<span class="leave-badge">فعّال</span>'+
+          '</div>';
       });
-    }else{empty.style.display='block';}
-  }catch(err){
+    } else {
+      empty.style.display='block';
+    }
+  } catch(err) {
     loading.style.display='none';
     list.innerHTML='<p style="color:red;text-align:center">خطأ في التحميل</p>';
   }
