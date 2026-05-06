@@ -66,6 +66,7 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
 .lang-badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 4px; font-weight: 600; }
 .ar-badge { background: #e8f4ea; color: #2d7a38; }
 .en-badge { background: #e8eef8; color: #1a5fa8; }
+.opt-badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-right: 4px; font-weight: 600; background: #fff3cd; color: #856404; }
 
 .submit-area { text-align: center; margin-top: 8px; }
 .btn-submit { display: inline-flex; align-items: center; gap: 10px; padding: 14px 40px; background: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; transition: background .2s; box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
@@ -89,11 +90,15 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
 #leavesLoading { text-align: center; color: var(--sub); padding: 40px; }
 #leavesEmpty   { text-align: center; color: var(--sub); padding: 40px; display: none; }
 
+.date-inputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.date-inputs input { text-align: center; }
+
 @media (max-width: 600px) {
   .field-row { grid-template-columns: 1fr; }
   .field-full { grid-column: span 1; }
   .tab-btn { padding: 12px 14px; font-size: 14px; }
   .login-card { padding: 30px 20px; }
+  .date-inputs { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -194,10 +199,15 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
               <input type="text" id="natEn" class="en-input" placeholder="Saudi Arabia" required>
             </div>
           </div>
+          <!-- ✅ جهة العمل: عربي (إلزامي) + إنجليزي (اختياري) -->
           <div class="field-row">
-            <div class="field-group field-full">
-              <label>جهة العمل <span class="ar-badge">Employer</span></label>
-              <input type="text" id="employer" class="ar-input" placeholder="موظف حكومي / طالب جامعي ...">
+            <div class="field-group">
+              <label>جهة العمل بالعربي <span class="ar-badge">عربي</span></label>
+              <input type="text" id="employerAr" class="ar-input" placeholder="موظف حكومي / طالب جامعي">
+            </div>
+            <div class="field-group">
+              <label>جهة العمل بالإنجليزي <span class="opt-badge">اختياري</span></label>
+              <input type="text" id="employerEn" class="en-input" placeholder="Government Employee (optional)">
             </div>
           </div>
         </div>
@@ -271,7 +281,11 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
           <div class="field-row">
             <div class="field-group">
               <label>تاريخ الإصدار <span class="en-badge">Issue Date</span></label>
-              <input type="date" id="issueDate" required>
+              <div class="date-inputs">
+                <input type="number" id="issueDay" placeholder="يوم" min="1" max="31" required>
+                <input type="number" id="issueMonth" placeholder="شهر" min="1" max="12" required>
+                <input type="number" id="issueYear" placeholder="سنة" min="2020" max="2030" required>
+              </div>
             </div>
             <div class="field-group">
               <label>المدة <span class="ar-badge">تلقائي</span></label>
@@ -281,7 +295,11 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
           <div class="field-row">
             <div class="field-group">
               <label>تاريخ البداية بالميلادي <span class="en-badge">Admission AD</span></label>
-              <input type="date" id="admAD" required onchange="calcAll()">
+              <div class="date-inputs">
+                <input type="number" id="admDay" placeholder="يوم" min="1" max="31" required onchange="calcAll()">
+                <input type="number" id="admMonth" placeholder="شهر" min="1" max="12" required onchange="calcAll()">
+                <input type="number" id="admYear" placeholder="سنة" min="2020" max="2030" required onchange="calcAll()">
+              </div>
             </div>
             <div class="field-group">
               <label>تاريخ البداية بالهجري <span class="ar-badge">تلقائي</span></label>
@@ -291,7 +309,11 @@ body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--t
           <div class="field-row">
             <div class="field-group">
               <label>تاريخ النهاية بالميلادي <span class="en-badge">Discharge AD</span></label>
-              <input type="date" id="disAD" required onchange="calcAll()">
+              <div class="date-inputs">
+                <input type="number" id="disDay" placeholder="يوم" min="1" max="31" required onchange="calcAll()">
+                <input type="number" id="disMonth" placeholder="شهر" min="1" max="12" required onchange="calcAll()">
+                <input type="number" id="disYear" placeholder="سنة" min="2020" max="2030" required onchange="calcAll()">
+              </div>
             </div>
             <div class="field-group">
               <label>تاريخ النهاية بالهجري <span class="ar-badge">تلقائي</span></label>
@@ -378,7 +400,7 @@ function doLogin() {
   document.getElementById('loginSection').style.display = 'none';
   document.getElementById('appSection').style.display   = 'block';
   err.style.display = 'none';
-  document.getElementById('issueDate').value = todayISO();
+  setTodayDate();
 }
 
 function doLogout() {
@@ -397,19 +419,30 @@ function switchTab(name, btn) {
   btn.classList.add('active');
 }
 
-function todayISO() {
-  return new Date().toISOString().split('T')[0];
+function setTodayDate() {
+  var today = new Date();
+  document.getElementById('issueDay').value = today.getDate();
+  document.getElementById('issueMonth').value = today.getMonth() + 1;
+  document.getElementById('issueYear').value = today.getFullYear();
 }
 
-function fmtDate(iso) {
-  if (!iso) return '';
-  var d = new Date(iso);
-  return String(d.getDate()).padStart(2,'0') + '-' +
-         String(d.getMonth()+1).padStart(2,'0') + '-' +
-         d.getFullYear();
+function getDateFromInputs(dayId, monthId, yearId) {
+  var day = document.getElementById(dayId).value;
+  var month = document.getElementById(monthId).value;
+  var year = document.getElementById(yearId).value;
+  if (day && month && year) {
+    return new Date(year, month - 1, day);
+  }
+  return null;
+}
+
+function fmtDate(day, month, year) {
+  if (!day || !month || !year) return '';
+  return String(day).padStart(2,'0') + '-' + String(month).padStart(2,'0') + '-' + year;
 }
 
 function toHijri(date) {
+  if (!date) return '';
   var gD=date.getDate(), gM=date.getMonth()+1, gY=date.getFullYear();
   var JD=Math.floor((1461*(gY+4800+Math.floor((gM-14)/12)))/4)+
          Math.floor((367*(gM-2-12*Math.floor((gM-14)/12)))/12)-
@@ -423,16 +456,22 @@ function toHijri(date) {
   var hM=Math.floor((24*l)/709),
       hD=l-Math.floor((709*hM)/24),
       hY=30*n+j-30;
-  return hY+'-'+String(hM).padStart(2,'0')+'-'+String(hD).padStart(2,'0');
+  return hY + '-' + String(hM).padStart(2,'0') + '-' + String(hD).padStart(2,'0');
 }
 
 function calcAll() {
-  var a = document.getElementById('admAD').value;
-  var d = document.getElementById('disAD').value;
-  if (a) document.getElementById('admAH').value = toHijri(new Date(a));
-  if (d) document.getElementById('disAH').value = toHijri(new Date(d));
-  if (a && d) {
-    var diff = Math.round((new Date(d)-new Date(a))/(864e5)) + 1;
+  var admDate = getDateFromInputs('admDay', 'admMonth', 'admYear');
+  var disDate = getDateFromInputs('disDay', 'disMonth', 'disYear');
+  
+  if (admDate) {
+    document.getElementById('admAH').value = toHijri(admDate);
+  }
+  if (disDate) {
+    document.getElementById('disAH').value = toHijri(disDate);
+  }
+  
+  if (admDate && disDate) {
+    var diff = Math.round((disDate - admDate)/(864e5)) + 1;
     if (diff > 0) {
       var ar = diff===1 ? diff+' يوم' : diff+' أيام';
       var en = diff===1 ? diff+' Day'  : diff+' Days';
@@ -485,12 +524,13 @@ async function submitLeave(e) {
     posEn:       posEnV,
     natAr:       document.getElementById('natAr').value.trim(),
     natEn:       document.getElementById('natEn').value.trim(),
-    employer:    document.getElementById('employer').value.trim(),
-    admissionAD: fmtDate(document.getElementById('admAD').value),
+    employerAr:  document.getElementById('employerAr').value.trim() || '',
+    employerEn:  document.getElementById('employerEn').value.trim() || '',
+    admissionAD: fmtDate(document.getElementById('admDay').value, document.getElementById('admMonth').value, document.getElementById('admYear').value),
     admissionAH: document.getElementById('admAH').value,
-    dischargeAD: fmtDate(document.getElementById('disAD').value),
+    dischargeAD: fmtDate(document.getElementById('disDay').value, document.getElementById('disMonth').value, document.getElementById('disYear').value),
     dischargeAH: document.getElementById('disAH').value,
-    issueDate:   fmtDate(document.getElementById('issueDate').value),
+    issueDate:   fmtDate(document.getElementById('issueDay').value, document.getElementById('issueMonth').value, document.getElementById('issueYear').value),
     hospAr:      document.getElementById('hospAr').value.trim(),
     hospEn:      document.getElementById('hospEn').value.trim(),
     licenseNo:   document.getElementById('licenseNo').value.trim()
@@ -515,7 +555,7 @@ async function submitLeave(e) {
       pdfArea.innerHTML =
         '<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
       document.getElementById('leaveForm').reset();
-      document.getElementById('issueDate').value = todayISO();
+      setTodayDate();
     } else {
       throw new Error(result.message || 'خطأ غير معروف');
     }
