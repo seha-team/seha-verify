@@ -352,7 +352,7 @@ function doLogin() {
 }
 
 function doLogout(){
-  SESSION={user:'',pass:''};
+  SESSION={user:'', pass:''};
   document.getElementById('loginSection').style.display='flex';
   document.getElementById('appSection').style.display='none';
   document.getElementById('loginPass').value='';
@@ -438,11 +438,11 @@ async function submitLeave(e){
     natEn:document.getElementById('natEn').value.trim(),
     employerAr:document.getElementById('employerAr').value.trim(),
     employerEn:document.getElementById('employerEn').value.trim(),
-    admissionAD:fmtDate(document.getElementById('admAD').value),
-    admissionAH:document.getElementById('admAH').value,
-    dischargeAD:fmtDate(document.getElementById('disAD').value),
-    dischargeAH:document.getElementById('disAH').value,
-    issueDate:fmtDate(document.getElementById('issueDate').value),
+    admissionAD:document.getElementById('admAD').value, // إرسال كما هو كنص
+    admissionAH:document.getElementById('admAH').value, // إرسال كما هو كنص
+    dischargeAD:document.getElementById('disAD').value, // إرسال كما هو كنص
+    dischargeAH:document.getElementById('disAH').value, // إرسال كما هو كنص
+    issueDate:document.getElementById('issueDate').value, // إرسال كما هو كنص
     hospAr:document.getElementById('hospAr').value.trim(),
     hospEn:document.getElementById('hospEn').value.trim(),
     licenseNo:document.getElementById('licenseNo').value.trim()
@@ -496,3 +496,4 @@ async function loadMyLeaves(){
 }
 </script>
 </body>
+</html>
