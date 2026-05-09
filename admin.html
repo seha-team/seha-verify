@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بوابة إدخال الإجازات المرضية</title>
+<title>بوابة إدخال الإجازات المرضية - نسخة ذكية</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -53,6 +52,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .ar-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f4ea;color:#2d7a38;}
 .en-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8eef8;color:#1a5fa8;}
 .opt-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
+.smart-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f5e8;color:#2d7a38;}
 .submit-area{text-align:center;margin-top:8px;}
 .btn-submit{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--accent);color:white;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:background .2s;box-shadow:0 4px 12px rgba(40,167,69,.3);}
 .btn-submit:hover{background:#218838;}
@@ -73,6 +73,15 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .leave-badge{background:#e8f4ea;color:#2d7a38;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;}
 #leavesLoading{text-align:center;color:var(--sub);padding:40px;}
 #leavesEmpty{text-align:center;color:var(--sub);padding:40px;display:none;}
+/* Smart Translation Styles */
+.translation-controls{display:flex;gap:8px;margin-bottom:8px;}
+.btn-translate{padding:6px 12px;background:#28a745;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:background .2s;}
+.btn-translate:hover{background:#218838;}
+.btn-translate:disabled{background:#6c757d;cursor:not-allowed;}
+.search-suggestions{position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+.search-suggestion{padding:10px 13px;cursor:pointer;border-bottom:1px solid #f0f0f0;transition:background .2s;}
+.search-suggestion:hover{background:#f8f9fa;}
+.search-suggestion:last-child{border-bottom:none;}
 @media(max-width:600px){
   .field-row{grid-template-columns:1fr;}
   .field-full{grid-column:span 1;}
@@ -88,7 +97,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     <div class="login-logo">
       <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
     </div>
-    <h2>بوابة الإجازات المرضية</h2>
+    <h2>بوابة الإجازات المرضية - ذكية</h2>
     <p>سجّل دخولك للمتابعة</p>
     <div class="form-group">
       <label>اسم المستخدم</label>
@@ -111,7 +120,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
 <div id="appSection">
   <div class="app-header">
-    <div class="app-header-title">🏥 بوابة الإجازات المرضية</div>
+    <div class="app-header-title">🏥 بوابة الإجازات المرضية - ذكية</div>
     <div style="display:flex;align-items:center">
       <span style="font-size:14px;opacity:.85;margin-left:12px" id="headerUser"></span>
       <button class="btn-logout" onclick="doLogout()">خروج</button>
@@ -141,12 +150,15 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
           </div>
           <div class="field-row">
             <div class="field-group">
-              <label>اسم المريض بالعربي <span class="ar-badge">عربي</span></label>
-              <input type="text" id="nameAr" class="ar-input" placeholder="احمد حبيب عبدالحميد" required>
+              <label>اسم المريض بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
+              <div class="translation-controls">
+                <input type="text" id="nameAr" class="ar-input" placeholder="احمد حبيب عبدالحميد" required oninput="autoTranslate('name')">
+                <button type="button" class="btn-translate" onclick="autoTranslate('name')">🔄 ترجم</button>
+              </div>
             </div>
             <div class="field-group">
               <label>اسم المريض بالإنجليزي <span class="en-badge">English</span></label>
-              <input type="text" id="nameEn" class="en-input" placeholder="Ahmed Habeeb Abdulhamed" required>
+              <input type="text" id="nameEn" class="en-input" placeholder="AHMED HABEEB ABDULHAMID" required>
             </div>
           </div>
           <div class="field-row">
@@ -172,10 +184,9 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
             <div class="field-group">
               <label>الجنسية بالإنجليزي <span class="en-badge">English</span></label>
-              <input type="text" id="natEn" class="en-input" placeholder="Saudi Arabia" required>
+              <input type="text" id="natEn" class="en-input" placeholder="SAUDI ARABIA" required>
             </div>
           </div>
-          <!-- ✅ جهة العمل: عربي (إلزامي) + إنجليزي (اختياري) -->
           <div class="field-row">
             <div class="field-group">
               <label>جهة العمل بالعربي <span class="ar-badge">عربي</span></label>
@@ -183,7 +194,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
             <div class="field-group">
               <label>جهة العمل بالإنجليزي <span class="opt-badge">اختياري</span></label>
-              <input type="text" id="employerEn" class="en-input" placeholder="Government Employee (optional)">
+              <input type="text" id="employerEn" class="en-input" placeholder="GOVERNMENT EMPLOYEE">
             </div>
           </div>
         </div>
@@ -198,12 +209,15 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         <div class="section-body">
           <div class="field-row">
             <div class="field-group">
-              <label>اسم الممارس بالعربي <span class="ar-badge">عربي</span></label>
-              <input type="text" id="docAr" class="ar-input" placeholder="د. حبيب الصحاف" required>
+              <label>اسم الممارس بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
+              <div class="translation-controls">
+                <input type="text" id="docAr" class="ar-input" placeholder="د/ حبيب الصحاف" required oninput="autoTranslate('doctor')">
+                <button type="button" class="btn-translate" onclick="autoTranslate('doctor')">🔄 ترجم</button>
+              </div>
             </div>
             <div class="field-group">
               <label>اسم الممارس بالإنجليزي <span class="en-badge">English</span></label>
-              <input type="text" id="docEn" class="en-input" placeholder="Dr. Habeeb Alsahaf" required>
+              <input type="text" id="docEn" class="en-input" placeholder="DR. HABEEB ALSAHAF" required>
             </div>
           </div>
           <div class="field-row">
@@ -295,15 +309,19 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
         <div class="section-body">
           <div class="field-row">
-            <div class="field-group field-full">
-              <label>اسم المستشفى بالعربي <span class="ar-badge">عربي</span></label>
-              <input type="text" id="hospAr" class="ar-input" placeholder="مستشفى الملك فهد" required>
+            <div class="field-group field-full" style="position:relative;">
+              <label>اسم المستشفى بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
+              <div class="translation-controls">
+                <input type="text" id="hospAr" class="ar-input" placeholder="مستشفى الملك فهد" required oninput="searchHospital()" onfocus="showHospitalSuggestions()">
+                <button type="button" class="btn-translate" onclick="autoTranslate('hospital')">🔄 ترجم</button>
+              </div>
+              <div id="hospitalSuggestions" class="search-suggestions" style="display:none;"></div>
             </div>
           </div>
           <div class="field-row">
             <div class="field-group field-full">
               <label>اسم المستشفى بالإنجليزي <span class="en-badge">English</span></label>
-              <input type="text" id="hospEn" class="en-input" placeholder="King Fahad Hospital" required>
+              <input type="text" id="hospEn" class="en-input" placeholder="KING FAHAD HOSPITAL" required>
             </div>
           </div>
           <div class="field-row">
@@ -338,6 +356,165 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec';
 let SESSION = { user:'', pass:'' };
 
+// Smart Translation System
+const TRANSLATION_CACHE = {};
+let isTranslating = false;
+
+// Google Translate API simulation (using free translation service)
+async function translateText(text, fromLang = 'ar', toLang = 'en') {
+  if (TRANSLATION_CACHE[text]) return TRANSLATION_CACHE[text];
+  
+  try {
+    // Using MyMemory API (free translation service)
+    const apiKey = ''; // Free API key
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.responseStatus === 200) {
+      const translated = data.responseData.translatedText;
+      TRANSLATION_CACHE[text] = translated;
+      return translated;
+    }
+  } catch (error) {
+    console.log('Translation API error, using fallback');
+  }
+  
+  // Fallback: simple character mapping for Arabic names
+  return fallbackTranslate(text);
+}
+
+function fallbackTranslate(arabicText) {
+  const mapping = {
+    'أ': 'A', 'ب': 'B', 'ت': 'T', 'ث': 'TH', 'ج': 'J', 'ح': 'H', 'خ': 'KH', 'د': 'D',
+    'ذ': 'DH', 'ر': 'R', 'ز': 'Z', 'س': 'S', 'ش': 'SH', 'ص': 'S', 'ض': 'D', 'ط': 'T',
+    'ظ': 'DH', 'ع': 'A', 'غ': 'GH', 'ف': 'F', 'ق': 'Q', 'ك': 'K', 'ل': 'L', 'م': 'M',
+    'ن': 'N', 'ه': 'H', 'و': 'W', 'ي': 'Y', 'ى': 'A', 'ة': 'H', 'ء': 'A',
+    'إ': 'A', 'آ': 'A', 'ؤ': 'U', 'ئ': 'E'
+  };
+  
+  return arabicText.split('').map(char => mapping[char] || char).join('').toUpperCase();
+}
+
+async function autoTranslate(field) {
+  if (isTranslating) return;
+  
+  const arField = document.getElementById(field === 'name' ? 'nameAr' : field === 'doctor' ? 'docAr' : 'hospAr');
+  const enField = document.getElementById(field === 'name' ? 'nameEn' : field === 'doctor' ? 'docEn' : 'hospEn');
+  const translateBtn = arField.parentElement.querySelector('.btn-translate');
+  
+  if (!arField.value.trim()) return;
+  
+  isTranslating = true;
+  translateBtn.disabled = true;
+  translateBtn.textContent = '⏳ جاري الترجمة...';
+  
+  try {
+    let translated = await translateText(arField.value.trim());
+    
+    // Special handling for doctor names
+    if (field === 'doctor') {
+      // Add DR prefix if Arabic starts with د/
+      if (arField.value.trim().startsWith('د/')) {
+        translated = 'DR. ' + translated.replace(/^DR\.\s*/, '');
+      } else {
+        translated = 'DR. ' + translated;
+      }
+    }
+    
+    // Make ALL CAPS
+    translated = translated.toUpperCase();
+    
+    enField.value = translated;
+    translateBtn.textContent = '✅ تم';
+    
+    setTimeout(() => {
+      translateBtn.textContent = '🔄 ترجم';
+      translateBtn.disabled = false;
+    }, 2000);
+    
+  } catch (error) {
+    translateBtn.textContent = '❌ خطأ';
+    setTimeout(() => {
+      translateBtn.textContent = '🔄 ترجم';
+      translateBtn.disabled = false;
+    }, 2000);
+  } finally {
+    isTranslating = false;
+  }
+}
+
+// Hospital search functionality
+let hospitalSearchTimeout;
+const HOSPITAL_DATABASE = [
+  { ar: 'مستشفى الملك فهد', en: 'KING FAHAD HOSPITAL' },
+  { ar: 'مستشفى الملك فيصل', en: 'KING FAISAL HOSPITAL' },
+  { ar: 'مستشفى الملك سعود', en: 'KING SAUD HOSPITAL' },
+  { ar: 'مستشفى الأمير محمد', en: 'PRINCE MOHAMMED HOSPITAL' },
+  { ar: 'مستشفى القوات المسلحة', en: 'ARMED FORCES HOSPITAL' },
+  { ar: 'مستشفى الحرس الوطني', en: 'NATIONAL GUARD HOSPITAL' },
+  { ar: 'مستشفى الأمل', en: 'HOPE HOSPITAL' },
+  { ar: 'مستشفى الرحمة', en: 'MERCY HOSPITAL' },
+  { ar: 'مستشفى النور', en: 'LIGHT HOSPITAL' },
+  { ar: 'المركز الطبي', en: 'MEDICAL CENTER' }
+];
+
+function searchHospital() {
+  clearTimeout(hospitalSearchTimeout);
+  const searchInput = document.getElementById('hospAr');
+  const suggestionsDiv = document.getElementById('hospitalSuggestions');
+  
+  hospitalSearchTimeout = setTimeout(() => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm.length < 2) {
+      suggestionsDiv.style.display = 'none';
+      return;
+    }
+    
+    const matches = HOSPITAL_DATABASE.filter(h => 
+      h.ar.toLowerCase().includes(searchTerm) || 
+      h.en.toLowerCase().includes(searchTerm)
+    );
+    
+    if (matches.length > 0) {
+      suggestionsDiv.innerHTML = matches.map(h => 
+        `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+      ).join('');
+      suggestionsDiv.style.display = 'block';
+    } else {
+      suggestionsDiv.style.display = 'none';
+    }
+  }, 300);
+}
+
+function showHospitalSuggestions() {
+  const searchInput = document.getElementById('hospAr');
+  const suggestionsDiv = document.getElementById('hospitalSuggestions');
+  
+  if (searchInput.value.trim().length === 0) {
+    // Show all hospitals when input is empty
+    suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
+      `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+    ).join('');
+    suggestionsDiv.style.display = 'block';
+  }
+}
+
+function selectHospital(arName, enName) {
+  document.getElementById('hospAr').value = arName;
+  document.getElementById('hospEn').value = enName;
+  document.getElementById('hospitalSuggestions').style.display = 'none';
+}
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.field-group')) {
+    document.getElementById('hospitalSuggestions').style.display = 'none';
+  }
+});
+
+// Original functions
 function doLogin() {
   var u=document.getElementById('loginUser').value;
   var p=document.getElementById('loginPass').value;
@@ -439,11 +616,11 @@ async function submitLeave(e){
     natEn:document.getElementById('natEn').value.trim(),
     employerAr:document.getElementById('employerAr').value.trim(),
     employerEn:document.getElementById('employerEn').value.trim(),
-    admissionAD:document.getElementById('admAD').value, // إرسال كما هو كنص
-    admissionAH:document.getElementById('admAH').value, // إرسال كما هو كنص
-    dischargeAD:document.getElementById('disAD').value, // إرسال كما هو كنص
-    dischargeAH:document.getElementById('disAH').value, // إرسال كما هو كنص
-    issueDate:document.getElementById('issueDate').value, // إرسال كما هو كنص
+    admissionAD:document.getElementById('admAD').value,
+    admissionAH:document.getElementById('admAH').value,
+    dischargeAD:document.getElementById('disAD').value,
+    dischargeAH:document.getElementById('disAH').value,
+    issueDate:document.getElementById('issueDate').value,
     hospAr:document.getElementById('hospAr').value.trim(),
     hospEn:document.getElementById('hospEn').value.trim(),
     licenseNo:document.getElementById('licenseNo').value.trim()
