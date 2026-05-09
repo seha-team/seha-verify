@@ -515,7 +515,7 @@ document.addEventListener('click', function(e) {
 });
 
 // Original functions
-function doLogin() {
+function doLogin(){
   var u=document.getElementById('loginUser').value;
   var p=document.getElementById('loginPass').value;
   var err=document.getElementById('loginError');
@@ -527,6 +527,24 @@ function doLogin() {
   document.getElementById('appSection').style.display='block';
   err.style.display='none';
   document.getElementById('issueDate').value=todayISO();
+  generateLeaveId();
+}
+
+// Function to generate automatic Leave ID
+async function generateLeaveId() {
+  try {
+    var url = SCRIPT_URL + '?action=generateLeaveId&prefix=PSL';
+    var response = await fetch(url);
+    var result = await response.json();
+    
+    if (result.status === 'success') {
+      document.getElementById('leaveId').value = result.leaveId;
+      document.getElementById('leaveId').readOnly = true;
+      document.getElementById('leaveId').style.background = '#f8f9fa';
+    }
+  } catch (error) {
+    console.log('Error generating Leave ID:', error);
+  }
 }
 
 function doLogout(){
