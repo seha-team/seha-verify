@@ -695,23 +695,99 @@ async function loadMyLeaves(){
 
 function shareLeave(leaveId, patientName, issueDate) {
   try {
-    // Create share text for specific leave
-    var shareText = '📄 بيانات الإجازة:\n\n' +
-                   '👤 اسم المريض: ' + patientName + '\n' +
-                   '🆔 رقم الإجازة: ' + leaveId + '\n' +
-                   '� تاريخ الإصدار: ' + issueDate;
+    // Show share options modal
+    var modal = document.createElement('div');
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
     
-    // Copy to clipboard
-    navigator.clipboard.writeText(shareText).then(function() {
-      alert('✅ تم نسخ بيانات الإجازة للحافظة\nيمكنك لصقها في أي مكان');
-    }).catch(function(err) {
-      console.error('Failed to copy: ', err);
-      alert('❌ فشل في نسخ البيانات');
-    });
+    var modalContent = document.createElement('div');
+    modalContent.style.cssText = 'background:white;border-radius:12px;padding:24px;max-width:400px;width:90%;text-align:center;';
+    
+    modalContent.innerHTML = `
+      <h3 style="margin-bottom:20px;color:#1a5fa8;">📤 خيارات المشاركة</h3>
+      <div style="display:grid;gap:12px;">
+        <button onclick="copyLeaveData('${leaveId}', '${patientName}', '${issueDate}')" style="background:#007bff;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📋 نسخ البيانات
+        </button>
+        <button onclick="downloadPDF('${leaveId}')" style="background:#28a745;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📥 تحميل PDF
+        </button>
+        <button onclick="shareToTelegram('${leaveId}', '${patientName}', '${issueDate}')" style="background:#0088cc;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📱 مشاركة عبر Telegram
+        </button>
+        <button onclick="closeShareModal()" style="background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          إلغاء
+        </button>
+      </div>
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
     
   } catch (error) {
     console.error('Share error:', error);
     alert('❌ حدث خطأ أثناء المشاركة');
+  }
+}
+
+function copyLeaveData(leaveId, patientName, issueDate) {
+  try {
+    var shareText = '📄 بيانات الإجازة:\n\n' +
+                   '👤 اسم المريض: ' + patientName + '\n' +
+                   '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                   '📅 تاريخ الإصدار: ' + issueDate;
+    
+    navigator.clipboard.writeText(shareText).then(function() {
+      alert('✅ تم نسخ بيانات الإجازة للحافظة\nيمكنك لصقها في أي مكان');
+      closeShareModal();
+    }).catch(function(err) {
+      console.error('Failed to copy: ', err);
+      alert('❌ فشل في نسخ البيانات');
+    });
+  } catch (error) {
+    console.error('Copy error:', error);
+    alert('❌ حدث خطأ أثناء النسخ');
+  }
+}
+
+function downloadPDF(leaveId) {
+  try {
+    // Find PDF link for the specific leave
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
+    
+    // Create download link
+    var link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'Sick-Leave-' + leaveId + '.pdf';
+    link.click();
+    
+    closeShareModal();
+  } catch (error) {
+    console.error('Download error:', error);
+    alert('❌ حدث خطأ أثناء تحميل PDF');
+  }
+}
+
+function shareToTelegram(leaveId, patientName, issueDate) {
+  try {
+    var shareText = '📄 بيانات الإجازة:\n\n' +
+                   '👤 اسم المريض: ' + patientName + '\n' +
+                   '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                   '📅 تاريخ الإصدار: ' + issueDate;
+    
+    var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(SCRIPT_URL + '?action=viewLeave&leaveId=' + leaveId) + '&text=' + encodeURIComponent(shareText);
+    
+    window.open(telegramUrl, '_blank');
+    closeShareModal();
+  } catch (error) {
+    console.error('Telegram share error:', error);
+    alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
+  }
+}
+
+function closeShareModal() {
+  var modal = document.querySelector('div[style*="position:fixed"]');
+  if (modal) {
+    document.body.removeChild(modal);
   }
 }
 </script>
