@@ -714,6 +714,9 @@ function shareLeave(leaveId, patientName, issueDate) {
         <button onclick="shareToTelegram('${leaveId}', '${patientName}', '${issueDate}')" style="background:#0088cc;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
           📱 مشاركة عبر Telegram
         </button>
+        <button onclick="shareToWhatsApp('${leaveId}', '${patientName}', '${issueDate}')" style="background:#25D366;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          💬 مشاركة عبر WhatsApp
+        </button>
         <button onclick="closeShareModal()" style="background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
           إلغاء
         </button>
@@ -751,16 +754,36 @@ function copyLeaveData(leaveId, patientName, issueDate) {
 
 function downloadPDF(leaveId) {
   try {
-    // Find PDF link for the specific leave
+    // Show loading message
+    alert('⏳ جاري تحميل ملف PDF...');
+    
+    // Get PDF URL from backend
     var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
     
-    // Create download link
-    var link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = 'Sick-Leave-' + leaveId + '.pdf';
-    link.click();
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create download link with actual PDF URL
+          var link = document.createElement('a');
+          link.href = data.pdfUrl;
+          link.download = 'Sick-Leave-' + leaveId + '.pdf';
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          closeShareModal();
+          alert('✅ تم تحميل ملف PDF بنجاح');
+        } else {
+          alert('❌ فشل في تحميل PDF: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Download error:', error);
+        alert('❌ حدث خطأ أثناء تحميل PDF');
+      });
     
-    closeShareModal();
   } catch (error) {
     console.error('Download error:', error);
     alert('❌ حدث خطأ أثناء تحميل PDF');
@@ -769,18 +792,79 @@ function downloadPDF(leaveId) {
 
 function shareToTelegram(leaveId, patientName, issueDate) {
   try {
-    var shareText = '📄 بيانات الإجازة:\n\n' +
-                   '👤 اسم المريض: ' + patientName + '\n' +
-                   '🆔 رقم الإجازة: ' + leaveId + '\n' +
-                   '📅 تاريخ الإصدار: ' + issueDate;
+    alert('⏳ جاري تحميل ملف PDF للمشاركة...');
     
-    var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(SCRIPT_URL + '?action=viewLeave&leaveId=' + leaveId) + '&text=' + encodeURIComponent(shareText);
+    // Get PDF URL first
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
     
-    window.open(telegramUrl, '_blank');
-    closeShareModal();
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create share text with PDF link
+          var shareText = '📄 بيانات الإجازة:\n\n' +
+                         '👤 اسم المريض: ' + patientName + '\n' +
+                         '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                         '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+                         '📥 رابط تحميل PDF: ' + data.pdfUrl;
+          
+          // Share to Telegram with PDF link
+          var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '&text=' + encodeURIComponent(shareText);
+          window.open(telegramUrl, '_blank');
+          
+          closeShareModal();
+          alert('✅ تم فتح Telegram للمشاركة');
+        } else {
+          alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Telegram share error:', error);
+        alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
+      });
+    
   } catch (error) {
     console.error('Telegram share error:', error);
     alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
+  }
+}
+
+function shareToWhatsApp(leaveId, patientName, issueDate) {
+  try {
+    alert('⏳ جاري تحميل ملف PDF للمشاركة...');
+    
+    // Get PDF URL first
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
+    
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create share text with PDF link
+          var shareText = '📄 بيانات الإجازة:\n\n' +
+                         '👤 اسم المريض: ' + patientName + '\n' +
+                         '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                         '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+                         '📥 رابط تحميل PDF: ' + data.pdfUrl;
+          
+          // Share to WhatsApp with PDF link
+          var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+          window.open(whatsappUrl, '_blank');
+          
+          closeShareModal();
+          alert('✅ تم فتح WhatsApp للمشاركة');
+        } else {
+          alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('WhatsApp share error:', error);
+        alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
+      });
+    
+  } catch (error) {
+    console.error('WhatsApp share error:', error);
+    alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
   }
 }
 
