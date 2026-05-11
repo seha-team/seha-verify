@@ -479,7 +479,7 @@ function searchHospital() {
     
     if (matches.length > 0) {
       suggestionsDiv.innerHTML = matches.map(h => 
-        `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+        `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
       ).join('');
       suggestionsDiv.style.display = 'block';
     } else {
@@ -495,7 +495,7 @@ function showHospitalSuggestions() {
   if (searchInput.value.trim().length === 0) {
     // Show all hospitals when input is empty
     suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
-      `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+      `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
     ).join('');
     suggestionsDiv.style.display = 'block';
   }
@@ -801,19 +801,20 @@ function shareToTelegram(leaveId, patientName, issueDate) {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          // Create share text with PDF link
+          // Create share text with PDF download instructions
           var shareText = '📄 بيانات الإجازة:\n\n' +
                          '👤 اسم المريض: ' + patientName + '\n' +
                          '🆔 رقم الإجازة: ' + leaveId + '\n' +
                          '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
-                         '📥 رابط تحميل PDF: ' + data.pdfUrl;
+                         '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
+                         '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
           
-          // Share to Telegram with PDF link
+          // Share to Telegram with enhanced message
           var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '&text=' + encodeURIComponent(shareText);
           window.open(telegramUrl, '_blank');
           
           closeShareModal();
-          alert('✅ تم فتح Telegram للمشاركة');
+          alert('✅ تم فتح Telegram للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
         } else {
           alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
         }
@@ -840,19 +841,20 @@ function shareToWhatsApp(leaveId, patientName, issueDate) {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          // Create share text with PDF link
+          // Create share text with PDF download instructions
           var shareText = '📄 بيانات الإجازة:\n\n' +
                          '👤 اسم المريض: ' + patientName + '\n' +
                          '🆔 رقم الإجازة: ' + leaveId + '\n' +
                          '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
-                         '📥 رابط تحميل PDF: ' + data.pdfUrl;
+                         '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
+                         '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
           
           // Share to WhatsApp with PDF link
           var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
           window.open(whatsappUrl, '_blank');
           
           closeShareModal();
-          alert('✅ تم فتح WhatsApp للمشاركة');
+          alert('✅ تم فتح WhatsApp للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
         } else {
           alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
         }
