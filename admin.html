@@ -9,8 +9,7 @@
 :root {
   --primary:#1a5fa8; --primary-d:#134a87; --accent:#28a745;
   --danger:#dc3545; --bg:#f0f4f8; --card:#ffffff;
-  --border:#d1c
-e8; --text:#2d3748; --sub:#6b7a8d; --sec-bg:#eef4fb;
+  --border:#d1dce8; --text:#2d3748; --sub:#6b7a8d; --sec-bg:#eef4fb;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
@@ -102,7 +101,12 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     <p>سجّل دخولك للمتابعة</p>
     <div class="form-group">
       <label>اسم المستخدم</label>
-      <input type="text" id="loginUser" placeholder="أدخل اسم المستخدم">
+      <select id="loginUser">
+        <option value="">— اختر المستخدم —</option>
+        <option value="Ahmed">Ahmed</option>
+        <option value="Mohammed">Mohammed</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
     <div class="form-group">
       <label>كلمة المرور</label>
@@ -475,7 +479,7 @@ function searchHospital() {
     
     if (matches.length > 0) {
       suggestionsDiv.innerHTML = matches.map(h => 
-        `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+        `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
       ).join('');
       suggestionsDiv.style.display = 'block';
     } else {
@@ -489,8 +493,9 @@ function showHospitalSuggestions() {
   const suggestionsDiv = document.getElementById('hospitalSuggestions');
   
   if (searchInput.value.trim().length === 0) {
+    // Show all hospitals when input is empty
     suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
-      `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
+      `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
     ).join('');
     suggestionsDiv.style.display = 'block';
   }
@@ -690,6 +695,7 @@ async function loadMyLeaves(){
 
 function shareLeave(leaveId, patientName, issueDate) {
   try {
+    // Show share options modal
     var modal = document.createElement('div');
     modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
     
@@ -748,14 +754,17 @@ function copyLeaveData(leaveId, patientName, issueDate) {
 
 function downloadPDF(leaveId) {
   try {
+    // Show loading message
     alert('⏳ جاري تحميل ملف PDF...');
     
+    // Get PDF URL from backend
     var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
     
     fetch(pdfUrl)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
+          // Create download link with actual PDF URL
           var link = document.createElement('a');
           link.href = data.pdfUrl;
           link.download = 'Sick-Leave-' + leaveId + '.pdf';
@@ -785,12 +794,14 @@ function shareToTelegram(leaveId, patientName, issueDate) {
   try {
     alert('⏳ جاري تحميل ملف PDF للمشاركة...');
     
+    // Get PDF URL first
     var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
     
     fetch(pdfUrl)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
+          // Create share text with PDF download instructions
           var shareText = '📄 بيانات الإجازة:\n\n' +
                          '👤 اسم المريض: ' + patientName + '\n' +
                          '🆔 رقم الإجازة: ' + leaveId + '\n' +
@@ -798,6 +809,7 @@ function shareToTelegram(leaveId, patientName, issueDate) {
                          '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
                          '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
           
+          // Share to Telegram with enhanced message
           var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '&text=' + encodeURIComponent(shareText);
           window.open(telegramUrl, '_blank');
           
@@ -822,12 +834,14 @@ function shareToWhatsApp(leaveId, patientName, issueDate) {
   try {
     alert('⏳ جاري تحميل ملف PDF للمشاركة...');
     
+    // Get PDF URL first
     var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
     
     fetch(pdfUrl)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
+          // Create share text with PDF download instructions
           var shareText = '📄 بيانات الإجازة:\n\n' +
                          '👤 اسم المريض: ' + patientName + '\n' +
                          '🆔 رقم الإجازة: ' + leaveId + '\n' +
@@ -835,6 +849,7 @@ function shareToWhatsApp(leaveId, patientName, issueDate) {
                          '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
                          '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
           
+          // Share to WhatsApp with PDF link
           var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
           window.open(whatsappUrl, '_blank');
           
