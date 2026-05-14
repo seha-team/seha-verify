@@ -101,12 +101,8 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     <p>سجّل دخولك للمتابعة</p>
     <div class="form-group">
       <label>اسم المستخدم</label>
-      <select id="loginUser">
-        <option value="">— اختر المستخدم —</option>
-        <option value="Ahmed">Ahmed</option>
-        <option value="Mohammed">Mohammed</option>
-        <option value="Other">Other</option>
-      </select>
+      <input type="text" id="loginUser" placeholder="أدخل اسم المستخدم"
+             onkeydown="if(event.key==='Enter') document.getElementById('loginPass').focus()">
     </div>
     <div class="form-group">
       <label>كلمة المرور</label>
@@ -120,7 +116,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
 <div id="appSection">
   <div class="app-header">
-    <div class="app-header-title">🏥 بوابة الإجازات المرضية - ذكية</div>
+    <div class="app-header-title">بوابة الإجازات المرضية - ذكية</div>
     <div style="display:flex;align-items:center">
       <span style="font-size:14px;opacity:.85;margin-left:12px" id="headerUser"></span>
       <button class="btn-logout" onclick="doLogout()">خروج</button>
@@ -128,8 +124,8 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('addLeave',this)">➕ إضافة إجازة</button>
-    <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">📂 إجازاتي</button>
+    <button class="tab-btn active" onclick="switchTab('addLeave',this)">إضافة إجازة</button>
+    <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">إجازاتي</button>
   </div>
 
   <div class="tab-content active" id="tab-addLeave">
@@ -514,20 +510,59 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Original functions
-function doLogin(){
-  var u=document.getElementById('loginUser').value;
+// دالة تسجيل الدخول المعدلة - تتحقق من السيرفر
+async function doLogin(){
+  var u=document.getElementById('loginUser').value.trim();
   var p=document.getElementById('loginPass').value;
   var err=document.getElementById('loginError');
-  if(!u||!p){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ اختر المستخدم وأدخل كلمة المرور';return;}
-  if(p!=='Sl@2026@ksa'){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ كلمة المرور غير صحيحة';return;}
-  SESSION={user:u,pass:p};
-  document.getElementById('headerUser').textContent='👤 '+u;
-  document.getElementById('loginSection').style.display='none';
-  document.getElementById('appSection').style.display='block';
+  var btn=document.querySelector('.btn-primary');
+  
+  if(!u||!p){
+    err.style.display='block';
+    err.style.color='var(--danger)';
+    err.textContent='أدخل اسم المستخدم وكلمة المرور';
+    return;
+  }
+  
+  // إظهار حالة التحميل
+  btn.disabled=true;
+  btn.textContent='جاري التحقق...';
   err.style.display='none';
-  document.getElementById('issueDate').value=todayISO();
-  generateLeaveId();
+  
+  try {
+    // التحقق من السيرفر
+    var response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify({
+        action: 'verifyLogin',
+        username: u,
+        password: p
+      })
+    });
+    var result = await response.json();
+    
+    if(result.status === 'success') {
+      SESSION={user:u,pass:p};
+      document.getElementById('headerUser').textContent='مرحباً '+u;
+      document.getElementById('loginSection').style.display='none';
+      document.getElementById('appSection').style.display='block';
+      err.style.display='none';
+      document.getElementById('issueDate').value=todayISO();
+      generateLeaveId();
+    } else {
+      err.style.display='block';
+      err.style.color='var(--danger)';
+      err.textContent='اسم المستخدم أو كلمة المرور غير صحيحة';
+    }
+  } catch(e) {
+    err.style.display='block';
+    err.style.color='var(--danger)';
+    err.textContent='خطأ في الاتصال بالسيرفر';
+  } finally {
+    btn.disabled=false;
+    btn.textContent='دخول';
+  }
 }
 
 // Function to generate automatic Leave ID
