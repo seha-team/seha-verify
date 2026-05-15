@@ -53,6 +53,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .en-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8eef8;color:#1a5fa8;}
 .opt-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
 .smart-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f5e8;color:#2d7a38;}
+.logo-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
 .submit-area{text-align:center;margin-top:8px;}
 .btn-submit{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--accent);color:white;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:background .2s;box-shadow:0 4px 12px rgba(40,167,69,.3);}
 .btn-submit:hover{background:#218838;}
@@ -305,6 +306,14 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
         <div class="section-body">
           <div class="field-row">
+            <div class="field-group field-full">
+              <label>اسم المستشفى للشعار <span class="logo-badge">للشعار</span></label>
+              <select id="hospitalLogoName" onchange="selectHospitalForLogo()">
+                <option value="">— اختر المستشفى للشعار —</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
             <div class="field-group field-full" style="position:relative;">
               <label>اسم المستشفى بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
               <div class="translation-controls">
@@ -503,6 +512,42 @@ function selectHospital(arName, enName) {
   document.getElementById('hospitalSuggestions').style.display = 'none';
 }
 
+// دالة لجلب قائمة المستشفيات من Sheet
+async function loadHospitalList() {
+  try {
+    const url = SCRIPT_URL + '?action=getHospitalList';
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      const select = document.getElementById('hospitalLogoName');
+      select.innerHTML = '<option value="">— اختر المستشفى للشعار —</option>';
+      
+      result.hospitals.forEach(hospital => {
+        const option = document.createElement('option');
+        option.value = hospital.nameAr;
+        option.textContent = hospital.nameAr + ' - ' + hospital.nameEn;
+        select.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.log('Error loading hospital list:', error);
+  }
+}
+
+// دالة عند اختيار مستشفى للشعار
+function selectHospitalForLogo() {
+  const selectedHospital = document.getElementById('hospitalLogoName').value;
+  if (selectedHospital) {
+    // البحث في قاعدة البيانات المحلية
+    const hospital = HOSPITAL_DATABASE.find(h => h.ar === selectedHospital);
+    if (hospital) {
+      document.getElementById('hospAr').value = hospital.ar;
+      document.getElementById('hospEn').value = hospital.en;
+    }
+  }
+}
+
 // Hide suggestions when clicking outside
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.field-group')) {
@@ -550,6 +595,7 @@ async function doLogin(){
       err.style.display='none';
       document.getElementById('issueDate').value=todayISO();
       generateLeaveId();
+      loadHospitalList(); // تحميل قائمة المستشفيات
     } else {
       err.style.display='block';
       err.style.color='var(--danger)';
@@ -678,6 +724,7 @@ async function submitLeave(e){
     issueDate:document.getElementById('issueDate').value,
     hospAr:document.getElementById('hospAr').value.trim(),
     hospEn:document.getElementById('hospEn').value.trim(),
+    hospitalLogoName:document.getElementById('hospitalLogoName').value.trim(),
     licenseNo:document.getElementById('licenseNo').value.trim()
   };
 
@@ -719,7 +766,7 @@ async function loadMyLeaves(){
     loading.style.display='none';
     if(res.status==='success'&&res.leaves.length>0){
       res.leaves.slice().reverse().forEach(function(lv, index){
-        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
+        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &​nbsp;|&​nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
       });
     }else{empty.style.display='block';}
   }catch(err){
