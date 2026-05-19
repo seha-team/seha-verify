@@ -53,7 +53,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .en-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8eef8;color:#1a5fa8;}
 .opt-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
 .smart-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f5e8;color:#2d7a38;}
-.logo-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
 .submit-area{text-align:center;margin-top:8px;}
 .btn-submit{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--accent);color:white;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:background .2s;box-shadow:0 4px 12px rgba(40,167,69,.3);}
 .btn-submit:hover{background:#218838;}
@@ -102,8 +101,12 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
     <p>سجّل دخولك للمتابعة</p>
     <div class="form-group">
       <label>اسم المستخدم</label>
-      <input type="text" id="loginUser" placeholder="أدخل اسم المستخدم"
-             onkeydown="if(event.key==='Enter') document.getElementById('loginPass').focus()">
+      <select id="loginUser">
+        <option value="">— اختر المستخدم —</option>
+        <option value="Ahmed">Ahmed</option>
+        <option value="Mohammed">Mohammed</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
     <div class="form-group">
       <label>كلمة المرور</label>
@@ -117,7 +120,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 
 <div id="appSection">
   <div class="app-header">
-    <div class="app-header-title">بوابة الإجازات المرضية - ذكية</div>
+    <div class="app-header-title">🏥 بوابة الإجازات المرضية - ذكية</div>
     <div style="display:flex;align-items:center">
       <span style="font-size:14px;opacity:.85;margin-left:12px" id="headerUser"></span>
       <button class="btn-logout" onclick="doLogout()">خروج</button>
@@ -125,8 +128,8 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('addLeave',this)">إضافة إجازة</button>
-    <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">إجازاتي</button>
+    <button class="tab-btn active" onclick="switchTab('addLeave',this)">➕ إضافة إجازة</button>
+    <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">📂 إجازاتي</button>
   </div>
 
   <div class="tab-content active" id="tab-addLeave">
@@ -306,14 +309,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
         <div class="section-body">
           <div class="field-row">
-            <div class="field-group field-full">
-              <label>اسم المستشفى للشعار <span class="logo-badge">للشعار</span></label>
-              <select id="hospitalLogoName" onchange="selectHospitalForLogo()">
-                <option value="">— اختر المستشفى للشعار —</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-row">
             <div class="field-group field-full" style="position:relative;">
               <label>اسم المستشفى بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
               <div class="translation-controls">
@@ -452,7 +447,18 @@ async function autoTranslate(field) {
 
 // Hospital search functionality
 let hospitalSearchTimeout;
-let HOSPITAL_DATABASE = [];
+const HOSPITAL_DATABASE = [
+  { ar: 'مستشفى الملك فهد', en: 'KING FAHAD HOSPITAL' },
+  { ar: 'مستشفى الملك فيصل', en: 'KING FAISAL HOSPITAL' },
+  { ar: 'مستشفى الملك سعود', en: 'KING SAUD HOSPITAL' },
+  { ar: 'مستشفى الأمير محمد', en: 'PRINCE MOHAMMED HOSPITAL' },
+  { ar: 'مستشفى القوات المسلحة', en: 'ARMED FORCES HOSPITAL' },
+  { ar: 'مستشفى الحرس الوطني', en: 'NATIONAL GUARD HOSPITAL' },
+  { ar: 'مستشفى الأمل', en: 'HOPE HOSPITAL' },
+  { ar: 'مستشفى الرحمة', en: 'MERCY HOSPITAL' },
+  { ar: 'مستشفى النور', en: 'LIGHT HOSPITAL' },
+  { ar: 'المركز الطبي', en: 'MEDICAL CENTER' }
+];
 
 function searchHospital() {
   clearTimeout(hospitalSearchTimeout);
@@ -486,7 +492,7 @@ function showHospitalSuggestions() {
   const searchInput = document.getElementById('hospAr');
   const suggestionsDiv = document.getElementById('hospitalSuggestions');
   
-  if (searchInput.value.trim().length === 0 && HOSPITAL_DATABASE.length > 0) {
+  if (searchInput.value.trim().length === 0) {
     // Show all hospitals when input is empty
     suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
       `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
@@ -499,60 +505,6 @@ function selectHospital(arName, enName) {
   document.getElementById('hospAr').value = arName;
   document.getElementById('hospEn').value = enName;
   document.getElementById('hospitalSuggestions').style.display = 'none';
-  
-  // Also select the hospital logo if it exists in the dropdown
-  const logoSelect = document.getElementById('hospitalLogoName');
-  for (let i = 0; i < logoSelect.options.length; i++) {
-    if (logoSelect.options[i].value === arName) {
-      logoSelect.selectedIndex = i;
-      break;
-    }
-  }
-}
-
-// دالة لجلب قائمة المستشفيات من Sheet
-async function loadHospitalList() {
-  try {
-    const url = SCRIPT_URL + '?action=getHospitalList';
-    const response = await fetch(url);
-    const result = await response.json();
-    
-    if (result.status === 'success') {
-      const select = document.getElementById('hospitalLogoName');
-      select.innerHTML = '<option value="">— اختر المستشفى للشعار —</option>';
-      
-      // Update HOSPITAL_DATABASE from server data
-      HOSPITAL_DATABASE = [];
-      
-      result.hospitals.forEach(hospital => {
-        const option = document.createElement('option');
-        option.value = hospital.nameAr;
-        option.textContent = hospital.nameAr + ' - ' + hospital.nameEn;
-        select.appendChild(option);
-        
-        // Add to HOSPITAL_DATABASE for search
-        HOSPITAL_DATABASE.push({
-          ar: hospital.nameAr,
-          en: hospital.nameEn
-        });
-      });
-    }
-  } catch (error) {
-    console.log('Error loading hospital list:', error);
-  }
-}
-
-// دالة عند اختيار مستشفى للشعار
-function selectHospitalForLogo() {
-  const selectedHospital = document.getElementById('hospitalLogoName').value;
-  if (selectedHospital) {
-    // البحث في قاعدة البيانات المحلية
-    const hospital = HOSPITAL_DATABASE.find(h => h.ar === selectedHospital);
-    if (hospital) {
-      document.getElementById('hospAr').value = hospital.ar;
-      document.getElementById('hospEn').value = hospital.en;
-    }
-  }
 }
 
 // Hide suggestions when clicking outside
@@ -562,60 +514,20 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// دالة تسجيل الدخول المعدلة - تتحقق من السيرفر
-async function doLogin(){
-  var u=document.getElementById('loginUser').value.trim();
+// Original functions
+function doLogin(){
+  var u=document.getElementById('loginUser').value;
   var p=document.getElementById('loginPass').value;
   var err=document.getElementById('loginError');
-  var btn=document.querySelector('.btn-primary');
-  
-  if(!u||!p){
-    err.style.display='block';
-    err.style.color='var(--danger)';
-    err.textContent='أدخل اسم المستخدم وكلمة المرور';
-    return;
-  }
-  
-  // إظهار حالة التحميل
-  btn.disabled=true;
-  btn.textContent='جاري التحقق...';
+  if(!u||!p){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ اختر المستخدم وأدخل كلمة المرور';return;}
+  if(p!=='Sl@2026@ksa'){err.style.display='block';err.style.color='var(--danger)';err.textContent='❌ كلمة المرور غير صحيحة';return;}
+  SESSION={user:u,pass:p};
+  document.getElementById('headerUser').textContent='👤 '+u;
+  document.getElementById('loginSection').style.display='none';
+  document.getElementById('appSection').style.display='block';
   err.style.display='none';
-  
-  try {
-    // التحقق من السيرفر
-    var response = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'text/plain'},
-      body: JSON.stringify({
-        action: 'verifyLogin',
-        username: u,
-        password: p
-      })
-    });
-    var result = await response.json();
-    
-    if(result.status === 'success') {
-      SESSION={user:u,pass:p};
-      document.getElementById('headerUser').textContent='مرحباً '+u;
-      document.getElementById('loginSection').style.display='none';
-      document.getElementById('appSection').style.display='block';
-      err.style.display='none';
-      document.getElementById('issueDate').value=todayISO();
-      generateLeaveId();
-      loadHospitalList(); // تحميل قائمة المستشفيات
-    } else {
-      err.style.display='block';
-      err.style.color='var(--danger)';
-      err.textContent='اسم المستخدم أو كلمة المرور غير صحيحة';
-    }
-  } catch(e) {
-    err.style.display='block';
-    err.style.color='var(--danger)';
-    err.textContent='خطأ في الاتصال بالسيرفر';
-  } finally {
-    btn.disabled=false;
-    btn.textContent='دخول';
-  }
+  document.getElementById('issueDate').value=todayISO();
+  generateLeaveId();
 }
 
 // Function to generate automatic Leave ID
@@ -731,7 +643,6 @@ async function submitLeave(e){
     issueDate:document.getElementById('issueDate').value,
     hospAr:document.getElementById('hospAr').value.trim(),
     hospEn:document.getElementById('hospEn').value.trim(),
-    hospitalLogoName:document.getElementById('hospitalLogoName').value.trim(),
     licenseNo:document.getElementById('licenseNo').value.trim()
   };
 
@@ -747,15 +658,8 @@ async function submitLeave(e){
       status.className='success';
       status.textContent='✅ تم الحفظ بنجاح!';
       pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
-      
-      // Reset form and generate new Leave ID
       document.getElementById('leaveForm').reset();
       document.getElementById('issueDate').value=todayISO();
-      document.getElementById('hospitalLogoName').selectedIndex = 0;
-      
-      // Generate new Leave ID for next entry
-      await generateLeaveId();
-      
     }else{throw new Error(result.message||'خطأ غير معروف');}
   }catch(err){
     status.className='error';
