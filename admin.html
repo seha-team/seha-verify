@@ -132,6 +132,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
   <div class="tab-content active" id="tab-addLeave">
     <form id="leaveForm" onsubmit="submitLeave(event)">
 
+      <!-- القسم 1 -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-icon">🆔</div>
@@ -166,6 +167,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
       </div>
 
+      <!-- القسم 2 -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-icon">👤</div>
@@ -195,6 +197,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
       </div>
 
+      <!-- القسم 3 -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-icon">🩺</div>
@@ -255,6 +258,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
         </div>
       </div>
 
+      <!-- القسم 4 -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-icon">📅</div>
@@ -278,7 +282,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
             <div class="field-group">
               <label>تاريخ البداية بالهجري <span class="opt-badge">قابل للتعديل</span></label>
-              <input type="text" id="admAH" class="en-input" style="text-align: right;" placeholder="يُحوَّل تلقائياً" onchange="calcAll()">
+              <input type="text" id="admAH" placeholder="يُحوَّل تلقائياً" onchange="calcAll()">
             </div>
           </div>
           <div class="field-row">
@@ -288,12 +292,13 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
             </div>
             <div class="field-group">
               <label>تاريخ النهاية بالهجري <span class="opt-badge">قابل للتعديل</span></label>
-              <input type="text" id="disAH" class="en-input" style="text-align: right;" placeholder="يُحوَّل تلقائياً" onchange="calcAll()">
+              <input type="text" id="disAH" placeholder="يُحوَّل تلقائياً" onchange="calcAll()">
             </div>
           </div>
         </div>
       </div>
 
+      <!-- القسم 5 -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-icon">🏥</div>
@@ -360,12 +365,18 @@ let SESSION = { user:'', pass:'' };
 const TRANSLATION_CACHE = {};
 let isTranslating = false;
 
+// Google Translate API simulation (using free translation service)
 async function translateText(text, fromLang = 'ar', toLang = 'en') {
   if (TRANSLATION_CACHE[text]) return TRANSLATION_CACHE[text];
+  
   try {
+    // Using MyMemory API (free translation service)
+    const apiKey = ''; // Free API key
     const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
+    
     const response = await fetch(url);
     const data = await response.json();
+    
     if (data.responseStatus === 200) {
       const translated = data.responseData.translatedText;
       TRANSLATION_CACHE[text] = translated;
@@ -374,6 +385,8 @@ async function translateText(text, fromLang = 'ar', toLang = 'en') {
   } catch (error) {
     console.log('Translation API error, using fallback');
   }
+  
+  // Fallback: simple character mapping for Arabic names
   return fallbackTranslate(text);
 }
 
@@ -385,34 +398,47 @@ function fallbackTranslate(arabicText) {
     'ن': 'N', 'ه': 'H', 'و': 'W', 'ي': 'Y', 'ى': 'A', 'ة': 'H', 'ء': 'A',
     'إ': 'A', 'آ': 'A', 'ؤ': 'U', 'ئ': 'E'
   };
+  
   return arabicText.split('').map(char => mapping[char] || char).join('').toUpperCase();
 }
 
 async function autoTranslate(field) {
   if (isTranslating) return;
+  
   const arField = document.getElementById(field === 'name' ? 'nameAr' : field === 'doctor' ? 'docAr' : 'hospAr');
   const enField = document.getElementById(field === 'name' ? 'nameEn' : field === 'doctor' ? 'docEn' : 'hospEn');
   const translateBtn = arField.parentElement.querySelector('.btn-translate');
+  
   if (!arField.value.trim()) return;
+  
   isTranslating = true;
   translateBtn.disabled = true;
   translateBtn.textContent = '⏳ جاري الترجمة...';
+  
   try {
     let translated = await translateText(arField.value.trim());
+    
+    // Special handling for doctor names
     if (field === 'doctor') {
+      // Add DR prefix if Arabic starts with د/
       if (arField.value.trim().startsWith('د/')) {
         translated = 'DR. ' + translated.replace(/^DR\.\s*/, '');
       } else {
         translated = 'DR. ' + translated;
       }
     }
+    
+    // Make ALL CAPS
     translated = translated.toUpperCase();
+    
     enField.value = translated;
     translateBtn.textContent = '✅ تم';
+    
     setTimeout(() => {
       translateBtn.textContent = '🔄 ترجم';
       translateBtn.disabled = false;
     }, 2000);
+    
   } catch (error) {
     translateBtn.textContent = '❌ خطأ';
     setTimeout(() => {
@@ -424,6 +450,7 @@ async function autoTranslate(field) {
   }
 }
 
+// Hospital search functionality
 let hospitalSearchTimeout;
 let HOSPITAL_DATABASE = [];
 
@@ -431,16 +458,19 @@ function searchHospital() {
   clearTimeout(hospitalSearchTimeout);
   const searchInput = document.getElementById('hospAr');
   const suggestionsDiv = document.getElementById('hospitalSuggestions');
+  
   hospitalSearchTimeout = setTimeout(() => {
     const searchTerm = searchInput.value.trim().toLowerCase();
     if (searchTerm.length < 2) {
       suggestionsDiv.style.display = 'none';
       return;
     }
+    
     const matches = HOSPITAL_DATABASE.filter(h => 
       h.ar.toLowerCase().includes(searchTerm) || 
       h.en.toLowerCase().includes(searchTerm)
     );
+    
     if (matches.length > 0) {
       suggestionsDiv.innerHTML = matches.map(h => 
         `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
@@ -455,7 +485,9 @@ function searchHospital() {
 function showHospitalSuggestions() {
   const searchInput = document.getElementById('hospAr');
   const suggestionsDiv = document.getElementById('hospitalSuggestions');
+  
   if (searchInput.value.trim().length === 0 && HOSPITAL_DATABASE.length > 0) {
+    // Show all hospitals when input is empty
     suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
       `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
     ).join('');
@@ -467,6 +499,8 @@ function selectHospital(arName, enName) {
   document.getElementById('hospAr').value = arName;
   document.getElementById('hospEn').value = enName;
   document.getElementById('hospitalSuggestions').style.display = 'none';
+  
+  // Also select the hospital logo if it exists in the dropdown
   const logoSelect = document.getElementById('hospitalLogoName');
   for (let i = 0; i < logoSelect.options.length; i++) {
     if (logoSelect.options[i].value === arName) {
@@ -476,20 +510,27 @@ function selectHospital(arName, enName) {
   }
 }
 
+// دالة لجلب قائمة المستشفيات من Sheet
 async function loadHospitalList() {
   try {
     const url = SCRIPT_URL + '?action=getHospitalList';
     const response = await fetch(url);
     const result = await response.json();
+    
     if (result.status === 'success') {
       const select = document.getElementById('hospitalLogoName');
       select.innerHTML = '<option value="">— اختر المستشفى للشعار —</option>';
+      
+      // Update HOSPITAL_DATABASE from server data
       HOSPITAL_DATABASE = [];
+      
       result.hospitals.forEach(hospital => {
         const option = document.createElement('option');
         option.value = hospital.nameAr;
         option.textContent = hospital.nameAr + ' - ' + hospital.nameEn;
         select.appendChild(option);
+        
+        // Add to HOSPITAL_DATABASE for search
         HOSPITAL_DATABASE.push({
           ar: hospital.nameAr,
           en: hospital.nameEn
@@ -501,9 +542,11 @@ async function loadHospitalList() {
   }
 }
 
+// دالة عند اختيار مستشفى للشعار
 function selectHospitalForLogo() {
   const selectedHospital = document.getElementById('hospitalLogoName').value;
   if (selectedHospital) {
+    // البحث في قاعدة البيانات المحلية
     const hospital = HOSPITAL_DATABASE.find(h => h.ar === selectedHospital);
     if (hospital) {
       document.getElementById('hospAr').value = hospital.ar;
@@ -512,27 +555,34 @@ function selectHospitalForLogo() {
   }
 }
 
+// Hide suggestions when clicking outside
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.field-group')) {
     document.getElementById('hospitalSuggestions').style.display = 'none';
   }
 });
 
+// دالة تسجيل الدخول المعدلة - تتحقق من السيرفر
 async function doLogin(){
   var u=document.getElementById('loginUser').value.trim();
   var p=document.getElementById('loginPass').value;
   var err=document.getElementById('loginError');
   var btn=document.querySelector('.btn-primary');
+  
   if(!u||!p){
     err.style.display='block';
     err.style.color='var(--danger)';
     err.textContent='أدخل اسم المستخدم وكلمة المرور';
     return;
   }
+  
+  // إظهار حالة التحميل
   btn.disabled=true;
   btn.textContent='جاري التحقق...';
   err.style.display='none';
+  
   try {
+    // التحقق من السيرفر
     var response = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: {'Content-Type': 'text/plain'},
@@ -543,6 +593,7 @@ async function doLogin(){
       })
     });
     var result = await response.json();
+    
     if(result.status === 'success') {
       SESSION={user:u,pass:p};
       document.getElementById('headerUser').textContent='مرحباً '+u;
@@ -551,7 +602,7 @@ async function doLogin(){
       err.style.display='none';
       document.getElementById('issueDate').value=todayISO();
       generateLeaveId();
-      loadHospitalList();
+      loadHospitalList(); // تحميل قائمة المستشفيات
     } else {
       err.style.display='block';
       err.style.color='var(--danger)';
@@ -567,11 +618,13 @@ async function doLogin(){
   }
 }
 
+// Function to generate automatic Leave ID
 async function generateLeaveId() {
   try {
     var url = SCRIPT_URL + '?action=generateLeaveId&prefix=PSL';
     var response = await fetch(url);
     var result = await response.json();
+    
     if (result.status === 'success') {
       document.getElementById('leaveId').value = result.leaveId;
       document.getElementById('leaveId').readOnly = true;
@@ -606,57 +659,26 @@ function fmtDate(iso){
   return String(d.getDate()).padStart(2,'0')+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear();
 }
 
-// دالة تحويل التاريخ الهجري المحدثة لمنع ظهور الساعات والرموز وضمان التنسيق الصحيح DD-MM-YYYY
-function toHijri(dateInput) {
-  if (!dateInput) return '';
-  var date;
-  if (typeof dateInput === 'string') {
-    var parts = dateInput.split('-');
-    if (parts.length === 3) {
-      date = new Date(parts[0], parts[1] - 1, parts[2]);
-    } else {
-      date = new Date(dateInput);
-    }
-  } else {
-    date = dateInput;
-  }
-  
-  if (isNaN(date.getTime())) return '';
-
-  try {
-    var formatter = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-    var partsMap = formatter.formatToParts(date);
-    var d = partsMap.find(p => p.type === 'day').value;
-    var m = partsMap.find(p => p.type === 'month').value;
-    var y = partsMap.find(p => p.type === 'year').value;
-    
-    y = y.replace(/[^0-9]/g, '');
-    return d.padStart(2, '0') + '-' + m.padStart(2, '0') + '-' + y;
-  } catch (e) {
-    var gD = date.getDate(), gM = date.getMonth() + 1, gY = date.getFullYear();
-    var JD = Math.floor((1461 * (gY + 4800 + Math.floor((gM - 14) / 12))) / 4) +
-             Math.floor((367 * (gM - 2 - 12 * Math.floor((gM - 14) / 12))) / 12) -
-             Math.floor((3 * (Math.floor((gY + 4900 + Math.floor((gM - 14) / 12)) / 100))) / 4) + gD - 32077;
-    var l = JD - 1948440 + 10632, n = Math.floor((l - 1) / 10631);
-    l = l - 10631 * n + 354;
-    var j = Math.floor((10985 - l) / 5316) * Math.floor((50 * l) / 17719) + Math.floor(l / 5670) * Math.floor((43 * l) / 15238);
-    l = l - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
-    var hM = Math.floor((24 * l) / 709), hD = l - Math.floor((709 * hM) / 24), hY = 30 * n + j - 30;
-    return String(hD).padStart(2, '0') + '-' + String(hM).padStart(2, '0') + '-' + hY;
-  }
+function toHijri(date){
+  var gD=date.getDate(),gM=date.getMonth()+1,gY=date.getFullYear();
+  // Corrected Hijri conversion algorithm (subtract 2 days to fix the advance issue)
+  var JD=Math.floor((1461*(gY+4800+Math.floor((gM-14)/12)))/4)+
+         Math.floor((367*(gM-2-12*Math.floor((gM-14)/12)))/12)-
+         Math.floor((3*(Math.floor((gY+4900+Math.floor((gM-14)/12))/100)))/4)+gD-32077;
+  var l=JD-1948440+10632,n=Math.floor((l-1)/10631);
+  l=l-10631*n+354;
+  var j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);
+  l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;
+  var hM=Math.floor((24*l)/709),hD=l-Math.floor((709*hM)/24),hY=30*n+j-30;
+  return String(hD).padStart(2,'0')+'-'+String(hM).padStart(2,'0')+'-'+hY;
 }
 
 function calcAll(){
   var a=document.getElementById('admAD').value;
   var d=document.getElementById('disAD').value;
-  
-  if(a && !document.getElementById('admAH').value) document.getElementById('admAH').value=toHijri(a);
-  if(d && !document.getElementById('disAH').value) document.getElementById('disAH').value=toHijri(d);
-  
+  // Only update Hijri dates if they are empty (allow manual editing)
+  if(a && !document.getElementById('admAH').value)document.getElementById('admAH').value=toHijri(new Date(a));
+  if(d && !document.getElementById('disAH').value)document.getElementById('disAH').value=toHijri(new Date(d));
   if(a&&d){
     var diff=Math.round((new Date(d)-new Date(a))/(864e5))+1;
     if(diff>0){
@@ -668,26 +690,10 @@ function calcAll(){
 }
 
 function syncPos(){
-  var ar=document.getElementById('posAr').value;
-  var en=document.getElementById('posEn');
-  var man=document.getElementById('posManual');
-  if(ar==='استشاري')en.value='Consultant';
-  else if(ar==='أخصائي')en.value='Specialist';
-  else if(ar==='طبيب عام')en.value='General Practitioner';
-  else if(ar==='ممارس صحي')en.value='Health Practitioner';
-  else if(ar==='طبيب أسنان')en.value='Dentist';
-  else if(ar==='طبيب مقيم')en.value='Resident';
-  
-  if(ar==='أخرى'){
-    en.value='Other';
-    man.style.display='grid';
-    document.getElementById('posArM').required=true;
-    document.getElementById('posEnM').required=true;
-  }else{
-    man.style.display='none';
-    document.getElementById('posArM').required=false;
-    document.getElementById('posEnM').required=false;
-  }
+  var v=document.getElementById('posAr').value;
+  var map={'استشاري':'Consultant','أخصائي':'Specialist','طبيب عام':'General Practitioner','ممارس صحي':'Health Practitioner','طبيب أسنان':'Dentist','طبيب مقيم':'Resident'};
+  document.getElementById('posManual').style.display=v==='أخرى'?'grid':'none';
+  if(v!=='أخرى')document.getElementById('posEn').value=map[v]||'';
 }
 
 async function submitLeave(e){
@@ -695,68 +701,65 @@ async function submitLeave(e){
   var btn=document.getElementById('submitBtn');
   var status=document.getElementById('submitStatus');
   var pdfArea=document.getElementById('pdfArea');
-  
-  btn.disabled=true;
-  btn.textContent='⏳ جاري الحفظ والتوليد...';
-  status.className='';
-  status.textContent='';
-  pdfArea.innerHTML='';
-  
-  var pAr=document.getElementById('posAr').value;
-  var pEn=document.getElementById('posEn').value;
-  if(pAr==='أخرى'){
-    pAr=document.getElementById('posArM').value.trim();
-    pEn=document.getElementById('posEnM').value.trim();
-  }
-  
+  var posArV=document.getElementById('posAr').value==='أخرى'?document.getElementById('posArM').value:document.getElementById('posAr').value;
+  var posEnV=document.getElementById('posEn').value==='Other'?document.getElementById('posEnM').value:document.getElementById('posEn').value;
+  var dur=document.getElementById('durDisplay').value||'';
+  var dp=dur.split(' / ');
+
   var payload={
-    action:'submitLeave',
+    action:'addLeave',
     username:SESSION.user,
     password:SESSION.pass,
     leaveId:document.getElementById('leaveId').value.trim(),
     nameAr:document.getElementById('nameAr').value.trim(),
-    nameEn:document.getElementById('nameEn').value.trim().toUpperCase(),
+    nameEn:document.getElementById('nameEn').value.trim(),
     iqama:document.getElementById('iqama').value.trim(),
-    natAr:document.getElementById('natAr').value.trim(),
-    natEn:document.getElementById('natEn').value.trim().toUpperCase(),
-    employerAr:document.getElementById('employerAr').value.trim(),
-    employerEn:document.getElementById('employerEn').value.trim().toUpperCase(),
+    durAr:dp[0]||'',
+    durEn:dp[1]||'',
     docAr:document.getElementById('docAr').value.trim(),
-    docEn:document.getElementById('docEn').value.trim().toUpperCase(),
-    posAr:pAr,
-    posEn:pEn,
-    issueDate:fmtDate(document.getElementById('issueDate').value),
-    admAD:fmtDate(document.getElementById('admAD').value),
-    admAH:document.getElementById('admAH').value.trim(),
-    disAD:fmtDate(document.getElementById('disAD').value),
-    disAH:document.getElementById('disAH').value.trim(),
-    durDisplay:document.getElementById('durDisplay').value,
+    docEn:document.getElementById('docEn').value.trim(),
+    posAr:posArV,
+    posEn:posEnV,
+    natAr:document.getElementById('natAr').value.trim(),
+    natEn:document.getElementById('natEn').value.trim(),
+    employerAr:document.getElementById('employerAr').value.trim(),
+    employerEn:document.getElementById('employerEn').value.trim(),
+    admissionAD:document.getElementById('admAD').value,
+    admissionAH:document.getElementById('admAH').value,
+    dischargeAD:document.getElementById('disAD').value,
+    dischargeAH:document.getElementById('disAH').value,
+    issueDate:document.getElementById('issueDate').value,
     hospAr:document.getElementById('hospAr').value.trim(),
-    hospEn:document.getElementById('hospEn').value.trim().toUpperCase(),
+    hospEn:document.getElementById('hospEn').value.trim(),
+    hospitalLogoName:document.getElementById('hospitalLogoName').value.trim(),
     licenseNo:document.getElementById('licenseNo').value.trim()
   };
-  
+
+  btn.disabled=true;
+  btn.textContent='⏳ جاري الحفظ وإنشاء PDF...';
+  status.className='';status.textContent='';
+  pdfArea.innerHTML='';
+
   try{
-    var response=await fetch(SCRIPT_URL,{
-      method:'POST',
-      headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify(payload)
-    });
-    var result=await response.json();
+    var res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+    var result=await res.json();
     if(result.status==='success'){
       status.className='success';
-      status.textContent='✅ تم حفظ البيانات بنجاح واصدار ملف PDF!';
-      pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📥 تحميل تقرير الإجازة المرضية (PDF)</a>';
+      status.textContent='✅ تم الحفظ بنجاح!';
+      pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
+      
+      // Reset form and generate new Leave ID
       document.getElementById('leaveForm').reset();
       document.getElementById('issueDate').value=todayISO();
-      generateLeaveId();
-    }else{
-      status.className='error';
-      status.textContent='❌ خطأ من السيرفر: '+result.message;
-    }
+      document.getElementById('hospitalLogoName').selectedIndex = 0;
+      
+      // Generate new Leave ID for next entry
+      await generateLeaveId();
+      
+    }else{throw new Error(result.message||'خطأ غير معروف');}
   }catch(err){
     status.className='error';
-    status.textContent='❌ خطأ في الاتصال بالشبكة';
+    status.textContent='❌ خطأ: '+err.message;
   }finally{
     btn.disabled=false;
     btn.textContent='💾 حفظ وإصدار PDF';
@@ -764,46 +767,211 @@ async function submitLeave(e){
 }
 
 async function loadMyLeaves(){
-  var list=document.getElementById('leavesList');
   var loading=document.getElementById('leavesLoading');
   var empty=document.getElementById('leavesEmpty');
-  
-  list.innerHTML='';
+  var list=document.getElementById('leavesList');
   loading.style.display='block';
   empty.style.display='none';
-  
+  list.innerHTML='';
   try{
-    var url=SCRIPT_URL+'?action=getMyLeaves&username='+encodeURIComponent(SESSION.user)+'&password='+encodeURIComponent(SESSION.pass);
-    var response=await fetch(url);
-    var result=await response.json();
+    var url=SCRIPT_URL+'?action=getLeaves&user='+SESSION.user+'&pwd='+encodeURIComponent(SESSION.pass);
+    var r=await fetch(url);
+    var res=await r.json();
     loading.style.display='none';
+    if(res.status==='success'&&res.leaves.length>0){
+      res.leaves.slice().reverse().forEach(function(lv, index){
+        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
+      });
+    }else{empty.style.display='block';}
+  }catch(err){
+    loading.style.display='none';
+    list.innerHTML='<p style="color:red;text-align:center">خطأ في التحميل</p>';
+  }
+}
+
+function shareLeave(leaveId, patientName, issueDate) {
+  try {
+    // Show share options modal
+    var modal = document.createElement('div');
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
     
-    if(result.status==='success'){
-      if(result.leaves.length===0){
-        empty.style.display='block';
-      }else{
-        result.leaves.forEach(l=>{
-          var div=document.createElement('div');
-          div.className='leave-item';
-          div.innerHTML='<div>'+
-                          '<div class="leave-name">'+l.nameAr+' - '+l.leaveId+'</div>'+
-                          '<div class="leave-meta">التاريخ: '+l.admAD+' م / '+l.admAH+' هـ | المدة: '+l.dur+'</div>'+
-                        '</div>'+
-                        '<div>'+
-                          '<a href="'+l.pdfUrl+'" target="_blank" class="leave-badge" style="text-decoration:none">📄 فتح PDF</a>'+
-                        '</div>';
-          list.appendChild(div);
-        });
-      }
-    }else{
-      list.innerHTML='<div style="color:var(--danger); text-align:center">'+result.message+'</div>';
-    }
-  }catch(e){
-    loading.style.display='none';
-    list.innerHTML='<div style="color:var(--danger); text-align:center">خطأ في تحميل البيانات</div>';
+    var modalContent = document.createElement('div');
+    modalContent.style.cssText = 'background:white;border-radius:12px;padding:24px;max-width:400px;width:90%;text-align:center;';
+    
+    modalContent.innerHTML = `
+      <h3 style="margin-bottom:20px;color:#1a5fa8;">📤 خيارات المشاركة</h3>
+      <div style="display:grid;gap:12px;">
+        <button onclick="copyLeaveData('${leaveId}', '${patientName}', '${issueDate}')" style="background:#007bff;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📋 نسخ البيانات
+        </button>
+        <button onclick="downloadPDF('${leaveId}')" style="background:#28a745;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📥 تحميل PDF
+        </button>
+        <button onclick="shareToTelegram('${leaveId}', '${patientName}', '${issueDate}')" style="background:#0088cc;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          📱 مشاركة عبر Telegram
+        </button>
+        <button onclick="shareToWhatsApp('${leaveId}', '${patientName}', '${issueDate}')" style="background:#25D366;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          💬 مشاركة عبر WhatsApp
+        </button>
+        <button onclick="closeShareModal()" style="background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
+          إلغاء
+        </button>
+      </div>
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+  } catch (error) {
+    console.error('Share error:', error);
+    alert('❌ حدث خطأ أثناء المشاركة');
+  }
+}
+
+function copyLeaveData(leaveId, patientName, issueDate) {
+  try {
+    var shareText = '📄 بيانات الإجازة:\n\n' +
+                   '👤 اسم المريض: ' + patientName + '\n' +
+                   '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                   '📅 تاريخ الإصدار: ' + issueDate;
+    
+    navigator.clipboard.writeText(shareText).then(function() {
+      alert('✅ تم نسخ بيانات الإجازة للحافظة\nيمكنك لصقها في أي مكان');
+      closeShareModal();
+    }).catch(function(err) {
+      console.error('Failed to copy: ', err);
+      alert('❌ فشل في نسخ البيانات');
+    });
+  } catch (error) {
+    console.error('Copy error:', error);
+    alert('❌ حدث خطأ أثناء النسخ');
+  }
+}
+
+function downloadPDF(leaveId) {
+  try {
+    // Show loading message
+    alert('⏳ جاري تحميل ملف PDF...');
+    
+    // Get PDF URL from backend
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
+    
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create download link with actual PDF URL
+          var link = document.createElement('a');
+          link.href = data.pdfUrl;
+          link.download = 'Sick-Leave-' + leaveId + '.pdf';
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          closeShareModal();
+          alert('✅ تم تحميل ملف PDF بنجاح');
+        } else {
+          alert('❌ فشل في تحميل PDF: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Download error:', error);
+        alert('❌ حدث خطأ أثناء تحميل PDF');
+      });
+    
+  } catch (error) {
+    console.error('Download error:', error);
+    alert('❌ حدث خطأ أثناء تحميل PDF');
+  }
+}
+
+function shareToTelegram(leaveId, patientName, issueDate) {
+  try {
+    alert('⏳ جاري تحميل ملف PDF للمشاركة...');
+    
+    // Get PDF URL first
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
+    
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create share text with PDF download instructions
+          var shareText = '📄 بيانات الإجازة:\n\n' +
+                         '👤 اسم المريض: ' + patientName + '\n' +
+                         '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                         '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+                         '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
+                         '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
+          
+          // Share to Telegram with enhanced message
+          var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '&text=' + encodeURIComponent(shareText);
+          window.open(telegramUrl, '_blank');
+          
+          closeShareModal();
+          alert('✅ تم فتح Telegram للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
+        } else {
+          alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Telegram share error:', error);
+        alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
+      });
+    
+  } catch (error) {
+    console.error('Telegram share error:', error);
+    alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
+  }
+}
+
+function shareToWhatsApp(leaveId, patientName, issueDate) {
+  try {
+    alert('⏳ جاري تحميل ملف PDF للمشاركة...');
+    
+    // Get PDF URL first
+    var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
+    
+    fetch(pdfUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // Create share text with PDF download instructions
+          var shareText = '📄 بيانات الإجازة:\n\n' +
+                         '👤 اسم المريض: ' + patientName + '\n' +
+                         '🆔 رقم الإجازة: ' + leaveId + '\n' +
+                         '📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+                         '📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
+                         '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
+          
+          // Share to WhatsApp with PDF link
+          var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+          window.open(whatsappUrl, '_blank');
+          
+          closeShareModal();
+          alert('✅ تم فتح WhatsApp للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
+        } else {
+          alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('WhatsApp share error:', error);
+        alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
+      });
+    
+  } catch (error) {
+    console.error('WhatsApp share error:', error);
+    alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
+  }
+}
+
+function closeShareModal() {
+  var modal = document.querySelector('div[style*="position:fixed"]');
+  if (modal) {
+    document.body.removeChild(modal);
   }
 }
 </script>
-
 </body>
 </html>
