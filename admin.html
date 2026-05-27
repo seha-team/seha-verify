@@ -452,7 +452,18 @@ async function autoTranslate(field) {
 
 // Hospital search functionality
 let hospitalSearchTimeout;
-let HOSPITAL_DATABASE = [];
+const HOSPITAL_DATABASE = [
+  { ar: 'مستشفى الملك فهد', en: 'KING FAHAD HOSPITAL' },
+  { ar: 'مستشفى الملك فيصل', en: 'KING FAISAL HOSPITAL' },
+  { ar: 'مستشفى الملك سعود', en: 'KING SAUD HOSPITAL' },
+  { ar: 'مستشفى الأمير محمد', en: 'PRINCE MOHAMMED HOSPITAL' },
+  { ar: 'مستشفى القوات المسلحة', en: 'ARMED FORCES HOSPITAL' },
+  { ar: 'مستشفى الحرس الوطني', en: 'NATIONAL GUARD HOSPITAL' },
+  { ar: 'مستشفى الأمل', en: 'HOPE HOSPITAL' },
+  { ar: 'مستشفى الرحمة', en: 'MERCY HOSPITAL' },
+  { ar: 'مستشفى النور', en: 'LIGHT HOSPITAL' },
+  { ar: 'المركز الطبي', en: 'MEDICAL CENTER' }
+];
 
 function searchHospital() {
   clearTimeout(hospitalSearchTimeout);
@@ -486,7 +497,7 @@ function showHospitalSuggestions() {
   const searchInput = document.getElementById('hospAr');
   const suggestionsDiv = document.getElementById('hospitalSuggestions');
   
-  if (searchInput.value.trim().length === 0 && HOSPITAL_DATABASE.length > 0) {
+  if (searchInput.value.trim().length === 0) {
     // Show all hospitals when input is empty
     suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h => 
       `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>` 
@@ -499,15 +510,6 @@ function selectHospital(arName, enName) {
   document.getElementById('hospAr').value = arName;
   document.getElementById('hospEn').value = enName;
   document.getElementById('hospitalSuggestions').style.display = 'none';
-  
-  // Also select the hospital logo if it exists in the dropdown
-  const logoSelect = document.getElementById('hospitalLogoName');
-  for (let i = 0; i < logoSelect.options.length; i++) {
-    if (logoSelect.options[i].value === arName) {
-      logoSelect.selectedIndex = i;
-      break;
-    }
-  }
 }
 
 // دالة لجلب قائمة المستشفيات من Sheet
@@ -521,20 +523,11 @@ async function loadHospitalList() {
       const select = document.getElementById('hospitalLogoName');
       select.innerHTML = '<option value="">— اختر المستشفى للشعار —</option>';
       
-      // Update HOSPITAL_DATABASE from server data
-      HOSPITAL_DATABASE = [];
-      
       result.hospitals.forEach(hospital => {
         const option = document.createElement('option');
         option.value = hospital.nameAr;
         option.textContent = hospital.nameAr + ' - ' + hospital.nameEn;
         select.appendChild(option);
-        
-        // Add to HOSPITAL_DATABASE for search
-        HOSPITAL_DATABASE.push({
-          ar: hospital.nameAr,
-          en: hospital.nameEn
-        });
       });
     }
   } catch (error) {
@@ -747,15 +740,8 @@ async function submitLeave(e){
       status.className='success';
       status.textContent='✅ تم الحفظ بنجاح!';
       pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
-      
-      // Reset form and generate new Leave ID
       document.getElementById('leaveForm').reset();
       document.getElementById('issueDate').value=todayISO();
-      document.getElementById('hospitalLogoName').selectedIndex = 0;
-      
-      // Generate new Leave ID for next entry
-      await generateLeaveId();
-      
     }else{throw new Error(result.message||'خطأ غير معروف');}
   }catch(err){
     status.className='error';
@@ -780,7 +766,7 @@ async function loadMyLeaves(){
     loading.style.display='none';
     if(res.status==='success'&&res.leaves.length>0){
       res.leaves.slice().reverse().forEach(function(lv, index){
-        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
+        list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &​nbsp;|&​nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
       });
     }else{empty.style.display='block';}
   }catch(err){
