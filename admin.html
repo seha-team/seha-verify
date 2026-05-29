@@ -419,22 +419,24 @@ try {
 var arabicValue = arField.value.trim();
 var translated = '';
 
-// Special handling for doctor names
+// Special handling for doctor names (transliteration حرفي)
 if (field === 'doctor') {
 // إزالة بادئة د/ أو د\ أو د. من النص العربي قبل الترجمة
 var docName = arabicValue.replace(/^د[\\/\\.]\s*/, '');
-translated = await translateText(docName);
-// إزالة أي DR موجود من الترجمة ثم إضافته مرة واحدة
-translated = translated.replace(/^DR[\.\s]*/i, '');
-translated = 'DR. ' + translated.toUpperCase();
+translated = fallbackTranslate(docName);
+translated = 'DR. ' + translated;
 }
-// Special handling for nationality (Title Case)
+// Special handling for nationality (ترجمة معنوية + Title Case)
 else if (field === 'nationality') {
 translated = await translateText(arabicValue);
 // Nationality: أول حرف كبير لكل كلمة (Title Case)
 translated = toTitleCase(translated);
 }
-// Default: ALL CAPS for names and hospitals
+// Patient name (transliteration حرفي)
+else if (field === 'name') {
+translated = fallbackTranslate(arabicValue);
+}
+// Hospital (ترجمة معنوية)
 else {
 translated = await translateText(arabicValue);
 translated = translated.toUpperCase();
