@@ -4,173 +4,92 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بوابة إدخال الإجازات المرضية - نسخة ذكية</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700\&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-
 :root {
-
-\--primary:#1a5fa8; --primary-d:#134a87; --accent:#28a745;
-
-\--danger:#dc3545; --bg:#f0f4f8; --card:#ffffff;
-
-\--border:#d1dce8; --text:#2d3748; --sub:#6b7a8d; --sec-bg:#eef4fb;
-
+--primary:#1a5fa8; --primary-d:#134a87; --accent:#28a745;
+--danger:#dc3545; --bg:#f0f4f8; --card:#ffffff;
+--border:#d1dce8; --text:#2d3748; --sub:#6b7a8d; --sec-bg:#eef4fb;
 }
-
-\*{box-sizing:border-box;margin:0;padding:0;}
-
+*{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-
-\#loginSection{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
-
+#loginSection{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
 .login-card{background:var(--card);border-radius:16px;box-shadow:0 8px 32px rgba(26,95,168,.15);padding:40px 36px;width:100%;max-width:400px;text-align:center;}
-
 .login-logo{width:64px;height:64px;background:var(--primary);border-radius:16px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;}
-
 .login-logo svg{width:36px;height:36px;fill:none;stroke:white;stroke-width:2;}
-
 .login-card h2{color:var(--primary);font-size:22px;margin-bottom:6px;}
-
 .login-card p{color:var(--sub);font-size:14px;margin-bottom:28px;}
-
 .form-group{margin-bottom:18px;text-align:right;}
-
 .form-group label{display:block;font-size:14px;font-weight:500;color:var(--text);margin-bottom:6px;}
-
 .form-group select,.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:15px;color:var(--text);background:white;transition:border-color .2s;}
-
 .form-group select:focus,.form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,95,168,.1);}
-
 .btn-primary{width:100%;padding:13px;background:var(--primary);color:white;border:none;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s;}
-
 .btn-primary:hover{background:var(--primary-d);}
-
-\#loginError{color:var(--danger);font-size:13px;margin-top:12px;display:none;}
-
-\#appSection{display:none;min-height:100vh;}
-
+#loginError{color:var(--danger);font-size:13px;margin-top:12px;display:none;}
+#appSection{display:none;min-height:100vh;}
 .app-header{background:var(--primary);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;color:white;box-shadow:0 2px 8px rgba(0,0,0,.15);position:sticky;top:0;z-index:100;}
-
 .app-header-title{font-size:17px;font-weight:700;}
-
 .btn-logout{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:white;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;margin-right:12px;transition:background .2s;}
-
 .btn-logout:hover{background:rgba(255,255,255,.3);}
-
 .tabs{display:flex;background:white;border-bottom:2px solid var(--border);padding:0 24px;}
-
 .tab-btn{padding:14px 24px;border:none;background:none;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:500;color:var(--sub);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;}
-
 .tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
-
 .tab-content{display:none;padding:24px;max-width:900px;margin:0 auto;}
-
 .tab-content.active{display:block;}
-
 .section-card{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-bottom:20px;overflow:hidden;}
-
 .section-header{background:var(--sec-bg);padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
-
 .section-icon{width:32px;height:32px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-
 .section-title{font-size:15px;font-weight:700;color:var(--primary);}
-
 .section-body{padding:20px;}
-
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-
 .field-full{grid-column:span 2;}
-
 .field-group label{display:block;font-size:13px;font-weight:500;color:var(--sub);margin-bottom:6px;}
-
 .field-group input,.field-group select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--text);background:white;transition:border-color .2s;}
-
 .field-group input:focus,.field-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,95,168,.08);}
-
-.field-group input\[readonly]{background:#f7fafc;color:var(--sub);cursor:not-allowed;}
-
+.field-group input[readonly]{background:#f7fafc;color:var(--sub);cursor:not-allowed;}
 .field-group input.ar-input{direction:rtl;}
-
 .field-group input.en-input{direction:ltr;font-family:Arial,sans-serif;}
-
 .ar-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f4ea;color:#2d7a38;}
-
 .en-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8eef8;color:#1a5fa8;}
-
 .opt-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
-
 .smart-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#e8f5e8;color:#2d7a38;}
-
 .logo-badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;margin-right:4px;font-weight:600;background:#fff3cd;color:#856404;}
-
 .submit-area{text-align:center;margin-top:8px;}
-
 .btn-submit{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--accent);color:white;border:none;border-radius:10px;font-family:'Tajawal',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:background .2s;box-shadow:0 4px 12px rgba(40,167,69,.3);}
-
 .btn-submit:hover{background:#218838;}
-
 .btn-submit:disabled{background:#9ec9aa;cursor:not-allowed;box-shadow:none;}
-
-\#submitStatus{margin-top:16px;font-size:15px;font-weight:500;}
-
-\#submitStatus.success{color:var(--accent);}
-
-\#submitStatus.error{color:var(--danger);}
-
+#submitStatus{margin-top:16px;font-size:15px;font-weight:500;}
+#submitStatus.success{color:var(--accent);}
+#submitStatus.error{color:var(--danger);}
 .pdf-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:12px 28px;background:var(--primary);color:white;border-radius:8px;text-decoration:none;font-size:15px;font-weight:600;box-shadow:0 3px 10px rgba(26,95,168,.25);transition:background .2s;}
-
 .pdf-link:hover{background:var(--primary-d);}
-
 .leaves-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
-
 .leaves-header h3{font-size:17px;color:var(--primary);}
-
 .btn-refresh{padding:8px 16px;background:var(--sec-bg);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--primary);transition:all .2s;}
-
 .btn-refresh:hover{background:var(--primary);color:white;border-color:var(--primary);}
-
 .leave-item{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
-
 .leave-item:hover{box-shadow:0 3px 12px rgba(26,95,168,.1);}
-
 .leave-name{font-size:15px;font-weight:700;color:var(--text);}
-
 .leave-meta{font-size:13px;color:var(--sub);margin-top:4px;}
-
 .leave-badge{background:#e8f4ea;color:#2d7a38;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;}
-
-\#leavesLoading{text-align:center;color:var(--sub);padding:40px;}
-
-\#leavesEmpty{text-align:center;color:var(--sub);padding:40px;display:none;}
-
+#leavesLoading{text-align:center;color:var(--sub);padding:40px;}
+#leavesEmpty{text-align:center;color:var(--sub);padding:40px;display:none;}
+/* Smart Translation Styles */
 .translation-controls{display:flex;gap:8px;margin-bottom:8px;}
-
 .btn-translate{padding:6px 12px;background:#28a745;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:background .2s;}
-
 .btn-translate:hover{background:#218838;}
-
 .btn-translate:disabled{background:#6c757d;cursor:not-allowed;}
-
 .search-suggestions{position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,.15);}
-
 .search-suggestion{padding:10px 13px;cursor:pointer;border-bottom:1px solid #f0f0f0;transition:background .2s;}
-
 .search-suggestion:hover{background:#f8f9fa;}
-
 .search-suggestion:last-child{border-bottom:none;}
-
 @media(max-width:600px){
-
 .field-row{grid-template-columns:1fr;}
-
 .field-full{grid-column:span 1;}
-
 .tab-btn{padding:12px 14px;font-size:14px;}
-
 .login-card{padding:30px 20px;}
-
 }
-
+</style>
 </head>
 <body>
 <div id="loginSection">
@@ -194,7 +113,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <div id="loginError"></div>
 </div>
 </div>
-
 <div id="appSection">
 <div class="app-header">
 <div class="app-header-title">بوابة الإجازات المرضية - ذكية</div>
@@ -203,15 +121,12 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <button class="btn-logout" onclick="doLogout()">خروج</button>
 </div>
 </div>
-
 <div class="tabs">
 <button class="tab-btn active" onclick="switchTab('addLeave',this)">إضافة إجازة</button>
 <button class="tab-btn" onclick="switchTab('myLeaves',this);loadMyLeaves()">إجازاتي</button>
 </div>
-
 <div class="tab-content active" id="tab-addLeave">
 <form id="leaveForm" onsubmit="submitLeave(event)">
-
 <!-- القسم 1 -->
 <div class="section-card">
 <div class="section-header">
@@ -225,7 +140,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="leaveId" class="en-input" placeholder="مثال: PSL26033203815" required>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group">
 <label>اسم المريض بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
@@ -239,7 +153,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="nameEn" class="en-input" placeholder="AHMED HABEEB ABDULHAMID" required>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group field-full">
 <label>رقم الهوية / الإقامة <span class="en-badge">ID / Iqama</span></label>
@@ -248,7 +161,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </div>
 </div>
 </div>
-
 <!-- القسم 2 -->
 <div class="section-card">
 <div class="section-header">
@@ -269,7 +181,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="natEn" class="en-input" placeholder="Saudi Arabia" required>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group">
 <label>جهة العمل بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
@@ -285,7 +196,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </div>
 </div>
 </div>
-
 <!-- القسم 3 -->
 <div class="section-card">
 <div class="section-header">
@@ -306,7 +216,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="docEn" class="en-input" placeholder="DR. HABEEB ALSAHAF" required>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group">
 <label>المسمى الوظيفي بالعربي <span class="ar-badge">عربي</span></label>
@@ -335,7 +244,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </select>
 </div>
 </div>
-
 <div class="field-row" id="posManual" style="display:none">
 <div class="field-group">
 <label>المسمى يدوياً بالعربي</label>
@@ -348,7 +256,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </div>
 </div>
 </div>
-
 <!-- القسم 4 -->
 <div class="section-card">
 <div class="section-header">
@@ -356,7 +263,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <div class="section-title">القسم الرابع — التواريخ والمدة</div>
 </div>
 <div class="section-body">
-
 <div class="field-row">
 <div class="field-group">
 <label>تاريخ الإصدار <span class="en-badge">Issue Date</span></label>
@@ -367,14 +273,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="durDisplay" readonly placeholder="تُحسب تلقائياً">
 </div>
 </div>
-
-<div class="field-row">
-<div class="field-group field-full">
-<label>تاريخ ووقت الطباعة <span class="en-badge">Print Date</span></label>
-<input type="datetime-local" id="printDate" required>
-</div>
-</div>
-
 <div class="field-row">
 <div class="field-group">
 <label>تاريخ البداية بالميلادي <span class="en-badge">Admission AD</span></label>
@@ -385,7 +283,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <input type="text" id="admAH" placeholder="يُحوَّل تلقائياً" onchange="calcAll()">
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group">
 <label>تاريخ النهاية بالميلادي <span class="en-badge">Discharge AD</span></label>
@@ -398,7 +295,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </div>
 </div>
 </div>
-
 <!-- القسم 5 -->
 <div class="section-card">
 <div class="section-header">
@@ -414,7 +310,6 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </select>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group field-full" style="position:relative;">
 <label>اسم المستشفى بالعربي <span class="ar-badge">عربي</span> <span class="smart-badge">ذكي</span></label>
@@ -425,14 +320,12 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <div id="hospitalSuggestions" class="search-suggestions" style="display:none;"></div>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group field-full">
 <label>اسم المستشفى بالإنجليزي <span class="en-badge">English</span></label>
 <input type="text" id="hospEn" class="en-input" placeholder="KING FAHAD HOSPITAL" required>
 </div>
 </div>
-
 <div class="field-row">
 <div class="field-group field-full">
 <label>رقم الترخيص <span class="en-badge">License No.</span></label>
@@ -441,16 +334,13 @@ onkeydown="if(event.key==='Enter') doLogin()">
 </div>
 </div>
 </div>
-
 <div class="submit-area">
 <button type="submit" class="btn-submit" id="submitBtn">💾 حفظ وإصدار PDF</button>
 <div id="submitStatus"></div>
 <div id="pdfArea"></div>
 </div>
-
 </form>
 </div>
-
 <div class="tab-content" id="tab-myLeaves">
 <div class="leaves-header">
 <h3>📂 إجازاتي</h3>
@@ -461,1304 +351,619 @@ onkeydown="if(event.key==='Enter') doLogin()">
 <div id="leavesList"></div>
 </div>
 </div>
-
 <script>
-
-const SCRIPT\_URL = 'https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD\_glyXlLV0Tt9\_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec';
-
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpIpO-7STEcj5PD_glyXlLV0Tt9_Ac70aqaU4ZPOAzuS5NLFwkp-oOpGDzgdWqM6j-vw/exec';
 let SESSION = { user:'', pass:'' };
-
-
-
 // Smart Translation System
-
-const TRANSLATION\_CACHE = {};
-
+const TRANSLATION_CACHE = {};
 let isTranslating = false;
-
-
-
+// Google Translate API simulation (using free translation service)
 async function translateText(text, fromLang = 'ar', toLang = 'en') {
-
-if (TRANSLATION\_CACHE\[text]) return TRANSLATION\_CACHE\[text];
+if (TRANSLATION_CACHE[text]) return TRANSLATION_CACHE[text];
 
 try {
-
-const apiKey = '';
-
-const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}\&langpair=${fromLang}|${toLang}`;
+// Using MyMemory API (free translation service)
+const apiKey = ''; // Free API key
+const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`;
 
 const response = await fetch(url);
-
 const data = await response.json();
 
 if (data.responseStatus === 200) {
-
 const translated = data.responseData.translatedText;
-
-TRANSLATION\_CACHE\[text] = translated;
-
+TRANSLATION_CACHE[text] = translated;
 return translated;
-
 }
-
 } catch (error) {
-
 console.log('Translation API error');
-
 }
 
+// عند فشل API: إرجاع فارغ ليكتب المستخدم يدوياً
 return '';
-
 }
-
-
-
 async function autoTranslate(field) {
-
 if (isTranslating) return;
 
-
-
 var arFieldId, enFieldId;
-
 if (field === 'name') { arFieldId = 'nameAr'; enFieldId = 'nameEn'; }
-
 else if (field === 'doctor') { arFieldId = 'docAr'; enFieldId = 'docEn'; }
-
 else if (field === 'hospital') { arFieldId = 'hospAr'; enFieldId = 'hospEn'; }
-
 else if (field === 'nationality') { arFieldId = 'natAr'; enFieldId = 'natEn'; }
-
 else if (field === 'employer') { arFieldId = 'employerAr'; enFieldId = 'employerEn'; }
-
 else return;
 
-
-
 const arField = document.getElementById(arFieldId);
-
 const enField = document.getElementById(enFieldId);
-
 const translateBtn = arField.closest('.translation-controls').querySelector('.btn-translate');
-
-
 
 if (!arField.value.trim()) return;
 
-
-
 isTranslating = true;
-
 translateBtn.disabled = true;
-
 translateBtn.textContent = '⏳ جاري الترجمة...';
 
-
-
 try {
-
 var arabicValue = arField.value.trim();
-
 var translated = '';
 
-
-
 if (field === 'doctor') {
-
-var docName = arabicValue.replace(/^د\[\\\\/\\\\.]\\s\*/, '');
-
+// إزالة بادئة د/ من النص العربي قبل إرسال للترجمة
+var docName = arabicValue.replace(/^د[\\/\\.]\s*/, '');
 translated = await translateText(docName);
-
 if (translated) {
-
-translated = translated.replace(/^DR\[\\.\\s]\*/i, '');
-
+// إزالة أي DR جاء من الترجمة ثم إضافته مرة واحدة فقط
+translated = translated.replace(/^DR[\.\s]*/i, '');
 translated = 'DR. ' + translated.toUpperCase();
-
 }
-
 }
-
 else if (field === 'name') {
-
 translated = await translateText(arabicValue);
-
 if (translated) {
-
 translated = translated.toUpperCase();
-
 }
-
 }
-
 else if (field === 'nationality') {
-
 translated = await translateText(arabicValue);
-
+// Title Case للجنسية
 if (translated) {
-
-translated = translated.toLowerCase().replace(/(?:^|\\s)\\S/g, function(a) { return a.toUpperCase(); });
-
+translated = translated.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 }
-
 }
-
 else if (field === 'employer') {
-
 translated = await translateText(arabicValue);
-
 if (translated) {
-
 translated = translated.toUpperCase();
-
 }
-
 }
-
 else {
-
+// المستشفى
 translated = await translateText(arabicValue);
-
 if (translated) {
-
 translated = translated.toUpperCase();
-
+}
 }
 
-}
-
-
-
+// وضع النتيجة في الحقل (فارغ إذا فشلت الترجمة ليكتب المستخدم يدوياً)
 enField.value = translated;
 
-
-
 if (translated) {
-
 translateBtn.textContent = '✅ تم';
-
 } else {
-
 translateBtn.textContent = '⚠️ اكتب يدوياً';
-
 }
 
-
-
 setTimeout(() => {
-
 translateBtn.textContent = '🔄 ترجم';
-
 translateBtn.disabled = false;
-
 }, 2000);
-
-
 
 } catch (error) {
-
 enField.value = '';
-
 translateBtn.textContent = '⚠️ اكتب يدوياً';
-
 setTimeout(() => {
-
 translateBtn.textContent = '🔄 ترجم';
-
 translateBtn.disabled = false;
-
 }, 2000);
-
 } finally {
-
 isTranslating = false;
-
 }
-
 }
-
-
-
 // Hospital search functionality
-
 let hospitalSearchTimeout;
-
-let HOSPITAL\_DATABASE = \[];
-
-
-
+let HOSPITAL_DATABASE = [];
 function searchHospital() {
-
 clearTimeout(hospitalSearchTimeout);
-
 const searchInput = document.getElementById('hospAr');
-
 const suggestionsDiv = document.getElementById('hospitalSuggestions');
-
-
 
 hospitalSearchTimeout = setTimeout(() => {
-
 const searchTerm = searchInput.value.trim().toLowerCase();
-
-
-
 if (searchTerm.length < 2) {
-
 suggestionsDiv.style.display = 'none';
-
 return;
-
 }
 
-
-
-const matches = HOSPITAL\_DATABASE.filter(h =>
-
+const matches = HOSPITAL_DATABASE.filter(h =>
 h.ar.toLowerCase().includes(searchTerm) ||
-
 h.en.toLowerCase().includes(searchTerm)
-
 );
 
-
-
 if (matches.length > 0) {
-
 suggestionsDiv.innerHTML = matches.map(h =>
-
 `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
-
 ).join('');
-
 suggestionsDiv.style.display = 'block';
-
 } else {
-
 suggestionsDiv.style.display = 'none';
-
 }
-
 }, 300);
-
 }
-
-
-
 function showHospitalSuggestions() {
-
 const searchInput = document.getElementById('hospAr');
-
 const suggestionsDiv = document.getElementById('hospitalSuggestions');
 
-
-
-if (searchInput.value.trim().length === 0 \&\& HOSPITAL\_DATABASE.length > 0) {
-
-suggestionsDiv.innerHTML = HOSPITAL\_DATABASE.map(h =>
-
+if (searchInput.value.trim().length === 0 && HOSPITAL_DATABASE.length > 0) {
+// Show all hospitals when input is empty
+suggestionsDiv.innerHTML = HOSPITAL_DATABASE.map(h =>
 `<div class="search-suggestion" onclick="selectHospital('${h.ar}', '${h.en}')">${h.ar} - ${h.en}</div>`
-
 ).join('');
-
 suggestionsDiv.style.display = 'block';
-
 }
-
 }
-
-
-
 function selectHospital(arName, enName) {
-
 document.getElementById('hospAr').value = arName;
-
 document.getElementById('hospEn').value = enName;
-
 document.getElementById('hospitalSuggestions').style.display = 'none';
 
-
-
+// Also select the hospital logo if it exists in the dropdown
 const logoSelect = document.getElementById('hospitalLogoName');
-
 for (let i = 0; i < logoSelect.options.length; i++) {
-
-if (logoSelect.options\[i].value === arName) {
-
+if (logoSelect.options[i].value === arName) {
 logoSelect.selectedIndex = i;
-
 break;
-
 }
-
 }
-
 }
-
-
-
+// دالة لجلب قائمة المستشفيات من Sheet
 async function loadHospitalList() {
-
 try {
-
-const url = SCRIPT\_URL + '?action=getHospitalList';
-
+const url = SCRIPT_URL + '?action=getHospitalList';
 const response = await fetch(url);
-
 const result = await response.json();
 
-
-
 if (result.status === 'success') {
-
 const select = document.getElementById('hospitalLogoName');
-
 select.innerHTML = '<option value="">— اختر المستشفى للشعار —</option>';
 
-
-
-HOSPITAL\_DATABASE = \[];
-
-
+// Update HOSPITAL_DATABASE from server data
+HOSPITAL_DATABASE = [];
 
 result.hospitals.forEach(hospital => {
-
 const option = document.createElement('option');
-
 option.value = hospital.nameAr;
-
 option.textContent = hospital.nameAr + ' - ' + hospital.nameEn;
-
 select.appendChild(option);
 
-
-
-HOSPITAL\_DATABASE.push({
-
+// Add to HOSPITAL_DATABASE for search
+HOSPITAL_DATABASE.push({
 ar: hospital.nameAr,
-
 en: hospital.nameEn
-
 });
-
 });
-
 }
-
 } catch (error) {
-
 console.log('Error loading hospital list:', error);
-
 }
-
 }
-
-
-
+// دالة عند اختيار مستشفى للشعار
 function selectHospitalForLogo() {
-
 const selectedHospital = document.getElementById('hospitalLogoName').value;
-
-
-
 if (selectedHospital) {
-
-const hospital = HOSPITAL\_DATABASE.find(h => h.ar === selectedHospital);
-
+// البحث في قاعدة البيانات المحلية
+const hospital = HOSPITAL_DATABASE.find(h => h.ar === selectedHospital);
 if (hospital) {
-
 document.getElementById('hospAr').value = hospital.ar;
-
 document.getElementById('hospEn').value = hospital.en;
-
 }
-
 }
-
 }
-
-
-
+// Hide suggestions when clicking outside
 document.addEventListener('click', function(e) {
-
 if (!e.target.closest('.field-group')) {
-
 document.getElementById('hospitalSuggestions').style.display = 'none';
-
 }
-
 });
-
-
-
+// دالة تسجيل الدخول المعدلة - تتحقق من السيرفر
 async function doLogin(){
-
 var u=document.getElementById('loginUser').value.trim();
-
 var p=document.getElementById('loginPass').value;
-
 var err=document.getElementById('loginError');
-
 var btn=document.querySelector('.btn-primary');
 
-
-
 if(!u||!p){
-
 err.style.display='block';
-
 err.style.color='var(--danger)';
-
 err.textContent='أدخل اسم المستخدم وكلمة المرور';
-
 return;
-
 }
 
-
-
+// إظهار حالة التحميل
 btn.disabled=true;
-
 btn.textContent='جاري التحقق...';
-
 err.style.display='none';
 
-
-
 try {
-
-var response = await fetch(SCRIPT\_URL, {
-
+// التحقق من السيرفر
+var response = await fetch(SCRIPT_URL, {
 method: 'POST',
-
 headers: {'Content-Type': 'text/plain'},
-
 body: JSON.stringify({
-
 action: 'verifyLogin',
-
 username: u,
-
 password: p
-
 })
-
 });
-
-
-
 var result = await response.json();
-
-
 
 if(result.status === 'success') {
-
 SESSION={user:u,pass:p};
-
 document.getElementById('headerUser').textContent='مرحباً '+u;
-
 document.getElementById('loginSection').style.display='none';
-
 document.getElementById('appSection').style.display='block';
-
 err.style.display='none';
-
-
-
 document.getElementById('issueDate').value=todayISO();
-
-document.getElementById('printDate').value=todayDateTimeLocal();
-
-
-
 generateLeaveId();
-
-loadHospitalList();
-
-
-
+loadHospitalList(); // تحميل قائمة المستشفيات
 } else {
-
 err.style.display='block';
-
 err.style.color='var(--danger)';
-
 err.textContent='اسم المستخدم أو كلمة المرور غير صحيحة';
-
 }
-
 } catch(e) {
-
 err.style.display='block';
-
 err.style.color='var(--danger)';
-
 err.textContent='خطأ في الاتصال بالسيرفر';
-
 } finally {
-
 btn.disabled=false;
-
 btn.textContent='دخول';
-
 }
-
 }
-
-
-
+// Function to generate automatic Leave ID
 async function generateLeaveId() {
-
 try {
-
-var url = SCRIPT\_URL + '?action=generateLeaveId\&prefix=PSL';
-
+var url = SCRIPT_URL + '?action=generateLeaveId&prefix=PSL';
 var response = await fetch(url);
-
 var result = await response.json();
 
-
-
 if (result.status === 'success') {
-
 document.getElementById('leaveId').value = result.leaveId;
-
 document.getElementById('leaveId').readOnly = true;
-
 document.getElementById('leaveId').style.background = '#f8f9fa';
-
 }
-
 } catch (error) {
-
 console.log('Error generating Leave ID:', error);
-
 }
-
 }
-
-
-
 function doLogout(){
-
 SESSION={user:'', pass:''};
-
 document.getElementById('loginSection').style.display='flex';
-
 document.getElementById('appSection').style.display='none';
-
 document.getElementById('loginPass').value='';
-
 document.getElementById('loginUser').value='';
-
 document.getElementById('leaveForm').reset();
-
 }
-
-
-
 function switchTab(name,btn){
-
 document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-
 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-
 document.getElementById('tab-'+name).classList.add('active');
-
 btn.classList.add('active');
-
 }
-
-
-
-function todayISO(){
-
-return new Date().toISOString().split('T')\[0];
-
-}
-
-
-
-function todayDateTimeLocal(){
-
-var d = new Date();
-
-d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-
-return d.toISOString().slice(0,16);
-
-}
-
-
-
+function todayISO(){return new Date().toISOString().split('T')[0];}
 function fmtDate(iso){
-
 if(!iso)return'';
-
 var d=new Date(iso);
-
 return String(d.getDate()).padStart(2,'0')+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+d.getFullYear();
-
 }
-
-
-
 function toHijri(date){
-
 var gD=date.getDate(),gM=date.getMonth()+1,gY=date.getFullYear();
-
-
-
-var JD=Math.floor((1461\*(gY+4800+Math.floor((gM-14)/12)))/4)+
-
-Math.floor((367\*(gM-2-12\*Math.floor((gM-14)/12)))/12)-
-
-Math.floor((3\*(Math.floor((gY+4900+Math.floor((gM-14)/12))/100)))/4)+gD-32077;
-
-
-
+// Corrected Hijri conversion algorithm (subtract 2 days to fix the advance issue)
+var JD=Math.floor((1461*(gY+4800+Math.floor((gM-14)/12)))/4)+
+Math.floor((367*(gM-2-12*Math.floor((gM-14)/12)))/12)-
+Math.floor((3*(Math.floor((gY+4900+Math.floor((gM-14)/12))/100)))/4)+gD-32077;
 var l=JD-1948440+10632,n=Math.floor((l-1)/10631);
-
-l=l-10631\*n+354;
-
-
-
-var j=Math.floor((10985-l)/5316)\*Math.floor((50\*l)/17719)+Math.floor(l/5670)\*Math.floor((43\*l)/15238);
-
-
-
-l=l-Math.floor((30-j)/15)\*Math.floor((17719\*j)/50)-Math.floor(j/16)\*Math.floor((15238\*j)/43)+29;
-
-
-
-var hM=Math.floor((24\*l)/709),hD=l-Math.floor((709\*hM)/24),hY=30\*n+j-30;
-
-
-
+l=l-10631*n+354;
+var j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+Math.floor(l/5670)*Math.floor((43*l)/15238);
+l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-Math.floor(j/16)*Math.floor((15238*j)/43)+29;
+var hM=Math.floor((24*l)/709),hD=l-Math.floor((709*hM)/24),hY=30*n+j-30;
 return String(hD).padStart(2,'0')+'-'+String(hM).padStart(2,'0')+'-'+hY;
-
 }
-
-
-
 function calcAll(){
-
 var a=document.getElementById('admAD').value;
-
 var d=document.getElementById('disAD').value;
-
-
-
-if(a \&\& !document.getElementById('admAH').value)document.getElementById('admAH').value=toHijri(new Date(a));
-
-if(d \&\& !document.getElementById('disAH').value)document.getElementById('disAH').value=toHijri(new Date(d));
-
-
-
-if(a\&\&d){
-
+// Only update Hijri dates if they are empty (allow manual editing)
+if(a && !document.getElementById('admAH').value)document.getElementById('admAH').value=toHijri(new Date(a));
+if(d && !document.getElementById('disAH').value)document.getElementById('disAH').value=toHijri(new Date(d));
+if(a&&d){
 var diff=Math.round((new Date(d)-new Date(a))/(864e5))+1;
-
 if(diff>0){
-
 var ar=diff===1?diff+' يوم':diff+' أيام';
-
 var en=diff===1?diff+' Day':diff+' Days';
-
 document.getElementById('durDisplay').value=ar+' / '+en;
-
 }
-
 }
-
 }
-
-
-
 function syncPos(){
-
 var v=document.getElementById('posAr').value;
-
 var map={'استشاري':'Consultant','أخصائي':'Specialist','طبيب عام':'General Practitioner','ممارس صحي':'Health Practitioner','طبيب أسنان':'Dentist','طبيب مقيم':'Resident'};
-
 document.getElementById('posManual').style.display=v==='أخرى'?'grid':'none';
-
-if(v!=='أخرى')document.getElementById('posEn').value=map\[v]||'';
-
+if(v!=='أخرى')document.getElementById('posEn').value=map[v]||'';
 }
-
-
-
 async function submitLeave(e){
-
 e.preventDefault();
-
-
-
 var btn=document.getElementById('submitBtn');
-
 var status=document.getElementById('submitStatus');
-
 var pdfArea=document.getElementById('pdfArea');
-
-
-
 var posArV=document.getElementById('posAr').value==='أخرى'?document.getElementById('posArM').value:document.getElementById('posAr').value;
-
 var posEnV=document.getElementById('posEn').value==='Other'?document.getElementById('posEnM').value:document.getElementById('posEn').value;
-
-
-
 var dur=document.getElementById('durDisplay').value||'';
-
 var dp=dur.split(' / ');
-
-
-
 var payload={
-
 action:'addLeave',
-
 username:SESSION.user,
-
 password:SESSION.pass,
-
 leaveId:document.getElementById('leaveId').value.trim(),
-
 nameAr:document.getElementById('nameAr').value.trim(),
-
 nameEn:document.getElementById('nameEn').value.trim(),
-
 iqama:document.getElementById('iqama').value.trim(),
-
-durAr:dp\[0]||'',
-
-durEn:dp\[1]||'',
-
+durAr:dp[0]||'',
+durEn:dp[1]||'',
 docAr:document.getElementById('docAr').value.trim(),
-
 docEn:document.getElementById('docEn').value.trim(),
-
 posAr:posArV,
-
 posEn:posEnV,
-
 natAr:document.getElementById('natAr').value.trim(),
-
 natEn:document.getElementById('natEn').value.trim(),
-
 employerAr:document.getElementById('employerAr').value.trim(),
-
 employerEn:document.getElementById('employerEn').value.trim(),
-
 admissionAD:document.getElementById('admAD').value,
-
 admissionAH:document.getElementById('admAH').value,
-
 dischargeAD:document.getElementById('disAD').value,
-
 dischargeAH:document.getElementById('disAH').value,
-
 issueDate:document.getElementById('issueDate').value,
-
-printDate:document.getElementById('printDate').value,
-
 hospAr:document.getElementById('hospAr').value.trim(),
-
 hospEn:document.getElementById('hospEn').value.trim(),
-
 hospitalLogoName:document.getElementById('hospitalLogoName').value.trim(),
-
 licenseNo:document.getElementById('licenseNo').value.trim()
-
 };
-
-
-
 btn.disabled=true;
-
 btn.textContent='⏳ جاري الحفظ وإنشاء PDF...';
-
-status.className='';
-
-status.textContent='';
-
+status.className='';status.textContent='';
 pdfArea.innerHTML='';
-
-
-
 try{
-
-var res=await fetch(SCRIPT\_URL,{
-
-method:'POST',
-
-headers:{'Content-Type':'text/plain'},
-
-body:JSON.stringify(payload)
-
-});
-
-
-
+var res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
 var result=await res.json();
-
-
-
 if(result.status==='success'){
-
 status.className='success';
-
 status.textContent='✅ تم الحفظ بنجاح!';
+pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="_blank" class="pdf-link">📄 تحميل PDF</a>';
 
-pdfArea.innerHTML='<a href="'+result.pdfUrl+'" target="\_blank" class="pdf-link">📄 تحميل PDF</a>';
-
-
-
+// Reset form and generate new Leave ID
 document.getElementById('leaveForm').reset();
-
 document.getElementById('issueDate').value=todayISO();
-
-document.getElementById('printDate').value=todayDateTimeLocal();
-
 document.getElementById('hospitalLogoName').selectedIndex = 0;
 
-
-
+// Generate new Leave ID for next entry
 await generateLeaveId();
 
-
-
-}else{
-
-throw new Error(result.message||'خطأ غير معروف');
-
-}
-
+}else{throw new Error(result.message||'خطأ غير معروف');}
 }catch(err){
-
 status.className='error';
-
 status.textContent='❌ خطأ: '+err.message;
-
 }finally{
-
 btn.disabled=false;
-
 btn.textContent='💾 حفظ وإصدار PDF';
-
 }
-
 }
-
-
-
 async function loadMyLeaves(){
-
 var loading=document.getElementById('leavesLoading');
-
 var empty=document.getElementById('leavesEmpty');
-
 var list=document.getElementById('leavesList');
-
-
-
 loading.style.display='block';
-
 empty.style.display='none';
-
 list.innerHTML='';
-
-
-
 try{
-
-var url=SCRIPT\_URL+'?action=getLeaves\&user='+SESSION.user+'\&pwd='+encodeURIComponent(SESSION.pass);
-
+var url=SCRIPT_URL+'?action=getLeaves&user='+SESSION.user+'&pwd='+encodeURIComponent(SESSION.pass);
 var r=await fetch(url);
-
 var res=await r.json();
-
-
-
 loading.style.display='none';
-
-
-
-if(res.status==='success'\&\&res.leaves.length>0){
-
+if(res.status==='success'&&res.leaves.length>0){
 res.leaves.slice().reverse().forEach(function(lv, index){
-
-list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' \&nbsp;|\&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\\''+lv.leaveId+'\\',\\''+lv.patientName+'\\',\\''+lv.issueDate+'\\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
-
+list.innerHTML+='<div class="leave-item"><div class="leave-info"><div class="leave-name">👤 '+lv.patientName+'</div><div class="leave-meta">🆔 '+lv.leaveId+' &nbsp;|&nbsp; 📅 '+lv.issueDate+'</div></div><span class="leave-badge">فعّال</span><button class="btn-share" onclick="shareLeave(\''+lv.leaveId+'\',\''+lv.patientName+'\',\''+lv.issueDate+'\')" style="background:#28a745;border-color:#28a745;color:white;padding:4px 8px;border-radius:4px;font-size:12px;margin-right:8px;">📤 مشاركة</button></div>';
 });
-
-}else{
-
-empty.style.display='block';
-
-}
-
+}else{empty.style.display='block';}
 }catch(err){
-
 loading.style.display='none';
-
 list.innerHTML='<p style="color:red;text-align:center">خطأ في التحميل</p>';
-
 }
-
 }
-
-
-
 function shareLeave(leaveId, patientName, issueDate) {
-
 try {
-
+// Show share options modal
 var modal = document.createElement('div');
-
 modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
 
-
-
 var modalContent = document.createElement('div');
-
 modalContent.style.cssText = 'background:white;border-radius:12px;padding:24px;max-width:400px;width:90%;text-align:center;';
 
-
-
 modalContent.innerHTML = `
-
 <h3 style="margin-bottom:20px;color:#1a5fa8;">📤 خيارات المشاركة</h3>
-
 <div style="display:grid;gap:12px;">
-
 <button onclick="copyLeaveData('${leaveId}', '${patientName}', '${issueDate}')" style="background:#007bff;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
-
 📋 نسخ البيانات
-
 </button>
-
 <button onclick="downloadPDF('${leaveId}')" style="background:#28a745;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
-
 📥 تحميل PDF
-
 </button>
-
 <button onclick="shareToTelegram('${leaveId}', '${patientName}', '${issueDate}')" style="background:#0088cc;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
-
 📱 مشاركة عبر Telegram
-
 </button>
-
 <button onclick="shareToWhatsApp('${leaveId}', '${patientName}', '${issueDate}')" style="background:#25D366;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
-
 💬 مشاركة عبر WhatsApp
-
 </button>
-
 <button onclick="closeShareModal()" style="background:#6c757d;color:white;border:none;padding:12px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;">
-
 إلغاء
-
 </button>
-
 </div>
-
 `;
 
-
-
 modal.appendChild(modalContent);
-
 document.body.appendChild(modal);
 
-
-
 } catch (error) {
-
 console.error('Share error:', error);
-
 alert('❌ حدث خطأ أثناء المشاركة');
-
 }
-
 }
-
-
-
 function copyLeaveData(leaveId, patientName, issueDate) {
-
 try {
-
-var shareText = '📄 بيانات الإجازة:\\n\\n' +
-
-'👤 اسم المريض: ' + patientName + '\\n' +
-
-'🆔 رقم الإجازة: ' + leaveId + '\\n' +
-
+var shareText = '📄 بيانات الإجازة:\n\n' +
+'👤 اسم المريض: ' + patientName + '\n' +
+'🆔 رقم الإجازة: ' + leaveId + '\n' +
 '📅 تاريخ الإصدار: ' + issueDate;
 
-
-
 navigator.clipboard.writeText(shareText).then(function() {
-
-alert('✅ تم نسخ بيانات الإجازة للحافظة\\nيمكنك لصقها في أي مكان');
-
+alert('✅ تم نسخ بيانات الإجازة للحافظة\nيمكنك لصقها في أي مكان');
 closeShareModal();
-
 }).catch(function(err) {
-
 console.error('Failed to copy: ', err);
-
 alert('❌ فشل في نسخ البيانات');
-
 });
-
 } catch (error) {
-
 console.error('Copy error:', error);
-
 alert('❌ حدث خطأ أثناء النسخ');
-
 }
-
 }
-
-
-
 function downloadPDF(leaveId) {
-
 try {
-
+// Show loading message
 alert('⏳ جاري تحميل ملف PDF...');
 
-
-
-var pdfUrl = SCRIPT\_URL + '?action=getPDF\&leaveId=' + leaveId + '\&user=' + SESSION.user + '\&pwd=' + encodeURIComponent(SESSION.pass);
-
-
+// Get PDF URL from backend
+var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
 
 fetch(pdfUrl)
-
 .then(response => response.json())
-
 .then(data => {
-
 if (data.status === 'success') {
-
+// Create download link with actual PDF URL
 var link = document.createElement('a');
-
 link.href = data.pdfUrl;
-
 link.download = 'Sick-Leave-' + leaveId + '.pdf';
-
-link.target = '\_blank';
-
+link.target = '_blank';
 document.body.appendChild(link);
-
 link.click();
-
 document.body.removeChild(link);
 
 closeShareModal();
-
 alert('✅ تم تحميل ملف PDF بنجاح');
-
 } else {
-
 alert('❌ فشل في تحميل PDF: ' + data.message);
-
 }
-
 })
-
 .catch(error => {
-
 console.error('Download error:', error);
-
 alert('❌ حدث خطأ أثناء تحميل PDF');
-
 });
 
-
-
 } catch (error) {
-
 console.error('Download error:', error);
-
 alert('❌ حدث خطأ أثناء تحميل PDF');
-
 }
-
 }
-
-
-
 function shareToTelegram(leaveId, patientName, issueDate) {
-
 try {
-
 alert('⏳ جاري تحميل ملف PDF للمشاركة...');
 
-
-
-var pdfUrl = SCRIPT\_URL + '?action=getPDF\&leaveId=' + leaveId + '\&user=' + SESSION.user + '\&pwd=' + encodeURIComponent(SESSION.pass);
-
-
+// Get PDF URL first
+var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
 
 fetch(pdfUrl)
-
 .then(response => response.json())
-
 .then(data => {
-
 if (data.status === 'success') {
-
-var shareText = '📄 بيانات الإجازة:\\n\\n' +
-
-'👤 اسم المريض: ' + patientName + '\\n' +
-
-'🆔 رقم الإجازة: ' + leaveId + '\\n' +
-
-'📅 تاريخ الإصدار: ' + issueDate + '\\n\\n' +
-
-'📥 لتحميل ملف PDF:\\n' + data.pdfUrl + '\\n\\n' +
-
+// Create share text with PDF download instructions
+var shareText = '📄 بيانات الإجازة:\n\n' +
+'👤 اسم المريض: ' + patientName + '\n' +
+'🆔 رقم الإجازة: ' + leaveId + '\n' +
+'📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+'📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
 '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
 
-
-
-var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '\&text=' + encodeURIComponent(shareText);
-
-
-
-window.open(telegramUrl, '\_blank');
+// Share to Telegram with enhanced message
+var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(data.pdfUrl) + '&text=' + encodeURIComponent(shareText);
+window.open(telegramUrl, '_blank');
 
 closeShareModal();
-
-alert('✅ تم فتح Telegram للمشاركة\\nيمكن للمستلم تحميل PDF مباشرة');
-
-
-
+alert('✅ تم فتح Telegram للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
 } else {
-
 alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
-
 }
-
 })
-
 .catch(error => {
-
 console.error('Telegram share error:', error);
-
 alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
-
 });
 
-
-
 } catch (error) {
-
 console.error('Telegram share error:', error);
-
 alert('❌ حدث خطأ أثناء المشاركة عبر Telegram');
-
 }
-
 }
-
-
-
 function shareToWhatsApp(leaveId, patientName, issueDate) {
-
 try {
-
 alert('⏳ جاري تحميل ملف PDF للمشاركة...');
 
-
-
-var pdfUrl = SCRIPT\_URL + '?action=getPDF\&leaveId=' + leaveId + '\&user=' + SESSION.user + '\&pwd=' + encodeURIComponent(SESSION.pass);
-
-
+// Get PDF URL first
+var pdfUrl = SCRIPT_URL + '?action=getPDF&leaveId=' + leaveId + '&user=' + SESSION.user + '&pwd=' + encodeURIComponent(SESSION.pass);
 
 fetch(pdfUrl)
-
 .then(response => response.json())
-
 .then(data => {
-
 if (data.status === 'success') {
-
-var shareText = '📄 بيانات الإجازة:\\n\\n' +
-
-'👤 اسم المريض: ' + patientName + '\\n' +
-
-'🆔 رقم الإجازة: ' + leaveId + '\\n' +
-
-'📅 تاريخ الإصدار: ' + issueDate + '\\n\\n' +
-
-'📥 لتحميل ملف PDF:\\n' + data.pdfUrl + '\\n\\n' +
-
+// Create share text with PDF download instructions
+var shareText = '📄 بيانات الإجازة:\n\n' +
+'👤 اسم المريض: ' + patientName + '\n' +
+'🆔 رقم الإجازة: ' + leaveId + '\n' +
+'📅 تاريخ الإصدار: ' + issueDate + '\n\n' +
+'📥 لتحميل ملف PDF:\n' + data.pdfUrl + '\n\n' +
 '🔗 أو انقر على الرابط أعلاه للتحميل المباشر';
 
-
-
+// Share to WhatsApp with PDF link
 var whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
-
-
-
-window.open(whatsappUrl, '\_blank');
+window.open(whatsappUrl, '_blank');
 
 closeShareModal();
-
-alert('✅ تم فتح WhatsApp للمشاركة\\nيمكن للمستلم تحميل PDF مباشرة');
-
-
-
+alert('✅ تم فتح WhatsApp للمشاركة\nيمكن للمستلم تحميل PDF مباشرة');
 } else {
-
 alert('❌ فشل في تحميل PDF للمشاركة: ' + data.message);
-
 }
-
 })
-
 .catch(error => {
-
 console.error('WhatsApp share error:', error);
-
 alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
-
 });
 
-
-
 } catch (error) {
-
 console.error('WhatsApp share error:', error);
-
 alert('❌ حدث خطأ أثناء المشاركة عبر WhatsApp');
-
 }
-
 }
-
-
-
 function closeShareModal() {
-
-var modal = document.querySelector('div\[style\*="position:fixed"]');
-
+var modal = document.querySelector('div[style*="position:fixed"]');
 if (modal) {
-
 document.body.removeChild(modal);
-
 }
-
 }
-
+</script>
 </body>
 </html>
